@@ -2,6 +2,8 @@ from models.config import session
 
 from models.user import User
 from models.book import Book
+from models.own_book import Own_Book
+from models.lend_info import Lend_info
 import os
 
 
@@ -20,6 +22,18 @@ session.add_all([
     Book( name="3匹のキリン", price=10000, image=ImageDir+"3.jpg", url = ImageDir+"3.jpg", info="物語は~~~から始まった", auther ="He"),
     Book( name="キリンビール", price=5000, image=ImageDir+"4.jpg", url = ImageDir+"4.jpg", info="nof" , auther = "She" ),
     Book( name="Kirin", price=777, image=ImageDir+"5.jpg", url = ImageDir+"5.jpg", info="beautiful" , auther="We"  )])
+
+session.add_all([
+    Own_Book( user_id = 1 , book_id = 1 ),
+    Own_Book( user_id = 1 , book_id = 2 ),
+    Own_Book( user_id = 1 , book_id = 3 ),
+    Own_Book( user_id = 1 , book_id = 4 ),
+    Own_Book( user_id = 1 , book_id = 5 ),
+    Own_Book( user_id = 2 , book_id = 1 ),
+    Own_Book( user_id = 2 , book_id = 2 ),
+    Own_Book( user_id = 3 , book_id = 3 ),
+    Own_Book( user_id = 3 , book_id = 4 ),
+    Own_Book( user_id = 5 , book_id = 5 )])
 
 
 
