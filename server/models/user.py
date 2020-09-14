@@ -7,15 +7,15 @@ from models.config import engine
 
 Base_user = declarative_base()
 
-class Book(Base_user):
+class User(Base_user):
     __tablename__ = 'users'
     id = Column(Integer,primary_key=True)
     icon_image = Column(String)
     name = Column(String)
     password = Column(String)
     point = Column(Integer)
-    friend_list = Column(String)
-    
+    friend_list = Column(String) #Integer Array
+
     def __init__(self, icon_image , name, password, point, friend_list ):
         self.icon_image = icon_image
         self.name = name

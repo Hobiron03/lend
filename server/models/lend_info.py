@@ -3,11 +3,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
 
-from config import engine
+from models.config import engine
 
-Base_own_book = declarative_base()
+Base_lend_info = declarative_base()
 
-class Own_Book(Base_own_book):
+class Own_Book(Base_lend_info):
     __tablename__ = 'lend_info'
     id = Column(Integer,primary_key=True)
     borrower_id = Column(Integer)
