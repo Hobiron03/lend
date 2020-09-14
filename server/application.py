@@ -1,6 +1,8 @@
 from flask import Flask, request ,session
 from flask_restplus import Api, Resource, fields # Werkzeug==0.16.1が良い（Werkzeug 1.0.0のエラーらしい）
 # https://qiita.com/sky_jokerxx/items/17481ffc34b52875528b よりSwaggerUIをFlaskで使う
+from models.config import session  as ses
+from models.user import User
 
 import json
 
@@ -60,6 +62,13 @@ class Login(Resource):
 class Logout(Resource):
     def post(Resource):
         session['logged_in'] = False
+
+@api.route('/books')
+class BookList(Resource):
+    def get(self):
+        users = ses.query(User).all()
+        ses.commit()
+        return str(users)
 
 
 if __name__ == '__main__':
