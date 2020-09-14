@@ -58,7 +58,7 @@ class Login(Resource):
                     print('ログイン成功')
                     session['logged_in'] = True
                     #フレンドIDからフレンド情報を取得するやつをかく
-                    #json_text = "{'id:'"+ str(LoginDatabase[0])+",'image_icon:'"+str(LoginDatabase[1]+"}"
+                    #json_text = "{'id':"+ "'"+str(LoginDatabase[0])+ "','image_icon':" + "'"+str(LoginDatabase[1]+"'}"
                     return LoginDatabase
                 else:
                     return {'message':'Error.Wrong name or password!'}
