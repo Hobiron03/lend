@@ -8,7 +8,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 type TabState = "mybookshell" | "friend" | "store" | "point" | "settings";
 
-export const BottomBar = () => {
+const BottomBar = () => {
 	const [tabState, setTabState] = useState<TabState>("mybookshell");
 
 	const onItemClick = (tabState: TabState) => {
@@ -56,3 +56,5 @@ export const BottomBar = () => {
 		</footer>
 	)
 }
+
+export default BottomBar;
