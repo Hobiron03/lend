@@ -1,0 +1,22 @@
+$button-color: #5ab9e3;
+$hover-button-color: #4a91af;
+
+.button {
+  width: 90px;
+  height: 30px;
+  margin: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $button-color;
+  border-radius: 2%;
+  color: white;
+  cursor: pointer;
+
+  transition: all 0.2s;
+  &:hover {
+    background-color: $hover-button-color;
+  }
+}
