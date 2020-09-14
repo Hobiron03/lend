@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-export const AppBar = () => {
+const AppBar = () => {
 	
 	const onClickNotification = (e: React.MouseEvent<HTMLInputElement>) => {
 		console.log('通知ページへ遷移');
@@ -18,3 +18,5 @@ export const AppBar = () => {
 		</header>
 	)
 }
+
+export default AppBar;
