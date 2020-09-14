@@ -3,7 +3,7 @@ import os
 
 from sqlalchemy.orm import sessionmaker
 
-DATAFILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'db.sqlite3')
+DATAFILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'sql.db')
 
 engine = create_engine('sqlite:///'+DATAFILE)
 
