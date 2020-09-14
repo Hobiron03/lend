@@ -6,10 +6,6 @@ export const AppBar = () => {
 	const onClickNotification = (e: React.MouseEvent<HTMLInputElement>) => {
 		console.log('通知ページへ遷移');
 	}
-
-	const onClickSettings = (e: React.MouseEvent<HTMLInputElement>) => {
-		console.log('設定ページへ遷移');
-	}
 	
 	return (
 		<header className="appBar">
