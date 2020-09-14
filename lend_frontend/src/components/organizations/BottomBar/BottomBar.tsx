@@ -13,6 +13,7 @@ export const BottomBar = () => {
 
 	const onItemClick = (tabState: TabState) => {
 		setTabState(tabState);
+		console.log(`タブを移動: ${tabState}へ遷移`)
 	}
 
 	return (
