@@ -1,0 +1,32 @@
+$theme-color: #09f;
+
+.login {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login-form {
+  width: 80%;
+  padding: 10px;
+  margin: 20px 0 0;
+}
+
+.to-registration {
+  color: $theme-color;
+  
+}
+
+.login-form-submit {
+  padding: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+  background-color: $theme-color;
+  border: none;
+  border-radius: 5px;
+}
+
+.to-registration {
+  text-align: right;
+}
