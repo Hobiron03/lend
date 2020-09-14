@@ -29,5 +29,7 @@ class Example2(Resource):
         return {'name': request.json['name'], 'param': request.json['param']}
 
 
+
+
 if __name__ == '__main__':
     app.run()
