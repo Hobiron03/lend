@@ -1,2 +1,2 @@
 # Rule
-- Issue3 のとき branch名 feature/issue3
+- Issue3 のとき branch名 feature/#3

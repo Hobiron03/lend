@@ -1,0 +1,49 @@
+$book-card-width: 340px;
+$book-card-height: 200px;
+
+.BookCard {
+  margin: 15px auto;
+  width: 340px;
+  height: 200px;
+  border-top: solid 1px black;
+
+  &__top {
+    display: flex;
+    text-align: left;
+    padding: 10px;
+    // background-color: rgb(109, 142, 233);
+
+    &__left {
+      height: $book-card-height * 0.7;
+      width: 35%;
+
+      &__image {
+        background-color: brown;
+        width: 80%;
+        height: 80%;
+
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    &__right {
+      height: 100%;
+      width: 65%;
+
+      &__description {
+        &__title {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  &__under {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

@@ -5,9 +5,9 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from models.config import engine
 
-Base = declarative_base()
+Base_own_book = declarative_base()
 
-class Own_Book(Base):
+class Own_Book(Base_own_book):
     __tablename__ = 'own_books'
     id = Column(Integer,primary_key=True)
     user_id = Column(Integer)
@@ -20,5 +20,5 @@ class Own_Book(Base):
     def __repr__(self):
         return str(self.id)
 
-Base.metadata.create_all(engine)
+#Base.metadata.create_all(engine)
     
