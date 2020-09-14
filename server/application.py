@@ -1,7 +1,11 @@
-from flask import Flask, request
+from flask import Flask, request ,session
 from flask_restplus import Api, Resource, fields # Werkzeug==0.16.1が良い（Werkzeug 1.0.0のエラーらしい）
 # https://qiita.com/sky_jokerxx/items/17481ffc34b52875528b よりSwaggerUIをFlaskで使う
+
+import json
+
 app = Flask(__name__)
+app.secret_key = 'シークレットキーです'
 api = Api(app)
 
 example_get_spec = api.model('Example GET', { #ドキュメントの名前を定義（説明の追加）
@@ -27,6 +31,35 @@ class Example2(Resource):
     @api.marshal_with(example2_post_spec)
     def post(self):
         return {'name': request.json['name'], 'param': request.json['param']}
+
+@api.route('/login')
+class Login(Resource):
+    def post(self,name,password):
+        if session.get('logged_in') == True: #ログインしていたら表示
+            return {'message': 'すでにログインしています。'}
+        else:
+            print("ログイン画面")
+            #logindata = request.json #送られてきたデータの取得
+            #name = logindata['name']
+            #password = logindata['password']
+            print(name,password) #デバック
+            database = ['KIRIN','USAGI'] #ここでデータベースを取得
+            database_password = ["aaaa","aaaa"]
+            if name not in database:
+                return { 'message': 'Eooer.Wrong name or password'}
+            else:
+                if password == database_password[0]: # データベース力技
+                    print('ログイン成功')
+                    session['logged_in'] = True
+                    #フレンドIDからフレンド情報を取得するやつをかく
+                    return database
+                else:
+                    return {'message':'Error.Wrong name or password!'}
+
+@api.route('/logout')
+class Logout(Resource):
+    def post(Resource):
+        session['logged_in'] = False
 
 
 if __name__ == '__main__':

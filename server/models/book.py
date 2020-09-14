@@ -13,13 +13,17 @@ class Book(Base_book):
     name = Column(String)
     price = Column(Integer)
     image = Column(String)
+    info = Column(String)
+    auther = Column(String)
     url = Column(String)
     
-    def __init__(self, name, price, image, url ):
+    def __init__(self, name, price, image, url, info, auther ):
         self.name = name
         self.price = price
         self.image = image
         self.url = url
+        self.info = info
+        self.auther = auther
 
     def __repr__(self):
         return self.name
