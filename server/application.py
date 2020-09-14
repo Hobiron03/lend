@@ -4,7 +4,7 @@ from flask_restplus import Api, Resource, fields # Werkzeug==0.16.1が良い（W
 
 import json
 from app.get_db import GetUserLoginData
-
+from app.BookList import GetBookListByUser
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -72,7 +72,8 @@ class Logout(Resource):
 @api.route('/books')
 class BookList(Resource):
     def get(self):
-        return "Hello"
+        booklist = GetBookListByUser()
+        return str(booklist)
 
 
 if __name__ == '__main__':
