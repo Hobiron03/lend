@@ -1,0 +1,27 @@
+.tabBar{
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	
+	.tabBar-item{
+		background: khaki;
+		padding: .5em 0px;
+
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.tabBar-item-icon{
+			margin-right: 0.5em;
+		}
+
+		border-top: 4px solid rgba(0,0,0,0);
+		border-bottom: 4px solid rgba(0,0,0,0);
+		transition: border-color 0.4s;
+		&.tabBar-item-selected{
+			border-bottom: 4px solid rgb(182, 152, 107);
+		}
+	}
+
+}

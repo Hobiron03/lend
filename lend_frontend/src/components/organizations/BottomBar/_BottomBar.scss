@@ -1,0 +1,44 @@
+$bottombar-bg-color: rgb(118, 165, 118);
+$bottombar-bg-selected-color: white;
+$bottombar-color: white;
+$bottombar-selected-color: rgb(118, 165, 118);
+
+.bottom-bar{
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	box-sizing: border-box;
+	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	
+	height: 70px;
+	padding: 0em 3px;
+
+	background: $bottombar-bg-color;
+	color: $bottombar-color;
+
+	.bottom-bar-item{
+		flex: 1;
+		
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		
+		margin: 0.25em 0em;
+		padding: .7em 0em;
+		font-size: 50%;
+
+		transition: color .1s, background .1s, font-size .1s;
+
+		&.bottom-bar-item-selected{
+			border-radius: 5px;
+			font-size: 75%;
+			color: $bottombar-selected-color;
+			background: $bottombar-bg-selected-color;
+		}
+	}
+}
