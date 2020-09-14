@@ -5,23 +5,23 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from models.config import engine
 
-Base_book = declarative_base()
+Base_user = declarative_base()
 
-class Book(Base_book):
-    __tablename__ = 'books'
+class Book(Base_user):
+    __tablename__ = 'users'
     id = Column(Integer,primary_key=True)
+    icon_image = Column(String)
     name = Column(String)
-    price = Column(Integer)
-    image = Column(String)
-    info = Column(String)
-    auther = Column(String)
-    url = Column(String)
+    password = Column(String)
+    point = Column(Integer)
+    friend_list = Column(String)
     
-    def __init__(self, name, price, image, url ):
+    def __init__(self, icon_image , name, password, point, friend_list ):
+        self.icon_image = icon_image
         self.name = name
-        self.price = price
-        self.image = image
-        self.url = url
+        self.password = password
+        self.point = point
+        self.friend_list = friend_list
 
     def __repr__(self):
         return self.name
