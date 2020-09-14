@@ -4,7 +4,7 @@ from models.book import Book
 from models.own_book import Own_Book
 
 def GetBookListByUser():
-    session = Session() #こちらの方が適切かも
+    session = Session() #こちらの方が適切かもしれない
     user_id = 1
     print(user_id)
     print(type(user_id) )
