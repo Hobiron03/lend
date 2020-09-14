@@ -5,6 +5,8 @@ from models.config import session  as ses
 from models.user import User
 
 import json
+from get_db import GetUserLoginData
+
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -36,25 +38,30 @@ class Example2(Resource):
 
 @api.route('/login')
 class Login(Resource):
-    def post(self,name,password):
+    def post(self):
         if session.get('logged_in') == True: #ログインしていたら表示
             return {'message': 'すでにログインしています。'}
         else:
             print("ログイン画面")
-            #logindata = request.json #送られてきたデータの取得
-            #name = logindata['name']
-            #password = logindata['password']
+            logindata = request.json #送られてきたデータの取得
+            print(logindata)
+            name = logindata['name']
+            password = logindata['password']
             print(name,password) #デバック
-            database = ['KIRIN','USAGI'] #ここでデータベースを取得
-            database_password = ["aaaa","aaaa"]
-            if name not in database:
-                return { 'message': 'Eooer.Wrong name or password'}
+            #データベースの取得
+            print("name",name)
+            LoginDatabase = GetUserLoginData(str(name))
+            print(LoginDatabase)
+            if LoginDatabase == None:
+                return { 'message': 'Error.Wrong name or password'}
             else:
-                if password == database_password[0]: # データベース力技
+
+                if password == LoginDatabase[3]: # データベースからパスワード
                     print('ログイン成功')
                     session['logged_in'] = True
                     #フレンドIDからフレンド情報を取得するやつをかく
-                    return database
+                    #json_text = "{'id':"+ "'"+str(LoginDatabase[0])+ "','image_icon':" + "'"+str(LoginDatabase[1]+"'}"
+                    return LoginDatabase
                 else:
                     return {'message':'Error.Wrong name or password!'}
 
