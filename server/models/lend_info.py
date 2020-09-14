@@ -7,7 +7,7 @@ from models.config import engine
 
 Base_lend_info = declarative_base()
 
-class Own_Book(Base_lend_info):
+class Lend_info(Base_lend_info):
     __tablename__ = 'lend_info'
     id = Column(Integer,primary_key=True)
     borrower_id = Column(Integer)
