@@ -45,3 +45,13 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
     print("データの追加が完了しました")
 
 
+# 返却処理
+def UpdateLendInfoData(user_id_data,book_id_data):
+    print(user_id_data)
+    lends = session.query(Lend_info).filter(Lend_info.id==user_id_data).all()
+    #print(lends)
+    for lend in lends:
+        lend.is_valid = False
+        #print("valid",lend.is_valid)
+        print("貸し出し終了しました")
+    session.commit()

@@ -1,6 +1,6 @@
 from models.config import engine
 from models.config import session
-from app.add_db_LendInfo import AddLendInfoData
+from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
 from app.get_db import GetLendData
 from datetime import datetime ,date, timedelta
 from models.lend_info import Lend_info
@@ -29,4 +29,7 @@ print(type(a))
 print(str(now_date))
 print(str(tomorrow))
 
+print(GetLendData(1))
+
+UpdateLendInfoData(1,1)
 print(GetLendData(1))

@@ -98,9 +98,9 @@ class BookList(Resource):
 
 # 書籍の貸し出し
 Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明の追加）
-    'id': fields.String(description='id'),
-    'borrower_id': fields.String(description='borrower_id'),
-    'book_id': fields.String(description='book_id'),
+    'id': fields.Integer(description='id'),
+    'borrower_id': fields.Integer(description='borrower_id'),
+    'book_id': fields.Integer(description='book_id'),
     'deadline': fields.String(description='deadline')
 })
 @api.route('/lend')
@@ -124,10 +124,16 @@ class BookLend(Resource):
             except:
                 return {'message':'Error.Please try again.'}
 
-
+# 書籍の返却
+Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明の追加）
+    'id': fields.Integer(description='id'),
+    'book_id': fields.Integer(description='book_id')
+})
 @api.route('/return_book')
 class ReturnBook(Resource):
     def post(self):
+        
+        return {'message':'成功'}
 
 
 
