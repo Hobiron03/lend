@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## 立ち上げ方法
 
 `cd lend_frontend`: フロントエンドのディレクトリに入る
@@ -9,5 +7,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## 使用言語・ライブラリ
 + TypeScript
 + React
++ create-react-app (typescript template)
 + axios
 + material-ui
