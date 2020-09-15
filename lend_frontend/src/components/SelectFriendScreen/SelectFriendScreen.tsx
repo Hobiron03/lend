@@ -3,9 +3,14 @@ import FriendColumn from "./FriendColumn/FriendColumn";
 import "./_SelectFriendScreen.scss";
 import friends from "./Friends.json";
 
-const SelectFriendScreen = () => {
-  const [searchText, setSearchText] = useState("");
-  const [isSearch, setIsSearch] = useState(false);
+interface SelectFriendScreenProps {
+  lendBookName: string;
+  //貸し出す本の情報が欲しい？
+}
+
+const SelectFriendScreen = (props: SelectFriendScreenProps) => {
+  const [searchText, setSearchText] = useState<string>("");
+  const [isSearch, setIsSearch] = useState<boolean>(false);
 
   const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -15,7 +20,7 @@ const SelectFriendScreen = () => {
   return (
     <div className="select_friend_screen">
       <div className="select_friend_screen__top">
-        <p className="select_friend_screen__top__title">鬼滅の刃 一巻</p>
+        <p className="select_friend_screen__top__title">{props.lendBookName}</p>
         <p>を貸す友達を選択してください</p>
         <div className="select_friend_screen__top__search">
           <input
@@ -32,6 +37,7 @@ const SelectFriendScreen = () => {
           if (isSearch) {
             return searchText === friend.name ? (
               <FriendColumn
+                key={friend.id}
                 name={friend.name}
                 iconImageURL={friend.iconImageURL}
               />
@@ -41,6 +47,7 @@ const SelectFriendScreen = () => {
           } else {
             return (
               <FriendColumn
+                key={friend.id}
                 name={friend.name}
                 iconImageURL={friend.iconImageURL}
               />

@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <TabBar />
-      <SelectFriendScreen />
+      <SelectFriendScreen lendBookName="鬼滅の剣" />
       <BottomBar />
     </div>
   );
