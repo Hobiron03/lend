@@ -7,19 +7,20 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useLocation, useHistory } from "react-router-dom";
 
+// URLと対応してます。
+// /mybook, /myfriend など
 type TabState = "mybook" | "friend" | "store" | "contents-store" | "settings";
 
 const BottomBar = () => {
-	const [tabState, setTabState] = useState<TabState>("mybook");
+	const [tabState, setTabState] = useState<TabState>();
 
 	const location = useLocation();
 	useEffect(() => {
-		setTabState(location.pathname.split('/')[1] as TabState)
+		setTabState(location.pathname.split('/')[1] as TabState);
 	}, [location])
 
 	const history = useHistory();
 	const onItemClick = (tabState: TabState) => {
-		setTabState(tabState);
 		history.push(`/${tabState}`);
 	}
 
