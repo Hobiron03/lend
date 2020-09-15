@@ -4,6 +4,8 @@ from models.book import Book
 from models.own_book import Own_Book
 from models.lend_info import Lend_info
 from sqlalchemy import and_, or_
+from app.LendInfo_auto import AutoUpdateLendInfo
+
 
 def IsOwnBookAndId(own_book_id, user_id):
     session = Session()
@@ -58,7 +60,7 @@ def GetBookListByUser(user_id):
     session = Session() #こちらの方が適切かもしれない
     
     #Lend_infoの更新関数をここで呼び出す予定............................................................................................
-    
+    AutoUpdateLendInfo()
 
 
     #is_validを利用して判断する．
