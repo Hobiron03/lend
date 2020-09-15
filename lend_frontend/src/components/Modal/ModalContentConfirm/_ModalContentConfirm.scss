@@ -1,0 +1,11 @@
+.modal_content__confirm {
+  &__description {
+    text-align: center;
+    height: 50%;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
