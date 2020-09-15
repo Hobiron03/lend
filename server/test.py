@@ -1,14 +1,14 @@
 from models.config import engine
 from models.config import session
-from app.add_db_LendInfo import AddLendInfoData
+from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
 from app.get_db import GetLendData
 from datetime import datetime ,date, timedelta
 from models.lend_info import Lend_info
 
 
-user_id_data = 1
+user_id_data = 5
 borrower_id_data = 2
-book_id_data = 1
+book_id_data = 2
 now_date = datetime.now()
 deadline_data = (now_date + timedelta(days=7))
 
@@ -18,9 +18,9 @@ deadline_date_string = deadline_data.strftime('%Y/%m/%d %H:%M:%S')
 
 print(now_date_string,deadline_date_string)
 
-#AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data)
-
-
+#AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_date_string)
+#UpdateLendInfoData(2,2) # 貸し出し処理の終了
+"""
 now_date = datetime.now()
 print(now_date)
 tomorrow = now_date + timedelta(days=7)
@@ -30,3 +30,7 @@ print(str(now_date))
 print(str(tomorrow))
 
 print(GetLendData(1))
+
+#UpdateLendInfoData(1,1)
+#print(GetLendData(1))
+"""
