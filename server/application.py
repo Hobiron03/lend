@@ -4,7 +4,7 @@ from flask_restplus import Api, Resource, fields # Werkzeug==0.16.1が良い（W
 from flask_cors import CORS, cross_origin
 import json
 from app.get_db import GetUserLoginData
-from app.BookList import GetBookListByUser
+from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
 
 app = Flask(__name__)
@@ -89,13 +89,6 @@ class BookList(Resource):
 
 
 
-
-
-
-
-
-
-
 # 書籍の貸し出し
 Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明の追加）
     'id': fields.String(description='id'),
@@ -115,6 +108,9 @@ class BookLend(Resource):
             book_id = lend_data['book_id']
             deadline = lend_data['deadline']
             # bookIDが持っている書籍化を判別
+            if IsOwnBookAndId(book_id,user_id) == False:
+                return {'message':"Error.You don't have a book!"}
+            # ここに友達じゃない時の処理をかく！！
 
             # Lend_infoデータベースにデータを送る
             try:
