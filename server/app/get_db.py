@@ -15,6 +15,17 @@ def GetUserLoginData(UserName):
     for row in users:
         return [row.id,row.icon_image,row.name,row.password,row.point,row.friend_list]
 
+def GetLendData(id):
+    print(type(id))
+    select = (id)
+    print("select",select)
+    users = session.query(Lend_info).filter(Lend_info.id==id).all()
+    session.commit()
+    if users ==[]:
+        return None
+    for row in users:
+        return [row.id,row.borrower_id,row.own_book_id,row.created_at,row.returned_at,row.deadline,row.is_valid]
+
 
 str = "kirin"
 
