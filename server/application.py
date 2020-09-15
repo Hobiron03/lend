@@ -74,7 +74,7 @@ class Logout(Resource):
 class BookList(Resource):
     def get(self):
         booklist = GetBookListByUser()
-        return str(booklist)
+        return booklist
 
 
 if __name__ == '__main__':
