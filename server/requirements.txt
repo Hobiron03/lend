@@ -1,4 +1,7 @@
-Flask
+flask
+flask_restful
+flask_session
+flask_cors
 flask_restplus
 Jinja2
 requests
