@@ -35,8 +35,9 @@ class Example2(Resource):
         return {'name': request.json['name'], 'param': request.json['param']}
 
 @api.route('/login')
+@api.doc(params={'name': 'kirin','password':'pass'})
 class Login(Resource):
-    def post(self):
+    @api.marshal_with(example_get_spec)
         if session.get('logged_in') == True: #ログインしていたら表示
             return {'message': 'すでにログインしています。'}
         else:
@@ -66,7 +67,7 @@ class Login(Resource):
 
 @api.route('/logout')
 class Logout(Resource):
-    def post(Resource):
+    def post(self):
         session['logged_in'] = False
 
 @api.route('/books')
