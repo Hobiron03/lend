@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import AppBar from '../organizations/AppBar/AppBar';
 import BottomBar from '../organizations/BottomBar/BottomBar';
 
 interface Props{
-	children: JSX.Element
+	children: ReactNode
 }
 
 /**
