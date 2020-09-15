@@ -1,10 +1,10 @@
 from flask import Flask, request ,session
 from flask_restplus import Api, Resource, fields # Werkzeug==0.16.1が良い（Werkzeug 1.0.0のエラーらしい）
 # https://qiita.com/sky_jokerxx/items/17481ffc34b52875528b よりSwaggerUIをFlaskで使う
-from models.config import session  as ses
-from models.user import User
 
 import json
+from app.get_db import GetUserLoginData
+from app.BookList import GetBookListByUser
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -36,25 +36,31 @@ class Example2(Resource):
 
 @api.route('/login')
 class Login(Resource):
-    def post(self,name,password):
+    def post(self):
         if session.get('logged_in') == True: #ログインしていたら表示
             return {'message': 'すでにログインしています。'}
         else:
             print("ログイン画面")
-            #logindata = request.json #送られてきたデータの取得
-            #name = logindata['name']
-            #password = logindata['password']
+            logindata = request.json #送られてきたデータの取得
+            print(logindata)
+            name = logindata['name']
+            password = logindata['password']
             print(name,password) #デバック
-            database = ['KIRIN','USAGI'] #ここでデータベースを取得
-            database_password = ["aaaa","aaaa"]
-            if name not in database:
-                return { 'message': 'Eooer.Wrong name or password'}
+            #データベースの取得
+            print("name",name)
+            LoginDatabase = GetUserLoginData(str(name))
+            print(LoginDatabase)
+            if LoginDatabase == None:
+                return { 'message': 'Error.Wrong name or password'}
             else:
-                if password == database_password[0]: # データベース力技
+
+                if password == LoginDatabase[3]: # データベースからパスワード
                     print('ログイン成功')
                     session['logged_in'] = True
                     #フレンドIDからフレンド情報を取得するやつをかく
-                    return database
+                    json_text = "{'id':"+ "'"+str(LoginDatabase[0])+ "','icon_image':'"+str(LoginDatabase[1])+ ",'name':'"+str(LoginDatabase[2])+ "','password':'"+str(LoginDatabase[3])+ "','point':'"+str(LoginDatabase[4])+ "','friend_list':'"+str(LoginDatabase[5])+ "'}"
+                    print(json_text)
+                    return json_text
                 else:
                     return {'message':'Error.Wrong name or password!'}
 
@@ -66,9 +72,8 @@ class Logout(Resource):
 @api.route('/books')
 class BookList(Resource):
     def get(self):
-        users = ses.query(User).all()
-        ses.commit()
-        return str(users)
+        booklist = GetBookListByUser()
+        return str(booklist)
 
 
 if __name__ == '__main__':
