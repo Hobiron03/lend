@@ -6,19 +6,18 @@ from datetime import datetime ,date, timedelta
 from models.lend_info import Lend_info
 
 
-user_id_data = 5
-borrower_id_data = 2
+user_id_data = 1
+borrower_id_data = 4
 book_id_data = 2
 now_date = datetime.now()
-deadline_data = (now_date + timedelta(days=7))
-
+deadline_data = (now_date + timedelta(minutes=2))
 
 now_date_string = now_date.strftime('%Y/%m/%d %H:%M:%S')
 deadline_date_string = deadline_data.strftime('%Y/%m/%d %H:%M:%S')
 
 print(now_date_string,deadline_date_string)
 
-#AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_date_string)
+AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_date_string)
 #UpdateLendInfoData(2,2) # 貸し出し処理の終了
 """
 now_date = datetime.now()
