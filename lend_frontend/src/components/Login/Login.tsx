@@ -18,10 +18,10 @@ const Login = () => {
       console.error('ユーザー登録は実装されていません')
     }else{
       await axios.post(ENTRY_POINT + '/login', {
-        userName: userName,
+        name: userName,
         password: password,
       });
-      console.log('login success');
+      console.log('login成功');
     }
   }
 
