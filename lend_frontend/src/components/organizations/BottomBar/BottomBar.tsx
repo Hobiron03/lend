@@ -1,26 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { useLocation, useHistory } from "react-router-dom";
 
-type TabState = "mybookshell" | "friend" | "store" | "point" | "settings";
+type TabState = "mybook" | "friend" | "store" | "contents-store" | "settings";
 
 const BottomBar = () => {
-	const [tabState, setTabState] = useState<TabState>("mybookshell");
+	const [tabState, setTabState] = useState<TabState>("mybook");
 
+	const location = useLocation();
+	useEffect(() => {
+		setTabState(location.pathname.split('/')[1] as TabState)
+	}, [location])
+
+	const history = useHistory();
 	const onItemClick = (tabState: TabState) => {
 		setTabState(tabState);
-		console.log(`タブを移動: ${tabState}へ遷移`)
+		history.push(`/${tabState}`);
 	}
 
 	return (
 		<footer className="bottom-bar">
 			<div
-				className={classNames("bottom-bar-item", tabState == "mybookshell" && "bottom-bar-item-selected")}
-				onClick={() => onItemClick("mybookshell")}
+				className={classNames("bottom-bar-item", tabState == "mybook" && "bottom-bar-item-selected")}
+				onClick={() => onItemClick("mybook")}
 			>
 				<MenuBookIcon/>
 				<div>マイ本棚</div>
@@ -40,8 +47,8 @@ const BottomBar = () => {
 				<div>ストア</div>
 			</div>
 			<div
-				className={classNames("bottom-bar-item", tabState == "point" && "bottom-bar-item-selected")}
-				onClick={() => onItemClick("point")}
+				className={classNames("bottom-bar-item", tabState == "contents-store" && "bottom-bar-item-selected")}
+				onClick={() => onItemClick("contents-store")}
 			>
 				<EmojiEventsIcon />
 				<div>ポイント交換</div>
