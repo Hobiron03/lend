@@ -9,7 +9,8 @@ import os
 import datetime
 
 
-ImageDir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'images/')
+#ImageDir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'images/')
+ImageDir = "http://localhost:5000/static/images/"
 
 session.add_all([
     User( icon_image = ImageDir+"icon_1.jpg", name = "kirin" , password = "pass", point=0, friend_list = "[2,4,5]"),

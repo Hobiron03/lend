@@ -111,13 +111,13 @@ def GetBookListByUser(user_id):
     if user_borrow_info != []:
         books = ChangeBooksFromLendInfo(user_borrow_info)
         for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "borrow"} )
-        #print(str)
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "borrowing"} )
+    #print(str)
 
     if user_lend_info != []:
         books = ChangeBooksFromLendInfo(user_lend_info)
         for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "borrow"} )
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "lending"} )
         #print(str)
 
 
