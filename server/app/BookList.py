@@ -24,11 +24,19 @@ def IsLending(own_book_id):
     session.commit()
     return True
 
+#lend_info => own_book
+def GetOwnBookById(onw_book_id):
+    session = Session()
+    own_book = session.query(Own_Book).filter(Own_Book.id == own_book_id).all()
+    session.commit()
+    return own_book #リスト
+
+#own_book => book
 def GetBookById(book_id):
     session = Session()
     book = session.query(Book).filter(Book.id == book_id).all()
     session.commit()
-    return book #リスト?
+    return book #リスト
 
 
 def ChangeBooksFromOwnBook(booklist):
@@ -37,12 +45,17 @@ def ChangeBooksFromOwnBook(booklist):
         res.extend( GetBookById(book.book_id) )
     return res
 
+def ChangeBooksFromLendInfo( booklist ):
+    res = []
+    for book in booklist:
+        own_book = GetOwnBookById( book.own_book_id )
+        if own_book != [] :
+            res.extend( GetBookById( own_book.book_id ) )
+    return res
 
-def GetBookListByUser():
+
+def GetBookListByUser(user_id):
     session = Session() #こちらの方が適切かもしれない
-    user_id = 1
-    print(user_id)
-    print(type(user_id) )
     
     #Lend_infoの更新関数をここで呼び出す予定............................................................................................
     
@@ -91,8 +104,21 @@ def GetBookListByUser():
         for book in books:
             str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "having"} )
 
-        print(str)
+       # print(str)
     
+    if user_borrow_info != []:
+        books = ChangeBooksFromLendInfo(user_borrow_info)
+        for book in books:
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "borrow"} )
+        #print(str)
+
+    if user_lend_info != []:
+        books = ChangeBooksFromLendInfo(user_lend_info)
+        for book in books:
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "borrow"} )
+        #print(str)
+
+
     return str
 
 
