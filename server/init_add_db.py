@@ -6,6 +6,8 @@ from models.own_book import Own_Book
 from models.lend_info import Lend_info
 import os
 
+import datetime
+
 
 ImageDir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'images/')
 
@@ -34,6 +36,12 @@ session.add_all([
     Own_Book( user_id = 3 , book_id = 3 ),
     Own_Book( user_id = 3 , book_id = 4 ),
     Own_Book( user_id = 5 , book_id = 5 )])
+"""
+return_date = 7
+session.add.all([
+    Lend_info(id = 1, borrower_id = 1,own_book_id = 1,created_at = str(datetime.datetime.now()),returned_at= "Non",deadline = str(datetime.datetime.now()),is_valid = 1)
+])
+"""
 
 
 

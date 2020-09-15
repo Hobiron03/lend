@@ -77,5 +77,27 @@ class BookList(Resource):
         return str(booklist)
 
 
+
+
+
+# 書籍の貸し出し
+@api.route('/books')
+class BookList(Resource):
+    def post(self):
+        #try:
+            lend_data = request.json #送られてきたデータの取得
+            user_id = lend_data['id']
+            borrower_id = lend_data['borrower_id']
+            book_id = lend_data['book_id']
+            deadline = lend_data['deadline']
+
+            # Lend_infoデータベースにデータを送る
+
+            return {'message':'Success'}
+
+
+
+
+
 if __name__ == '__main__':
     app.run()

@@ -17,9 +17,9 @@ class Lend_info(Base_lend_info):
     deadline = Column(String)
     is_valid = Column(Boolean)
 
-    def __init__(self, id, borrowe_id,own_book_id,created_at,returned_at,deadline,is_valid):
+    def __init__(self, id, borrower_id,own_book_id,created_at,returned_at,deadline,is_valid):
         self.id = id
-        self.borrowe_id = borrowe_id
+        self.borrower_id = borrower_id
         self.own_book_id = own_book_id
         self.created_at = created_at
         self.returned_at = returned_at
