@@ -1,4 +1,9 @@
 .appBar{
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	box-sizing: border-box;
+
 	display: flex;
 	flex-direction: row;
 	align-items: center;

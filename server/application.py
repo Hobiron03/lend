@@ -1,7 +1,7 @@
 from flask import Flask, request ,session
 from flask_restplus import Api, Resource, fields # Werkzeug==0.16.1が良い（Werkzeug 1.0.0のエラーらしい）
 # https://qiita.com/sky_jokerxx/items/17481ffc34b52875528b よりSwaggerUIをFlaskで使う
-
+from flask_cors import CORS, cross_origin
 import json
 from app.get_db import GetUserLoginData
 from app.BookList import GetBookListByUser
@@ -9,6 +9,7 @@ from app.add_db_LendInfo import AddLendInfoData
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
+cors = CORS(app, supports_credentials=True) # Flask-CORSを使って有効化しました。フロント側でもリクエスト時に「withCredentials」をtrueにしてください
 api = Api(app)
 
 example_get_spec = api.model('Example GET', { #ドキュメントの名前を定義（説明の追加）
@@ -75,7 +76,7 @@ class Logout(Resource):
 class BookList(Resource):
     def get(self):
         booklist = GetBookListByUser()
-        return str(booklist)
+        return booklist
 
 
 
