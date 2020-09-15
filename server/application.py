@@ -73,7 +73,10 @@ class Logout(Resource):
 @api.route('/books')
 class BookList(Resource):
     def get(self):
-        booklist = GetBookListByUser()
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            return "パラメータが不適切です"
+        booklist = GetBookListByUser(user_id)
         return booklist
 
 
