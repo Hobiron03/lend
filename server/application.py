@@ -96,14 +96,15 @@ class BookLend(Resource):
             borrower_id = lend_data['borrower_id']
             book_id = lend_data['book_id']
             deadline = lend_data['deadline']
+            # bookIDが持っている書籍化を判別
 
             # Lend_infoデータベースにデータを送る
-            #try:
-            print((user_id,borrower_id,book_id,deadline))
-            AddLendInfoData(user_id,borrower_id,book_id,deadline)
-            return {'message':'Success'}
-            #except:
-                #return {'message':'Error.Please try again.'}
+            try:
+                print((user_id,borrower_id,book_id,deadline))
+                AddLendInfoData(user_id,borrower_id,book_id,deadline)
+                return {'message':'Success'}
+            except:
+                return {'message':'Error.Please try again.'}
 
 
 
