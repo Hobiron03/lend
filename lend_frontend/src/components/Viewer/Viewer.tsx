@@ -5,9 +5,11 @@ import image2 from '../../assets/p2.png';
 import image3 from '../../assets/p3.png';
 import image4 from '../../assets/p4.png';
 
+// 漫画のページ一覧
 const images = [image1, image2, image3, image4];
+
 const Viewer = () => {
-	const [page, setPage] = useState(4);
+	const [page, setPage] = useState(0);
 
 	const handlePageNext = () => {
 		if(page != images.length){
@@ -23,6 +25,7 @@ const Viewer = () => {
 
 	const history = useHistory();
 	const handleCloseViewer = () => {
+		// 本棚に戻る
 		history.push('/mybook');
 	}
 
