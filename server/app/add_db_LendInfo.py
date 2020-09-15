@@ -36,7 +36,7 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
     print(type(now_date))
     print(now_date)
     now_date_str = now_date.strftime('%Y/%m/%d %H:%M:%S')
-    print(type(now_date_str))
+    print(now_date_str)
 
     session.add_all([
         Lend_info(id = user_id_data, borrower_id = borrower_id_data,own_book_id = book_id_data,created_at = (now_date),returned_at= "Non",deadline = deadline_data,is_valid = 1)

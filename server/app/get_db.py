@@ -2,6 +2,8 @@ from models.config import session
 
 from models.user import User
 from models.book import Book
+from models.own_book import Own_Book
+from models.lend_info import Lend_info
 import os
 
 def GetUserLoginData(UserName):

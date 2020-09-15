@@ -18,7 +18,7 @@ deadline_date_string = deadline_data.strftime('%Y/%m/%d %H:%M:%S')
 
 print(now_date_string,deadline_date_string)
 
-AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data)
+#AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data)
 
 
 now_date = datetime.now()
