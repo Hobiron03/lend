@@ -6,7 +6,7 @@ from datetime import datetime ,date, timedelta
 from models.lend_info import Lend_info
 from app.BookList import GetOwnBookIDByUseridAndBookid,GetOwnBookById
 from app.BuyBooks import AddOwnBooks
-from app.AddNotification import GetNotificationByUserId,AddNotification
+from app.AddNotification import GetNotificationByUserId,AddNotification,AddNotificationInBuy
 
 user_id_data = 1
 user_id_data = 1
@@ -53,3 +53,4 @@ print(GetLendData(1))
 # 通知機能のテスト
 AddNotification(1,"今日は快晴です")
 print(GetNotificationByUserId(1))
+AddNotificationInBuy(1,1)

@@ -4,6 +4,8 @@ from models.own_book import Own_Book
 from models.lend_info import Lend_info
 from models.notification import Notification
 from sqlalchemy import and_, or_
+from app.BookList import GetBookById
+from app.friend import ChangeFriendlistToFriendData
 
 from datetime import  date, timedelta
 import datetime
@@ -30,4 +32,14 @@ def AddNotification(user_id_data,message_data):
     session.commit()
     print("通知の追加が完了しました")
 
+def AddNotificationInBuy(user_id,book_id):
+    book_info = GetBookById(book_id)
+    message = str(book_info[0]) + "を購入しました"
+    AddNotification(user_id,message)
 
+def AddNotificationInLend(user_id,borrower_id,book_id):
+    book_info = GetBookById(book_id)
+    name = ChangeFriendlistToFriendData(borrower_id)[2]
+    message = str(name) + "さんに" + str(book_info[0]) + "を貸しました。"
+
+# 友達が購入してくれた
