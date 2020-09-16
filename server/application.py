@@ -3,6 +3,7 @@ from flask_restplus import Api, Resource, fields # Werkzeug==0.16.1が良い（W
 # https://qiita.com/sky_jokerxx/items/17481ffc34b52875528b よりSwaggerUIをFlaskで使う
 from flask_cors import CORS, cross_origin
 import json
+from app.friend import GetUserFriendData
 from app.get_db import GetUserLoginData
 from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
@@ -111,7 +112,10 @@ class BookLend(Resource):
             if IsOwnBookAndId(book_id,user_id) == False:
                 return {'message':"Error.You don't have a book!"}
             # ここに友達じゃない時の処理をかく！！
-
+            friend_list = GetUserFriendData(user_id)
+            if borrower_id not in friend_list:
+                print("貸し出す相手が友達ではありません")
+                return {"message":"Error. You are not friends!!"}
             # Lend_infoデータベースにデータを送る
             try:
                 print((user_id,borrower_id,book_id,deadline))
