@@ -83,9 +83,7 @@ class Login(Resource):
                     print(friend_list_data)
                     friend_info_data =[] # これを格納する
                     for i in range(len(friend_list_data)):
-                        list = []
-                        list.append(ChangeFriendlistToFriendData(friend_list_data[i]))
-                        friend_info_data.append(list)
+                        friend_info_data.append((ChangeFriendlistToFriendData(friend_list_data[i])))
                     print(friend_info_data)
 
                     json_text = {'id':(LoginDatabase[0]),'icon_image':(LoginDatabase[1]),'name':(LoginDatabase[2]),'password':(LoginDatabase[3]),'point':(LoginDatabase[4]),'friend_list':friend_info_data}
