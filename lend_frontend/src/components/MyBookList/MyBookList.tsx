@@ -15,6 +15,7 @@ const MyBookList = () => {
 		axios.get(ENTRY_POINT + '/books?user_id=1').then((res) => {
 			const books = res.data.map((data: any) => Book.fromJson(data));
 			setMyBooks(books);
+			console.log(books);
 		});
 	}, [])
 
