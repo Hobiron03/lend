@@ -32,6 +32,7 @@
 127.0.0.1:5000にアクセスすることで利用できます.
 #### DB初期設定
 ```bash
+   rm models/sql.db
    python init_db.py
    python init_add_db.py
 ```
