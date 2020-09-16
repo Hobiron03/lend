@@ -11,7 +11,7 @@ from app.BuyBooks import AddOwnBooks
 user_id_data = 1
 
 borrower_id_data = 4
-book_id_data = 5
+book_id_data = 3
 
 now_date = datetime.now()
 deadline_data = (now_date + timedelta(minutes=2))
