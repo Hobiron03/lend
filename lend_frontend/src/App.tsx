@@ -13,6 +13,7 @@ import BottomBar from "./components/organizations/BottomBar/BottomBar";
 import SelectFriendScreen from "./components/SelectFriendScreen/SelectFriendScreen";
 import "./App.scss";
 import Viewer from './components/Viewer/Viewer'
+import Store from './components/Store/Store'
 import MyBookList from './components/MyBookList/MyBookList'
 
 function App() {
@@ -36,15 +37,7 @@ function App() {
             )}
           />
           {/* ストアページ */}
-          <Route
-            exact
-            path="/store"
-            component={() => (
-              <Screen>
-                <div style={{ padding: "100px" }}>/store 未実装</div>
-              </Screen>
-            )}
-          />
+          <Route exact path="/store" component={Store} />
           {/* 限定コンテンツ一覧ページ */}
           <Route
             exact
