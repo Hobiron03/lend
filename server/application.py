@@ -6,7 +6,9 @@ import json
 from app.get_db import GetUserLoginData
 from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
+from app.BuyBooks import AddOwnBooks
 from app.StoreBook import AllBooks, BooksForUser
+
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -148,7 +150,29 @@ class ReturnBook(Resource):
         except:
             return {'message':'Error. Please try again.'}
 
+# 書籍の購入
+BuyDoc = api.model('buy POST', { #ドキュメントの名前を定義（説明の追加）
+    'user_id': fields.String(description='user_id'),
+    'book_id': fields.String(description='book_id')
+    'point': fields.String(description='point')
+})
 
+@api.route('/return_book')
+class ReturnBook(Resource):
+    @api.marshal_with(BuyDoc)
+    def post(self):
+        buy_book_data = request.json
+        user_id_data = buy_book_data['user_id']
+        book_id_data = buy_book_data['book_id']
+        #point_data = buy_book_data['point'] # (拡張機能、デフォルトで０)
+        point_data = 0
+
+        # 書籍の購入を行う
+        try:
+            AddOwnBooks(user_id_data,book_id_data)
+            return {"message":"Success."}
+        except:
+            return {"message":"Error.Please try again"}
 
 
 if __name__ == '__main__':
