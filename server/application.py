@@ -9,7 +9,9 @@ from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
 from app.BuyBooks import AddOwnBooks
 from app.StoreBook import AllBooks, BooksForUser
-
+from app.StoreBook import AllBooksByRank, BooksForUserByRank
+from app.StoreBook import AllBooksByOwn, BooksForUserByOwn
+from app.StoreBook import AllBooksByLend, BooksForUserByLend
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -47,9 +49,9 @@ Login_doc = api.model('Login POST', { #ドキュメントの名前を定義（�
 })
 
 @api.route('/login')
-@api.doc(params={'name': 'kirin','password':'pass'})
+#@api.doc(params={'name': 'kirin','password':'pass'})
 class Login(Resource):
-    @api.marshal_with(Login_doc)
+    #@api.marshal_with(Login_doc)
     def post(self):
         if session.get('logged_in') == True: #ログインしていたら表示
             return {'message': 'すでにログインしています。'}
@@ -71,8 +73,9 @@ class Login(Resource):
                     print('ログイン成功')
                     session['logged_in'] = True
                     #フレンドIDからフレンド情報を取得するやつをかく
-                    json_text = '{"id":'+ '"'+str(LoginDatabase[0])+ '","icon_image":"'+str(LoginDatabase[1])+ '","name":"'+str(LoginDatabase[2])+ '","password":"'+str(LoginDatabase[3])+ '","point":"'+str(LoginDatabase[4])+ '","friend_list":"'+str(LoginDatabase[5])+ '"}'
+                    json_text = {'id':str(LoginDatabase[0]),'icon_image':str(LoginDatabase[1]),'name':str(LoginDatabase[2]),'password':str(LoginDatabase[3]),'point':str(LoginDatabase[4]),'friend_list':str(LoginDatabase[5])}
                     print(json_text)
+
                     return json_text
                 else:
                     return {'message':'Error.Wrong name or password!'}
@@ -92,7 +95,7 @@ class BookList(Resource):
         return booklist
 
 @api.route('/store')
-class BookList(Resource):
+class store(Resource):
     def get(self):
         user_id = request.args.get('user_id')
         if user_id is None:
@@ -101,6 +104,43 @@ class BookList(Resource):
         else :
             booklist = BooksForUser(user_id)
             return booklist
+
+
+@api.route('/store/rank') #(貸出+購入)順
+class BookList(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooksByRank()
+            return booklist
+        else :
+            booklist = BooksForUserByRank(user_id)
+            return booklist
+
+@api.route('/store/own') #購入順
+class BookList(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooksByRank()
+            return booklist
+        else :
+            booklist = BooksForUserByRank(user_id)
+            return booklist
+
+@api.route('/store/lend') #貸出数順
+class BookList(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooksByRank()
+            return booklist
+        else :
+            booklist = BooksForUserByRank(user_id)
+            return booklist
+
+
+
 
 
 # 書籍の貸し出し
@@ -113,7 +153,7 @@ Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明�
 @api.route('/lend')
 @api.doc(params={ "id": "1", "borrower_id": "2", "book_id": '1', "deadline": "2020-09-22 12:26:48.084076" })
 class BookLend(Resource):
-    @api.marshal_with(Lend)
+    #@api.marshal_with(Lend)
     def post(self):
         #try:
             lend_data = request.json #送られてきたデータの取得
@@ -157,13 +197,13 @@ class ReturnBook(Resource):
 # 書籍の購入
 BuyDoc = api.model('buy POST', { #ドキュメントの名前を定義（説明の追加）
     'user_id': fields.String(description='user_id'),
-    'book_id': fields.String(description='book_id')
+    'book_id': fields.String(description='book_id'),
     'point': fields.String(description='point')
 })
 
-@api.route('/return_book')
-class ReturnBook(Resource):
-    @api.marshal_with(BuyDoc)
+@api.route('/buy')
+class BuyBooks(Resource):
+    #@api.marshal_with(BuyDoc)
     def post(self):
         buy_book_data = request.json
         user_id_data = buy_book_data['user_id']

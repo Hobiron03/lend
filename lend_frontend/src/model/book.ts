@@ -7,10 +7,10 @@ export default class Book{
 	info: string;
 	price: number;
 	image: string;
-	url: string;
+	url: string[];
 	status: BookStatus;
 
-	constructor(id: number, name: string, auther: string, info: string, price: number, image: string, url: string, status: BookStatus){
+	constructor(id: number, name: string, auther: string, info: string, price: number, image: string, url: string[], status: BookStatus){
 		this.id = id;
 		this.name = name;
 		this.auther = auther;

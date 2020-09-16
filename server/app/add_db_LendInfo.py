@@ -44,7 +44,7 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
         raise Exception('Error!You don\'t have your books')
 
     session.add_all([
-        Lend_info(id = user_id_data, borrower_id = borrower_id_data,own_book_id = own_book_id_data,created_at = (now_date_str),returned_at= "Non",deadline = deadline_data,is_valid = 1)
+        Lend_info( borrower_id = borrower_id_data,own_book_id = own_book_id_data,created_at = (now_date_str),returned_at= "Non",deadline = deadline_data,is_valid = 1)
     ])
     session.commit()
 
@@ -55,7 +55,7 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
 def UpdateLendInfoData(user_id_data,book_id_data):
     #print(user_id_data)
     own_book_id_data = (GetOwnBookIDByUseridAndBookid(user_id_data,book_id_data))
-    lends = session.query(Lend_info).filter(Lend_info.id==user_id_data,Lend_info.own_book_id == own_book_id_data).all()
+    lends = session.query(Lend_info).filter(Lend_info.own_book_id == own_book_id_data).all()
     if lends == []:
         raise Exception('Error!')
     else:
