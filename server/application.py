@@ -161,8 +161,8 @@ BuyDoc = api.model('buy POST', { #ドキュメントの名前を定義（説明�
     'point': fields.String(description='point')
 })
 
-@api.route('/return_book')
-class ReturnBook(Resource):
+@api.route('/buy')
+class BuyBooks(Resource):
     @api.marshal_with(BuyDoc)
     def post(self):
         buy_book_data = request.json
