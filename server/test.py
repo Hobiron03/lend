@@ -9,13 +9,12 @@ from app.BuyBooks import AddOwnBooks
 
 
 user_id_data = 1
-user_id_data = 1
-borrower_id_data = 2
+borrower_id_data = 4
 
-book_id_data = 3
+book_id_data = 1
 
 now_date = datetime.now()
-deadline_data = (now_date + timedelta(minutes=2))
+deadline_data = (now_date + timedelta(minutes=60))
 
 now_date_string = now_date.strftime('%Y/%m/%d %H:%M:%S')
 deadline_date_string = deadline_data.strftime('%Y/%m/%d %H:%M:%S')
