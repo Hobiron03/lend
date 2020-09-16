@@ -7,7 +7,7 @@ interface Props {
 	book: Book;
 }
 
-// TODO: ダミーデータ
+// TODO: ダミーデータ（react-routerでbookdataを持てば良い）
 const BookPurchase = ({ book = new Book(1, '桃太郎', '昔の人', '昔話です。有名なお話です。鬼を倒します。', 100, 'xxx', 'xxx', 'having') }: Props) => {
 	// TODO: 初期値正しく設定する
 	const [havingBook, setHavingBook] = useState(false);
@@ -21,7 +21,7 @@ const BookPurchase = ({ book = new Book(1, '桃太郎', '昔の人', '昔話で�
 	}
 
 	const handleRead = () => {
-		history.push(`/mybook/${book.id}/read`);
+		history.push(`/mybook/${book.id}/read`, { book });
 	}
 
 	return (
