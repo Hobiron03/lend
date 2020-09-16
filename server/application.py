@@ -9,6 +9,7 @@ from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
 from app.BuyBooks import AddOwnBooks
 from app.StoreBook import AllBooks, BooksForUser
+from app.PointAdd import AddPoint,GetLenderId
 
 
 app = Flask(__name__)
@@ -175,6 +176,13 @@ class BuyBooks(Resource):
         # 書籍の購入を行う
         try:
             AddOwnBooks(user_id_data,book_id_data)
+            # 貸してくれたものを買ってくれた時にポイントを追加する
+            lend_user_id = GetLenderId(user_id_data,book_id_data)
+            if lend_user_id != None:
+                print("ポイント付与相手",lend_user_id)
+                add_point = 30
+                AddPoint(lend_user_id, add_point)
+                print("付与か完了しました")
             return {"message":"Success."}
         except:
             return {"message":"Error.Please try again"}

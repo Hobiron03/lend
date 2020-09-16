@@ -10,11 +10,11 @@ from app.PointAdd import GetLenderId
 
 
 
-"""
-user_id_data = 2
 
-borrower_id_data = 1
-book_id_data = 6
+user_id_data = 1
+
+borrower_id_data = 2
+book_id_data = 3
 
 now_date = datetime.now()
 deadline_data = (now_date + timedelta(minutes=2))
@@ -30,7 +30,7 @@ print(GetLendData(GetOwnBookIDByUseridAndBookid(2,6)))
 UpdateLendInfoData(2,6) # 貸し出し処理の終了
 #print(GetOwnBookIDByUseridAndBookid(1,1))
 print(GetLendData(1))
-"""
+
 
 """
 now_date = datetime.now()
