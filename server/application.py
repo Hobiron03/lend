@@ -244,6 +244,14 @@ class BuyBooks(Resource):
         except:
             return {"message":"Error.Please try again"}
 
+# 通知の取得
+@api.route('/notification')
+class Notification(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        notification_list = GetNotificationByUserId(user_id)
+        return notification_list
+
 
 if __name__ == '__main__':
     app.run()
