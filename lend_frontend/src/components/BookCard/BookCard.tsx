@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./_BookCard.scss";
 import "./Button/Button";
 import Button from "./Button/Button";
-import Book from '../../model/book';
+import Book from "../../model/book";
 
 /**
  * 本の状態によってボタンを出し分けるためのCardType
@@ -24,7 +24,11 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
 
   const handleRead = () => {
     history.push(`/mybook/${book.id}/read`, { book });
-  }
+  };
+
+  const handleLend = () => {
+    history.push(`/mybook/${props.book.id}/lend`);
+  };
 
   // 購入の場合のみ、カードをクリックしてアクションを起こせる
   const handleBuy = () => {
@@ -32,6 +36,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
       history.push(`/store/${book.id}`, { book });
     }
   }
+
 
   return (
     <div className="BookCard" onClick={handleBuy}>
