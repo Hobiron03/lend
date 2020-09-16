@@ -20,7 +20,7 @@ const Store = () => {
 	const [storeMode, setStoreMode] = useState<StoreMode>("top-page");
 
 	useEffect(() => {
-		axios.get(ENTRY_POINT + '/books?user_id=1').then((res) => {
+		axios.get(ENTRY_POINT + '/store').then((res) => {
 			const books = res.data.map((data: any) => Book.fromJson(data));
 			setRankingBooks(books);
 			setDiscountBooks(books);
