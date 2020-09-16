@@ -11,6 +11,9 @@ from app.BuyBooks import AddOwnBooks
 from app.StoreBook import AllBooks, BooksForUser
 from app.PointAdd import AddPoint,GetLenderId
 from app.friend import ChangeFriendlistToFriendData
+from app.StoreBook import AllBooksByRank, BooksForUserByRank
+from app.StoreBook import AllBooksByOwn, BooksForUserByOwn
+from app.StoreBook import AllBooksByLend, BooksForUserByLend
 
 
 app = Flask(__name__)
@@ -116,6 +119,43 @@ class store(Resource):
         else :
             booklist = BooksForUser(user_id)
             return booklist
+
+
+@api.route('/store/rank') #(貸出+購入)順
+class BookList(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooksByRank()
+            return booklist
+        else :
+            booklist = BooksForUserByRank(user_id)
+            return booklist
+
+@api.route('/store/own') #購入順
+class BookList(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooksByRank()
+            return booklist
+        else :
+            booklist = BooksForUserByRank(user_id)
+            return booklist
+
+@api.route('/store/lend') #貸出数順
+class BookList(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooksByRank()
+            return booklist
+        else :
+            booklist = BooksForUserByRank(user_id)
+            return booklist
+
+
+
 
 
 # 書籍の貸し出し
