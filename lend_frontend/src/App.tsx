@@ -8,6 +8,7 @@ import BottomBar from "./components/organizations/BottomBar/BottomBar";
 import SelectFriendScreen from "./components/SelectFriendScreen/SelectFriendScreen";
 import "./App.scss";
 import Viewer from './components/Viewer/Viewer'
+import MyBookList from './components/MyBookList/MyBookList'
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route exact path="/login" component={Login} />
 
           {/* マイ本棚 */}
-          <Route exact path="/mybook" component={() => <Screen><div style={{ padding: '100px' }}>/mybook 未実装</div></Screen>} />
+          <Route exact path="/mybook" component={MyBookList} />
           {/* 友達ページ */}
           <Route exact path="/friend" component={() => <Screen><div style={{ padding: '100px' }}>/friend 未実装</div></Screen>} />
           {/* ストアページ */}
