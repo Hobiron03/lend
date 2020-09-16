@@ -157,12 +157,12 @@ class ReturnBook(Resource):
 # 書籍の購入
 BuyDoc = api.model('buy POST', { #ドキュメントの名前を定義（説明の追加）
     'user_id': fields.String(description='user_id'),
-    'book_id': fields.String(description='book_id')
+    'book_id': fields.String(description='book_id'),
     'point': fields.String(description='point')
 })
 
-@api.route('/return_book')
-class ReturnBook(Resource):
+@api.route('/buy')
+class BuyBooks(Resource):
     @api.marshal_with(BuyDoc)
     def post(self):
         buy_book_data = request.json
