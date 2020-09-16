@@ -4,8 +4,10 @@ import Book from '../../model/book';
 
 /**
  * bookデータが与えられればビュワー（InnerViewer）を表示
+ * 与えられなければ不正とみなし本棚へ戻る
  */
 
+ //TODO: 優先度低: stateがnullだった場合になんとかしてデータを取得する（ContextAPI or API call）
 const Viewer = () => {
 	const [book, setBook] = useState<Book>();
 
