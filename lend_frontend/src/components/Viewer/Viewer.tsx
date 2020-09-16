@@ -1,14 +1,38 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import image1 from '../../assets/p1.png';
-import image2 from '../../assets/p2.png';
-import image3 from '../../assets/p3.png';
-import image4 from '../../assets/p4.png';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import Book from '../../model/book';
 
-// 漫画のページ一覧
-const images = [image1, image2, image3, image4];
+/**
+ * bookデータが与えられればビュワー（InnerViewer）を表示
+ */
 
 const Viewer = () => {
+	const [book, setBook] = useState<Book>();
+
+	const history = useHistory();
+	const { state } = useLocation();
+
+	useEffect(() => {
+		if (state == null) {
+			history.push('/mybook');
+		}else{
+			setBook((state as { book: Book }).book as Book);
+		}
+	}, [])
+
+	if(book != null){
+		return <InnerViewr book={book}/>;
+	}else{
+		return <div></div>;
+	}
+}
+
+
+
+const InnerViewr = ({book}: {book: Book}) => {
+	const history = useHistory();
+	
+	const images = book.url;
 	const [page, setPage] = useState(0);
 
 	const handlePageNext = () => {
@@ -23,7 +47,6 @@ const Viewer = () => {
 		}
 	}
 
-	const history = useHistory();
 	const handleCloseViewer = () => {
 		// 本棚に戻る
 		history.push('/mybook');
