@@ -6,7 +6,7 @@ import json
 from app.get_db import GetUserLoginData
 from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
-from app.StoreBook import AllBooks
+from app.StoreBook import AllBooks, BooksForUser
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -91,8 +91,13 @@ class BookList(Resource):
 @api.route('/store')
 class BookList(Resource):
     def get(self):
-        booklist = AllBooks()
-        return booklist
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooks()
+            return booklist
+        else :
+            booklist = BooksForUser(user_id)
+            return booklist
 
 
 # 書籍の貸し出し
