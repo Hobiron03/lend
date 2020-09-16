@@ -22,7 +22,7 @@ def GetNotificationByUserId(user_id): #全ての通知を取得する
     return notification_list
 
 
-def AddNotification(user_id_data,message_data):
+def AddNotification(user_id_data,message_data): # 通知を追加する
     session = Session()
     now_date = (datetime.datetime.now())
     now_date_str = now_date.strftime('%Y/%m/%d %H:%M:%S')
@@ -32,14 +32,29 @@ def AddNotification(user_id_data,message_data):
     session.commit()
     print("通知の追加が完了しました")
 
+# 購入時の追加
 def AddNotificationInBuy(user_id,book_id):
     book_info = GetBookById(book_id)
     message = str(book_info[0]) + "を購入しました"
     AddNotification(user_id,message)
 
+# 本を貸した時
 def AddNotificationInLend(user_id,borrower_id,book_id):
     book_info = GetBookById(book_id)
     name = ChangeFriendlistToFriendData(borrower_id)[2]
     message = str(name) + "さんに" + str(book_info[0]) + "を貸しました。"
+    AddNotification(user_id,message)
+
+# 本を貸してくれた時
+def AddNotificationInBorrow(user_id,borrower_id,book_id):
+    book_info = GetBookById(book_id)
+    name = ChangeFriendlistToFriendData(user_id)[2]
+    message = str(name) + "さんから" + str(book_info[0]) + "を貸してくれました。"
+    AddNotification(borrower_id,message) # 借りた側に通知がいく
 
 # 友達が購入してくれた
+def AddNotificationInLendBuy(user_id,borrower_id,book_id,addpoint):
+    book_info = GetBookById(book_id)
+    name = ChangeFriendlistToFriendData(borrower_id)[2]
+    message = str(name) + "さんが" + str(book_info[0]) + "を購入しました。" + str(addpoint) +"ポイントが追加されました。"
+    AddNotification(user_id,message) # 貸してくれた人に通知がいく
