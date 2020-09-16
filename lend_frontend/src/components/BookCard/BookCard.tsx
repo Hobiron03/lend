@@ -23,12 +23,12 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
   const history = useHistory();
 
   const handleRead = () => {
-
-  const handleLend = () => {
-    history.push(`/mybook/${props.book.id}/lend`);
-  };
     history.push(`/mybook/${book.id}/read`);
   }
+
+  const handleLend = () => {
+    history.push(`/mybook/${book.id}/lend`);
+  };
 
   // 購入の場合のみ、カードをクリックしてアクションを起こせる
   const handleBuy = () => {
@@ -63,7 +63,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
               type === "read_lend" ? (
                 <>
                   <Button content="読む" onClick={handleRead} />
-                  <Button content="貸す" onClick={() => console.log("貸す")} />
+                  <Button content="貸す" onClick={handleLend} />
                 </>
               ) : type === "read_buy_return" ? (
                 <>
