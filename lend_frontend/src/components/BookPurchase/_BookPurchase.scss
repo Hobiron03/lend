@@ -1,0 +1,76 @@
+$header-color: rgb(118, 165, 118);
+$purchase-button-color: #5ab9e3;
+$hover-purchase-button-color: #4a91af;
+$read-button-color: #dae35a;
+$hover-read-button-color: #adaf4a;
+
+.book-purchase-page{
+	display: flex;
+	flex-direction: column;
+
+	.upper-area{
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		height: 50%;
+
+		.book-img{
+			flex: 1;
+		}
+		.book-title{
+			flex: 1;
+		}
+		.book-price{
+			margin-top: 1em;
+			font-weight: bold;
+			font-size: 120%;
+		}
+	}
+
+	.action-button{
+		cursor: pointer;
+		text-align: center;
+		color: white;
+		font-weight: bold;
+		border-radius: 2em;
+		padding: .5em 1em;
+		margin: 2em 1em;
+		box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.2);
+	}
+
+	.purchase-button{
+		background: $purchase-button-color;
+		border: 3px solid $hover-purchase-button-color;
+		&:hover{
+			background: $hover-purchase-button-color;
+		}
+	}
+
+	.read-button{
+		background: $read-button-color;
+		border: 3px solid $hover-read-button-color;
+		color: black;
+		&:hover{
+			background: $hover-read-button-color;
+		}
+	}
+
+	.section{
+		padding: 1em 0em;
+
+		.section-header{
+			font-size: 100%;
+			background: $header-color;
+			color: white;
+			padding: .25em .5em;
+
+			h1{
+				margin: 0;
+			}
+		}
+
+		.section-body{
+			margin: 1em .5em;
+		}
+	}
+}
