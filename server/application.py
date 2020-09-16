@@ -47,9 +47,9 @@ Login_doc = api.model('Login POST', { #ドキュメントの名前を定義（�
 })
 
 @api.route('/login')
-@api.doc(params={'name': 'kirin','password':'pass'})
+#@api.doc(params={'name': 'kirin','password':'pass'})
 class Login(Resource):
-    @api.marshal_with(Login_doc)
+    #@api.marshal_with(Login_doc)
     def post(self):
         if session.get('logged_in') == True: #ログインしていたら表示
             return {'message': 'すでにログインしています。'}
@@ -71,8 +71,9 @@ class Login(Resource):
                     print('ログイン成功')
                     session['logged_in'] = True
                     #フレンドIDからフレンド情報を取得するやつをかく
-                    json_text = '{"id":'+ '"'+str(LoginDatabase[0])+ '","icon_image":"'+str(LoginDatabase[1])+ '","name":"'+str(LoginDatabase[2])+ '","password":"'+str(LoginDatabase[3])+ '","point":"'+str(LoginDatabase[4])+ '","friend_list":"'+str(LoginDatabase[5])+ '"}'
+                    json_text = {'id':str(LoginDatabase[0]),'icon_image':str(LoginDatabase[1]),'name':str(LoginDatabase[2]),'password':str(LoginDatabase[3]),'point':str(LoginDatabase[4]),'friend_list':str(LoginDatabase[5])}
                     print(json_text)
+
                     return json_text
                 else:
                     return {'message':'Error.Wrong name or password!'}
@@ -92,7 +93,7 @@ class BookList(Resource):
         return booklist
 
 @api.route('/store')
-class BookList(Resource):
+class store(Resource):
     def get(self):
         user_id = request.args.get('user_id')
         if user_id is None:
@@ -113,7 +114,7 @@ Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明�
 @api.route('/lend')
 @api.doc(params={ "id": "1", "borrower_id": "2", "book_id": '1', "deadline": "2020-09-22 12:26:48.084076" })
 class BookLend(Resource):
-    @api.marshal_with(Lend)
+    #@api.marshal_with(Lend)
     def post(self):
         #try:
             lend_data = request.json #送られてきたデータの取得
@@ -163,7 +164,7 @@ BuyDoc = api.model('buy POST', { #ドキュメントの名前を定義（説明�
 
 @api.route('/buy')
 class BuyBooks(Resource):
-    @api.marshal_with(BuyDoc)
+    #@api.marshal_with(BuyDoc)
     def post(self):
         buy_book_data = request.json
         user_id_data = buy_book_data['user_id']
