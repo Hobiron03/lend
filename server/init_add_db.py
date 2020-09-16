@@ -19,8 +19,11 @@ session.add_all([
     User( icon_image = ImageDir+"icon_4.jpg", name = "lion" , password = "pass", point=100, friend_list = "[1,5]"),
     User( icon_image = ImageDir+"icon_5.jpg", name = "zou" , password = "pass", point=10, friend_list = "[1,4]")] )
 
+mangalist = [ImageDir+"p1.png", ImageDir+"p2.png" , ImageDir+"p3.png" , ImageDir+"p4.png" ]
+mangastr = ','.join(mangalist)
+
 session.add_all([
-    Book( name="キリンの翼", price=100, image=ImageDir+"1.jpg", url = ImageDir+"1.jpg" , info ="Tsubasa", auther = "Me"),
+    Book( name="キリンの翼", price=100, image=ImageDir+"1.jpg", url = mangastr , info ="Tsubasa", auther = "Me"),
     Book( name="キリンの刃", price=1000, image=ImageDir+"2.jpg", url = ImageDir+"2.jpg", info="....あれから3年....", auther = "You" ),
     Book( name="3匹のキリン", price=10000, image=ImageDir+"3.jpg", url = ImageDir+"3.jpg", info="物語は~~~から始まった", auther ="He"),
     Book( name="キリンビール", price=5000, image=ImageDir+"4.jpg", url = ImageDir+"4.jpg", info="nof" , auther = "She" ),

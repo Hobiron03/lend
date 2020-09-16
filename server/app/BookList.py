@@ -118,20 +118,20 @@ def GetBookListByUser(user_id):
         books = ChangeBooksFromOwnBook(booklist)
     
         for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "having"} )
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "having"} )
 
        # print(str)
     
     if user_borrow_info != []:
         books = ChangeBooksFromLendInfo(user_borrow_info)
         for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "borrowing"} )
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "borrowing"} )
     #print(str)
 
     if user_lend_info != []:
         books = ChangeBooksFromLendInfo(user_lend_info)
         for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "lending"} )
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "lending"} )
         #print(str)
 
 
