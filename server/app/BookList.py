@@ -27,7 +27,7 @@ def IsLending(own_book_id):
     return True
 
 #lend_info => own_book
-def GetOwnBookById(onw_book_id):
+def GetOwnBookById(own_book_id):
     session = Session()
     own_book = session.query(Own_Book).filter(Own_Book.id == own_book_id).all()
     session.commit()
@@ -40,6 +40,18 @@ def GetBookById(book_id):
     session.commit()
     return book #リスト
 
+# user_id,book_id -> own_book_id
+def GetOwnBookIDByUseridAndBookid(user_id,book_id):
+    session = Session()
+    own_book_list = session.query(Own_Book).filter(Own_Book.user_id == user_id,Own_Book.book_id == book_id).all()
+    if own_book_list == []:
+        return "Non"
+    else:
+        for own_book in own_book_list:
+            own_book_id = own_book.id
+    print(own_book_id)
+    session.commit()
+    return own_book_id
 
 def ChangeBooksFromOwnBook(booklist):
     res = []

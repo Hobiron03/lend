@@ -67,7 +67,7 @@ class Login(Resource):
                     print('ログイン成功')
                     session['logged_in'] = True
                     #フレンドIDからフレンド情報を取得するやつをかく
-                    json_text = "{'id':"+ "'"+str(LoginDatabase[0])+ "','icon_image':'"+str(LoginDatabase[1])+ ",'name':'"+str(LoginDatabase[2])+ "','password':'"+str(LoginDatabase[3])+ "','point':'"+str(LoginDatabase[4])+ "','friend_list':'"+str(LoginDatabase[5])+ "'}"
+                    json_text = '{"id":'+ '"'+str(LoginDatabase[0])+ '","icon_image":"'+str(LoginDatabase[1])+ '","name":"'+str(LoginDatabase[2])+ '","password":"'+str(LoginDatabase[3])+ '","point":"'+str(LoginDatabase[4])+ '","friend_list":"'+str(LoginDatabase[5])+ '"}'
                     print(json_text)
                     return json_text
                 else:
