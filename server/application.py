@@ -5,7 +5,7 @@ from flask_cors import CORS, cross_origin
 import json
 from app.get_db import GetUserLoginData
 from app.BookList import GetBookListByUser
-from app.add_db_LendInfo import AddLendInfoData
+from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -36,10 +36,16 @@ class Example2(Resource):
     def post(self):
         return {'name': request.json['name'], 'param': request.json['param']}
 
+
+Login_doc = api.model('Login POST', { #ドキュメントの名前を定義（説明の追加）
+    'name': fields.String(description='name'),
+    'password': fields.String(description='password')
+})
+
 @api.route('/login')
 @api.doc(params={'name': 'kirin','password':'pass'})
 class Login(Resource):
-    @api.marshal_with(example_get_spec)
+    @api.marshal_with(Login_doc)
     def post(self):
         if session.get('logged_in') == True: #ログインしていたら表示
             return {'message': 'すでにログインしています。'}
@@ -91,8 +97,16 @@ class BookList(Resource):
 
 
 # 書籍の貸し出し
+Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明の追加）
+    'id': fields.String(description='id'),
+    'borrower_id': fields.String(description='borrower_id'),
+    'book_id': fields.String(description='book_id'),
+    'deadline': fields.String(description='deadline')
+})
 @api.route('/lend')
+@api.doc(params={ "id": "1", "borrower_id": "2", "book_id": '1', "deadline": "2020-09-22 12:26:48.084076" })
 class BookLend(Resource):
+    @api.marshal_with(Lend)
     def post(self):
         #try:
             lend_data = request.json #送られてきたデータの取得
@@ -110,6 +124,22 @@ class BookLend(Resource):
             except:
                 return {'message':'Error.Please try again.'}
 
+# 書籍の返却
+Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明の追加）
+    'id': fields.String(description='id'),
+    'book_id': fields.String(description='book_id')
+})
+@api.route('/return_book')
+class ReturnBook(Resource):
+    def post(self):
+        try:
+            lend_data = request.json #送られてきたデータの取得
+            user_id = lend_data['id']
+            book_id = lend_data['book_id']
+            UpdateLendInfoData(user_id,book_id)
+            return {'message':'Success'}
+        except:
+            return {'message':'Error. Please try again.'}
 
 
 

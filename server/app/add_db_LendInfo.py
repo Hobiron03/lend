@@ -27,10 +27,7 @@ str = "kirin"
 
 #ans = (GetUserLoginData(str))
 #print(ans)
-user_id_data = 1
-borrower_id = 2
-book_id = 1
-deadline = 4
+
 def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
     now_date = (datetime.datetime.now())
     print(type(now_date))
@@ -39,9 +36,19 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
     print(now_date_str)
 
     session.add_all([
-        Lend_info(id = user_id_data, borrower_id = borrower_id_data,own_book_id = book_id_data,created_at = (now_date),returned_at= "Non",deadline = deadline_data,is_valid = 1)
+        Lend_info(id = user_id_data, borrower_id = borrower_id_data,own_book_id = book_id_data,created_at = (now_date_str),returned_at= "Non",deadline = deadline_data,is_valid = 1)
     ])
     session.commit()
     print("データの追加が完了しました")
 
 
+# 返却処理
+def UpdateLendInfoData(user_id_data,book_id_data):
+    #print(user_id_data)
+    lends = session.query(Lend_info).filter(Lend_info.id==user_id_data).all()
+    #print(lends)
+    for lend in lends:
+        lend.is_valid = False
+        #print("valid",lend.is_valid)
+        print("貸し出し終了しました")
+    session.commit()
