@@ -12,6 +12,7 @@ import ModalContentConfirm from "../Modal/ModalContentConfirm/ModalContentConfir
 import friends from "./Friends.json";
 import Screen from "../Screen/Screen";
 import AppContext from "../../contexts/AppContexts";
+import calculateDeadline from "../../CalculateDeadline";
 import "./_SelectFriendScreen.scss";
 import axios from "axios";
 interface SelectFriendScreenProps extends RouteComponentProps<{ id: string }> {
@@ -51,25 +52,21 @@ const SelectFriendScreen = (props: SelectFriendScreenProps) => {
   };
 
   const onConfirm = async () => {
-    console.log(state.user);
-    //貸し出しのAPIを叩く
     await axios
       .post(ENTRY_POINT + "/lend", {
-        //自分のユーザーIDを
         id: state.user.id,
         borrower_id: 1,
         book_id: props.match.params.id,
-        deadline: "2020/09/22 12:26:48.084076",
+        deadline: calculateDeadline(2),
       })
       .then((res) => {
+        console.log("res: ");
         console.log(res);
       });
-    console.log("貸し出しのAPIを叩くいてモーダルを閉じる");
+    handleModalClose();
   };
 
   const onDeny = () => {
-    //貸し出しを中止してモーダルを閉じる
-    console.log("貸し出しを中止してモーダルを閉じる");
     handleModalClose();
   };
 
@@ -77,10 +74,8 @@ const SelectFriendScreen = (props: SelectFriendScreenProps) => {
     <Screen>
       <div className="select_friend_screen" ref={messagesDomRef}>
         <div className="select_friend_screen__top">
-          <p className="select_friend_screen__top__title">
-            {props.lendBookName}
-          </p>
-          <p>を貸す友達を選択してください</p>
+          <p className="select_friend_screen__top__title"></p>
+          <p>貸す友達を選択してください</p>
           <div className="select_friend_screen__top__search">
             <input
               type="text"

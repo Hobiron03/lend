@@ -29,7 +29,6 @@ const Login = () => {
           password: password,
         })
         .then((res) => {
-          console.log(res.data);
           dispatch({
             type: CREATE_USER,
             user: res.data,

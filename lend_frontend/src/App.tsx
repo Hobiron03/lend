@@ -14,7 +14,6 @@ import SelectFriendScreen from "./components/SelectFriendScreen/SelectFriendScre
 import "./App.scss";
 import Viewer from "./components/Viewer/Viewer";
 import MyBookList from "./components/MyBookList/MyBookList";
-import User from "./model/user";
 import reducer from "./reducers/";
 import AppContext from "./contexts/AppContexts";
 
@@ -31,7 +30,6 @@ function App() {
           <Switch>
             {/* ログイン/ユーザー登録ページ */}
             <Route exact path="/login" component={Login} />
-
             {/* マイ本棚 */}
             <Route exact path="/mybook" component={MyBookList} />
             {/* 友達ページ */}
