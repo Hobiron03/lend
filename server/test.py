@@ -9,8 +9,9 @@ from app.BuyBooks import AddOwnBooks
 
 
 user_id_data = 1
+user_id_data = 1
+borrower_id_data = 2
 
-borrower_id_data = 4
 book_id_data = 3
 
 now_date = datetime.now()
@@ -26,7 +27,8 @@ AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_date_string)
 #print(GetLendData(GetOwnBookIDByUseridAndBookid(2,6)))
 #UpdateLendInfoData(2,6) # 貸し出し処理の終了
 #print(GetOwnBookIDByUseridAndBookid(1,1))
-#print(GetLendData(1))
+print(GetLendData(1))
+
 
 
 """

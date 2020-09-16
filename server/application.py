@@ -9,9 +9,12 @@ from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
 from app.BuyBooks import AddOwnBooks
 from app.StoreBook import AllBooks, BooksForUser
+from app.PointAdd import AddPoint,GetLenderId
+from app.friend import ChangeFriendlistToFriendData
 from app.StoreBook import AllBooksByRank, BooksForUserByRank
 from app.StoreBook import AllBooksByOwn, BooksForUserByOwn
 from app.StoreBook import AllBooksByLend, BooksForUserByLend
+
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -73,7 +76,19 @@ class Login(Resource):
                     print('ログイン成功')
                     session['logged_in'] = True
                     #フレンドIDからフレンド情報を取得するやつをかく
-                    json_text = {'id':str(LoginDatabase[0]),'icon_image':str(LoginDatabase[1]),'name':str(LoginDatabase[2]),'password':str(LoginDatabase[3]),'point':str(LoginDatabase[4]),'friend_list':str(LoginDatabase[5])}
+                    print(type((LoginDatabase[5])))
+                    friend_list_data = LoginDatabase[5].strip("[")
+                    friend_list_data = friend_list_data.strip("]")
+                    friend_list_data = friend_list_data.split(",")
+                    print(friend_list_data)
+                    friend_info_data =[] # これを格納する
+                    for i in range(len(friend_list_data)):
+                        list = []
+                        list.append(ChangeFriendlistToFriendData(friend_list_data[i]))
+                        friend_info_data.append(list)
+                    print(friend_info_data)
+
+                    json_text = {'id':(LoginDatabase[0]),'icon_image':(LoginDatabase[1]),'name':(LoginDatabase[2]),'password':(LoginDatabase[3]),'point':(LoginDatabase[4]),'friend_list':friend_info_data}
                     print(json_text)
 
                     return json_text
@@ -206,14 +221,21 @@ class BuyBooks(Resource):
     #@api.marshal_with(BuyDoc)
     def post(self):
         buy_book_data = request.json
-        user_id_data = buy_book_data['user_id']
+        user_id_data = buy_book_data['id']
         book_id_data = buy_book_data['book_id']
-        #point_data = buy_book_data['point'] # (拡張機能、デフォルトで０)
+        point_data = buy_book_data['point'] # (拡張機能、デフォルトで０)
         point_data = 0
 
         # 書籍の購入を行う
         try:
             AddOwnBooks(user_id_data,book_id_data)
+            # 貸してくれたものを買ってくれた時にポイントを追加する
+            lend_user_id = GetLenderId(user_id_data,book_id_data)
+            if lend_user_id != None:
+                print("ポイント付与相手",lend_user_id)
+                add_point = 30
+                AddPoint(lend_user_id, add_point)
+                print("付与か完了しました")
             return {"message":"Success."}
         except:
             return {"message":"Error.Please try again"}
