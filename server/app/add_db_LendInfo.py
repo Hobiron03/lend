@@ -65,3 +65,4 @@ def UpdateLendInfoData(user_id_data,book_id_data):
             #print("valid",lend.is_valid)
             print("貸し出し終了しました")
         session.commit()
+

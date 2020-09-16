@@ -1,0 +1,17 @@
+.friend_column {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding-left: 20px;
+  border-bottom: solid 1px #c7c6c6;
+  cursor: pointer;
+
+  img {
+    border-radius: 100%;
+  }
+
+  &__name {
+    color: #6d6d6d;
+    padding-left: 20px;
+  }
+}

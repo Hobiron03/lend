@@ -10,20 +10,22 @@ from app.LendInfo_auto import AutoUpdateLendInfo
 def IsOwnBookAndId(own_book_id, user_id):
     session = Session()
     own_book =  session.query(Own_Book).filter(Own_Book.id == own_book_id )
+    session.commit()
     if( own_book.count() == 0 ) :
         return False
-    session.commit()
-    return own_book.first().user_id == user_id
+    return own_book.first().user_id == int( user_id )
 
 def IsLending(own_book_id):
     session = Session()
     user_lend_info = session.query(Lend_info).filter(
-            Lend_info.is_valid,
-            Lend_info.own_book_id == own_book_id
+            and_(
+                Lend_info.is_valid,
+                Lend_info.own_book_id == own_book_id
+            )
     )
+    session.commit()
     if( user_lend_info.count() == 0 ) :
         return False
-    session.commit()
     return True
 
 #lend_info => own_book
@@ -64,7 +66,7 @@ def ChangeBooksFromLendInfo( booklist ):
     for book in booklist:
         own_book = GetOwnBookById( book.own_book_id )
         if own_book != [] :
-            res.extend( GetBookById( own_book.book_id ) )
+            res.extend( GetBookById( own_book[0].book_id ) )
     return res
 
 
@@ -77,12 +79,20 @@ def GetBookListByUser(user_id):
 
     #is_validを利用して判断する．
     #貸し出し中の本( いらないかも )
-    user_lend_info =  session.query(Lend_info).filter(
+    user_lend_info_valid =  session.query(Lend_info).filter(
             and_(
                 Lend_info.is_valid,
-                IsOwnBookAndId( Lend_info.own_book_id, user_id )
+      #          IsOwnBookAndId( Lend_info.own_book_id, user_id )
             )
     ).all()
+    
+
+    user_lend_info = []
+    if user_lend_info_valid != []:
+        for user_lend in user_lend_info_valid:
+            if IsOwnBookAndId( user_lend.own_book_id , user_id ) :
+                user_lend_info.append( user_lend )
+
 
 
     #借りている本
@@ -95,41 +105,45 @@ def GetBookListByUser(user_id):
 
     
     
-    booklist = session.query(Own_Book).filter(
-            or_(
-                and_(
-                    Own_Book.user_id==user_id,
-                    not IsLending( Own_Book.id )
-                ),
-
-            )
+    booklist_user = session.query(Own_Book).filter(
+        and_(
+            Own_Book.user_id==user_id,
+     #       not IsLending( Own_Book.id )
+        )
     ).all()
+
+    booklist = []
+    if booklist_user != [] :
+        for book in booklist_user :
+            if not IsLending( book.id ):
+                booklist.append( book )
+
 
     session.commit()
     str = []
     
-    #print(type(booklist) )
-    #print(type(user_lend_info) )
-    #print(type(user_borrow_info) )
+    print(booklist )
+    print(user_lend_info )
+    print(user_borrow_info )
 
     if booklist != []:
         books = ChangeBooksFromOwnBook(booklist)
     
         for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "having"} )
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "having"} )
 
        # print(str)
     
     if user_borrow_info != []:
         books = ChangeBooksFromLendInfo(user_borrow_info)
         for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "borrowing"} )
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "borrowing"} )
     #print(str)
 
     if user_lend_info != []:
         books = ChangeBooksFromLendInfo(user_lend_info)
         for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url , "status": "lending"} )
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "lending"} )
         #print(str)
 
 

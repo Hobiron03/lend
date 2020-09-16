@@ -8,11 +8,12 @@ from app.BookList import GetOwnBookIDByUseridAndBookid
 
 
 user_id_data = 1
+
 borrower_id_data = 2
 book_id_data = 1
-now_date = datetime.now()
-deadline_data = (now_date + timedelta(days=7))
 
+now_date = datetime.now()
+deadline_data = (now_date + timedelta(minutes=2))
 
 now_date_string = now_date.strftime('%Y/%m/%d %H:%M:%S')
 deadline_date_string = deadline_data.strftime('%Y/%m/%d %H:%M:%S')
@@ -20,10 +21,12 @@ deadline_date_string = deadline_data.strftime('%Y/%m/%d %H:%M:%S')
 print(now_date_string,deadline_date_string)
 
 AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_date_string)
+
 print(GetLendData(1))
 UpdateLendInfoData(1,1) # 貸し出し処理の終了
 #print(GetOwnBookIDByUseridAndBookid(1,1))
 print(GetLendData(1))
+
 
 """
 now_date = datetime.now()
