@@ -5,40 +5,75 @@ import "./Button/Button";
 import Button from "./Button/Button";
 import Book from '../../model/book';
 
+/**
+ * 本の状態によってボタンを出し分けるためのCardType
+ * + read_lend: 読むボタンと貸すボタンを設置（今すぐ読める本）
+ * + buy: 購入ボタンのみ設置
+ * + read_lend_return: 読むボタン、買うボタン、返すボタンを設置
+ * + lending_label: 貸し出しボタンを設置
+ */
+type CardType = "read_lend" | "buy" | "read_buy_return" | "lending_label";
+
 interface BookCardProps {
   book: Book,
+  type?: CardType,
 }
 
-const BookCard = (props: BookCardProps): JSX.Element => {
+const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
   const history = useHistory();
 
   const handleRead = () => {
-    history.push(`/mybook/${props.book.id}/read`, { book: props.book });
+    history.push(`/mybook/${book.id}/read`);
+  }
+
+  // 購入の場合のみ、カードをクリックしてアクションを起こせる
+  const handleBuy = () => {
+    if(type === "buy"){
+      console.log("購入")
+    }
   }
 
   return (
-    <div className="BookCard">
+    <div className="BookCard" onClick={handleBuy}>
       <div className="BookCard__top">
         <div className="BookCard__top__left">
           <div className="BookCard__top__left__image">
-            {/* TODO: バックエンドで表紙画像が未実装なのでとりあえず1ページ目を表示します。（現時点9/15 16:10 ではurlがミスってるっぽくてそもそも画像が見れませんが。） */}
-            <img src={props.book.image} alt="cover" />
+            <img src={book.image} alt="cover" />
           </div>
         </div>
         <div className="BookCard__top__right">
           <div className="BookCard__top__right__description">
             <p className="BookCard__top__right__description__title">
-              {props.book.name}
+              {book.name}
             </p>
-            {/* TODO: バックエンドでdescriptionが未実装なので書籍説明が未実装です */}
-            <p>{props.book.name.repeat(4)}</p>
+            <p>{book.info}</p>
           </div>
         </div>
       </div>
-      <div className="BookCard__under">
-        <Button content="読む" onClick={handleRead} />
-        <Button content="貸す" onClick={() => console.log("貸す")} />
-      </div>
+      {/* 購入以外は、フッターにボタンを表示する */}
+      {
+        type !== "buy" && (
+          <div className="BookCard__under">
+            {
+              type === "read_lend" ? (
+                <>
+                  <Button content="読む" onClick={handleRead} />
+                  <Button content="貸す" onClick={() => console.log("貸す")} />
+                </>
+              ) : type === "read_buy_return" ? (
+                <>
+                  <Button content="読む" onClick={handleRead} />
+                  <Button content="購入" onClick={() => console.log("購入")} />
+                  <Button content="貸す" onClick={() => console.log("貸す")} />
+                </>
+              ) : type === "lending_label" && (
+                // TODO: デザイン未確認
+                <div>貸し出し中です</div>
+              )
+            }
+          </div>
+        )
+      }
     </div>
   );
 };
