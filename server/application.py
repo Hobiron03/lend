@@ -6,6 +6,7 @@ import json
 from app.get_db import GetUserLoginData
 from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
+from app.BuyBooks import AddOwnBooks
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -155,10 +156,11 @@ class ReturnBook(Resource):
         point_data = 0
 
         # 書籍の購入を行う
-
-        
-        return {"message":"Success."}
-
+        try:
+            AddOwnBooks(user_id_data,book_id_data)
+            return {"message":"Success."}
+        except:
+            return {"message":"Error.Please try again"}
 
 
 if __name__ == '__main__':
