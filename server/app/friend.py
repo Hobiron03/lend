@@ -22,6 +22,7 @@ def GetUserFriendData(user_id):
 def ChangeFriendlistToFriendData(friend_id): #フレンドidから名前と画像を取得
     users = session.query(User).filter(User.id==friend_id).all()
     session.commit()
+    #print(users)
     if users ==[]:
         return None
     for row in users:

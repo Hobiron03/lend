@@ -10,6 +10,7 @@ from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
 from app.BuyBooks import AddOwnBooks
 from app.StoreBook import AllBooks, BooksForUser
 from app.PointAdd import AddPoint,GetLenderId
+from app.friend import ChangeFriendlistToFriendData
 
 
 app = Flask(__name__)
@@ -77,9 +78,14 @@ class Login(Resource):
                     friend_list_data = friend_list_data.strip("]")
                     friend_list_data = friend_list_data.split(",")
                     print(friend_list_data)
+                    friend_info_data =[] # これを格納する
+                    for i in range(len(friend_list_data)):
+                        list = []
+                        list.append(ChangeFriendlistToFriendData(friend_list_data[i]))
+                        friend_info_data.append(list)
+                    print(friend_info_data)
 
-
-                    json_text = {'id':(LoginDatabase[0]),'icon_image':(LoginDatabase[1]),'name':(LoginDatabase[2]),'password':(LoginDatabase[3]),'point':(LoginDatabase[4]),'friend_list':friend_list_data}
+                    json_text = {'id':(LoginDatabase[0]),'icon_image':(LoginDatabase[1]),'name':(LoginDatabase[2]),'password':(LoginDatabase[3]),'point':(LoginDatabase[4]),'friend_list':friend_info_data}
                     print(json_text)
 
                     return json_text
