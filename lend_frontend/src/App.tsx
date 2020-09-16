@@ -17,10 +17,11 @@ import MyBookList from "./components/MyBookList/MyBookList";
 import reducer from "./reducers/";
 import AppContext from "./contexts/AppContexts";
 
+const initialState = {
+  user: {},
+};
+
 function App() {
-  const initialState = {
-    user: {},
-  };
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
