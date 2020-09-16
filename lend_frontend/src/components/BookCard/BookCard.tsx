@@ -13,7 +13,7 @@ const BookCard = (props: BookCardProps): JSX.Element => {
   const history = useHistory();
 
   const handleRead = () => {
-    history.push(`/mybook/${props.book.id}/read`);
+    history.push(`/mybook/${props.book.id}/read`, { book: props.book });
   }
 
   return (
