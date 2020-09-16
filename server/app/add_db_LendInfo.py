@@ -37,6 +37,7 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
     #print(now_date_str)
     #Own_Bookの変換を行う
     own_book_id_data = (GetOwnBookIDByUseridAndBookid(user_id_data,book_id_data))
+
     #print(type(own_book_id_data))
     #print(own_book_id_data)
     if own_book_id_data == "Non":
@@ -53,10 +54,14 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
 # 返却処理
 def UpdateLendInfoData(user_id_data,book_id_data):
     #print(user_id_data)
-    lends = session.query(Lend_info).filter(Lend_info.id==user_id_data).all()
-    #print(lends)
-    for lend in lends:
-        lend.is_valid = False
-        #print("valid",lend.is_valid)
-        print("貸し出し終了しました")
-    session.commit()
+    own_book_id_data = (GetOwnBookIDByUseridAndBookid(user_id_data,book_id_data))
+    lends = session.query(Lend_info).filter(Lend_info.id==user_id_data,Lend_info.own_book_id == own_book_id_data).all()
+    if lends == []:
+        raise Exception('Error!')
+    else:
+        #print(lends)
+        for lend in lends:
+            lend.is_valid = False
+            #print("valid",lend.is_valid)
+            print("貸し出し終了しました")
+        session.commit()

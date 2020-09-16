@@ -19,8 +19,8 @@ deadline_date_string = deadline_data.strftime('%Y/%m/%d %H:%M:%S')
 
 print(now_date_string,deadline_date_string)
 
-AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_date_string)
-#UpdateLendInfoData(2,2) # 貸し出し処理の終了
+#AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_date_string)
+UpdateLendInfoData(1,1) # 貸し出し処理の終了
 #print(GetOwnBookIDByUseridAndBookid(1,1))
 
 
