@@ -20,6 +20,7 @@ const BookPurchase = ({ book = new Book(1, '桃太郎', '昔の人', '昔話で�
 					<section className="book-title">
 						<h1>{book.name}</h1>
 						<div>{book.auther}</div>
+						<div className="book-price"><u>{book.price}円</u></div>
 					</section>
 				</div>
 				<div>
