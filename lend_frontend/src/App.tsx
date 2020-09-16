@@ -12,8 +12,8 @@ import AppBar from "./components/organizations/AppBar/AppBar";
 import BottomBar from "./components/organizations/BottomBar/BottomBar";
 import SelectFriendScreen from "./components/SelectFriendScreen/SelectFriendScreen";
 import "./App.scss";
-import Viewer from './components/Viewer/Viewer'
-import MyBookList from './components/MyBookList/MyBookList'
+import Viewer from "./components/Viewer/Viewer";
+import MyBookList from "./components/MyBookList/MyBookList";
 
 function App() {
   return (
@@ -70,15 +70,7 @@ function App() {
           <Route exact path="/mybook/:id/read" component={Viewer} />
 
           {/* 貸し出し友達選択ページ */}
-          <Route
-            exact
-            path="/mybook/:id/lend"
-            component={() => (
-              <div style={{ padding: "100px" }}>
-                /mybook/:bookid/lend 未実装
-              </div>
-            )}
-          />
+          <Route exact path="/mybook/:id/lend" component={SelectFriendScreen} />
 
           {/* 友達追加ページ */}
           <Route

@@ -3,10 +3,10 @@ import { useHistory } from "react-router-dom";
 import "./_BookCard.scss";
 import "./Button/Button";
 import Button from "./Button/Button";
-import Book from '../../model/book';
+import Book from "../../model/book";
 
 interface BookCardProps {
-  book: Book,
+  book: Book;
 }
 
 const BookCard = (props: BookCardProps): JSX.Element => {
@@ -14,7 +14,11 @@ const BookCard = (props: BookCardProps): JSX.Element => {
 
   const handleRead = () => {
     history.push(`/mybook/${props.book.id}/read`);
-  }
+  };
+
+  const handleLend = () => {
+    history.push(`/mybook/${props.book.id}/lend`);
+  };
 
   return (
     <div className="BookCard">
@@ -37,7 +41,7 @@ const BookCard = (props: BookCardProps): JSX.Element => {
       </div>
       <div className="BookCard__under">
         <Button content="読む" onClick={handleRead} />
-        <Button content="貸す" onClick={() => console.log("貸す")} />
+        <Button content="貸す" onClick={handleLend} />
       </div>
     </div>
   );
