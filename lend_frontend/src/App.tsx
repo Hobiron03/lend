@@ -10,23 +10,12 @@ import Screen from "./components/Screen/Screen";
 import { TabBar } from "./components/organizations/TabBar/TabBar";
 import AppBar from "./components/organizations/AppBar/AppBar";
 import BottomBar from "./components/organizations/BottomBar/BottomBar";
-import Modal from "./components/Modal/Modal";
 import "./App.scss";
 import Viewer from "./components/Viewer/Viewer";
 
 function App() {
-  const [isOpen, setIsOpen] = React.useState<boolean>(true);
-
   return (
-    <div className="App">
-      <button
-        onClick={() => {
-          setIsOpen(true);
-        }}
-      >
-        Open!!!!
-      </button>
-      {isOpen ? <Modal /> : <></>}
+    <div>
       <Router>
         <Switch>
           {/* ログイン/ユーザー登録ページ */}
