@@ -1,0 +1,12 @@
+.modal_content__confirm {
+  &__description {
+    margin: 0 auto;
+    padding: 80px 0px;
+    width: 80%;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
