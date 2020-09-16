@@ -30,7 +30,9 @@ def GetLenderId(user_id_data,book_id_data):
     for i in range(len(borrowed_data_list)):
         if borrowed_data_list[i][2] == book_id_data: # 貸し出しの履歴の中に本の履歴があったら
             lend_user_id = borrowed_data_list[i][1]
+            print("貸してくれた人：",lend_user_id,"｜貸し出された本",book_id_data)
             return lend_user_id,book_id_data
+
     # 貸し出されていなかった場合
     print("貸し出されていなかったです。")
     return None
