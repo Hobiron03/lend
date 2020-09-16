@@ -32,9 +32,26 @@ def CntLendBook(book_id):
 
 session = Session()
 booklist = session.query(Book).all()
+rank_list = []
+if booklist != []:
+    for book in booklist:
+        rank_list.append( { 'CntOwn': CntOwnBook(book.id) , 'CntLend': CntLendBook(book.id) , 'Rank': CntOwnBook(book.id)+CntLendBook(book.id) ,'book': book } ) 
+        print("id: "+str(book.id)+"\ncnt: "+str( CntOwnBook(book.id) )+"\nlend: "+str(CntLendBook(book.id))+"\n" )
+
+
+sorted_book_list =  sorted( rank_list , key= lambda x:x['Rank'] , reverse=True )
+
+booklist = []
+if sorted_book_list != []:
+    for book in sorted_book_list:
+        booklist.append( book['book'] )
+
 if booklist != []:
     for book in booklist:
         print("id: "+str(book.id)+"\ncnt: "+str( CntOwnBook(book.id) )+"\nlend: "+str(CntLendBook(book.id))+"\n" )
+
+
+
 
 
 
