@@ -1,10 +1,17 @@
-import React, { useCallback, useState, useRef, useEffect } from "react";
+import React, {
+  useCallback,
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+} from "react";
 import { RouteComponentProps } from "react-router-dom";
 import FriendColumn from "./FriendColumn/FriendColumn";
 import BaseModal from "@material-ui/core/Modal";
 import ModalContentConfirm from "../Modal/ModalContentConfirm/ModalContentConfirm";
 import friends from "./Friends.json";
 import Screen from "../Screen/Screen";
+import AppContext from "../../contexts/AppContexts";
 import "./_SelectFriendScreen.scss";
 import axios from "axios";
 interface SelectFriendScreenProps extends RouteComponentProps<{ id: string }> {
@@ -14,6 +21,7 @@ interface SelectFriendScreenProps extends RouteComponentProps<{ id: string }> {
 const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 
 const SelectFriendScreen = (props: SelectFriendScreenProps) => {
+  const { state } = useContext(AppContext);
   const [searchText, setSearchText] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
@@ -43,11 +51,12 @@ const SelectFriendScreen = (props: SelectFriendScreenProps) => {
   };
 
   const onConfirm = async () => {
+    console.log(state.user);
     //貸し出しのAPIを叩く
     await axios
       .post(ENTRY_POINT + "/lend", {
         //自分のユーザーIDを
-        id: 1,
+        id: state.user.id,
         borrower_id: 1,
         book_id: props.match.params.id,
         deadline: "2020/09/22 12:26:48.084076",
