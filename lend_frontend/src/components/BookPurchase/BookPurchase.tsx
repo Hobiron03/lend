@@ -15,6 +15,10 @@ const BookPurchase = () => {
 			setBook((state as { book: Book }).book as Book);
 		}
 	}, [])
+
+	const handleCancel = () => {
+		history.push('/store');
+	}
 	
 	// TODO: 初期値正しく設定する
 	const [havingBook, setHavingBook] = useState(false);
@@ -43,7 +47,8 @@ const BookPurchase = () => {
 						<div className="book-price"><u>{book?.price}円</u></div>
 					</section>
 				</div>
-				<div>
+				<div className="button-area">
+					<div className="back-button action-button" onClick={handleCancel}>キャンセル</div>
 					{
 						havingBook ? (
 							<div className="read-button action-button" onClick={handleRead}>読む</div>

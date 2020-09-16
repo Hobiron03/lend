@@ -29,7 +29,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
   // 購入の場合のみ、カードをクリックしてアクションを起こせる
   const handleBuy = () => {
     if(type === "buy"){
-      console.log("購入")
+      history.push(`/store/${book.id}`, { book });
     }
   }
 
