@@ -167,9 +167,9 @@ class BuyBooks(Resource):
     #@api.marshal_with(BuyDoc)
     def post(self):
         buy_book_data = request.json
-        user_id_data = buy_book_data['user_id']
+        user_id_data = buy_book_data['id']
         book_id_data = buy_book_data['book_id']
-        #point_data = buy_book_data['point'] # (拡張機能、デフォルトで０)
+        point_data = buy_book_data['point'] # (拡張機能、デフォルトで０)
         point_data = 0
 
         # 書籍の購入を行う
