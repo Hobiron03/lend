@@ -15,16 +15,16 @@ class Lend_info(Base_lend_info):
     created_at = Column(String)
     returned_at = Column(String)
     deadline = Column(String)
-    is_vaild = Column(Boolean)
+    is_valid = Column(Boolean)
 
-    def __init__(self, id, borrowe_id,own_book_id,created_at,returned_at,deadline,is_vaild):
+    def __init__(self, id, borrower_id,own_book_id,created_at,returned_at,deadline,is_valid):
         self.id = id
-        self.borrowe_id = borrowe_id
+        self.borrower_id = borrower_id
         self.own_book_id = own_book_id
         self.created_at = created_at
         self.returned_at = returned_at
         self.deadline = deadline
-        self.is_vaild = is_vaild
+        self.is_valid = is_valid
     def __repr__(self):
         return str(self.id)
 
