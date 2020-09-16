@@ -18,6 +18,7 @@ def GetNotificationByUserId(user_id): #全ての通知を取得する
     if notification != []:
         for noti in notification:
             notification_list.append( {"user_id":noti.user_id,"message":noti.message,"created_at":noti.created_at})
+    notification_list.reverse() # 通知を反転する（上が新しい物にする）
     print(notification_list)
     return notification_list
 
