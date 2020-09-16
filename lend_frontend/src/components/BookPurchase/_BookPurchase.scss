@@ -16,6 +16,11 @@ $hover-read-button-color: #adaf4a;
 
 		.book-img{
 			flex: 1;
+			padding: 10px;
+
+			img{
+				width: 100%;
+			}
 		}
 		.book-title{
 			flex: 1;
@@ -24,6 +29,7 @@ $hover-read-button-color: #adaf4a;
 			margin-top: 1em;
 			font-weight: bold;
 			font-size: 120%;
+			text-align: center;
 		}
 	}
 
