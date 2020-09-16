@@ -120,7 +120,7 @@ class store(Resource):
 
 
 @api.route('/store/rank') #(貸出+購入)順
-class BookList(Resource):
+class BookStoreRank(Resource):
     def get(self):
         user_id = request.args.get('user_id')
         if user_id is None:
@@ -131,7 +131,7 @@ class BookList(Resource):
             return booklist
 
 @api.route('/store/own') #購入順
-class BookList(Resource):
+class BookStoreOwn(Resource):
     def get(self):
         user_id = request.args.get('user_id')
         if user_id is None:
@@ -142,7 +142,7 @@ class BookList(Resource):
             return booklist
 
 @api.route('/store/lend') #貸出数順
-class BookList(Resource):
+class BookStoreLend(Resource):
     def get(self):
         user_id = request.args.get('user_id')
         if user_id is None:
