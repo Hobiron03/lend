@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Screen from "../Screen/Screen";
 import Book from "../../model/book";
+import { useHistory } from "react-router-dom";
 
 interface Props {
 	book: Book;
 }
 
+// TODO: ダミーデータ
 const BookPurchase = ({ book = new Book(1, '桃太郎', '昔の人', '昔話です。有名なお話です。鬼を倒します。', 100, 'xxx', 'xxx', 'having') }: Props) => {
+	// TODO: 初期値正しく設定する
+	const [havingBook, setHavingBook] = useState(false);
+	const history = useHistory();
+
 	const handleBuy = () => {
+		// TODO: 購入処理
 		console.log('購入');
+		//購入処理が完了したら
+		setHavingBook(true);
 	}
+
+	const handleRead = () => {
+		history.push(`/mybook/${book.id}/read`);
+	}
+
 	return (
 		<Screen>
 			<div className="book-purchase-page">
@@ -24,7 +38,13 @@ const BookPurchase = ({ book = new Book(1, '桃太郎', '昔の人', '昔話で�
 					</section>
 				</div>
 				<div>
-					<div className="purchase-button" onClick={handleBuy}>購入する</div>
+					{
+						havingBook ? (
+							<div className="read-button action-button" onClick={handleRead}>読む</div>
+						):(
+							<div className="purchase-button action-button" onClick={handleBuy}>購入する</div>
+						)
+					}
 				</div>
 				<section className="description section">
 					<div className="section-header">

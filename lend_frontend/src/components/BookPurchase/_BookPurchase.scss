@@ -1,6 +1,8 @@
 $header-color: rgb(118, 165, 118);
-$button-color: #5ab9e3;
-$hover-button-color: #4a91af;
+$purchase-button-color: #5ab9e3;
+$hover-purchase-button-color: #4a91af;
+$read-button-color: #dae35a;
+$hover-read-button-color: #adaf4a;
 
 .book-purchase-page{
 	display: flex;
@@ -25,20 +27,31 @@ $hover-button-color: #4a91af;
 		}
 	}
 
-	.purchase-button{
+	.action-button{
 		cursor: pointer;
 		text-align: center;
-		background: $button-color;
 		color: white;
 		font-weight: bold;
 		border-radius: 2em;
 		padding: .5em 1em;
 		margin: 2em 1em;
-		border: 3px solid $hover-button-color;
 		box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.2);
+	}
 
+	.purchase-button{
+		background: $purchase-button-color;
+		border: 3px solid $hover-purchase-button-color;
 		&:hover{
-			background: $hover-button-color;
+			background: $hover-purchase-button-color;
+		}
+	}
+
+	.read-button{
+		background: $read-button-color;
+		border: 3px solid $hover-read-button-color;
+		color: black;
+		&:hover{
+			background: $hover-read-button-color;
 		}
 	}
 
