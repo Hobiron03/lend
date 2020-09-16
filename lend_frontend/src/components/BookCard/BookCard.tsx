@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./_BookCard.scss";
 import "./Button/Button";
 import Button from "./Button/Button";
-import Book from '../../model/book';
+import Book from "../../model/book";
 
 /**
  * 本の状態によってボタンを出し分けるためのCardType
@@ -23,6 +23,10 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
   const history = useHistory();
 
   const handleRead = () => {
+
+  const handleLend = () => {
+    history.push(`/mybook/${props.book.id}/lend`);
+  };
     history.push(`/mybook/${book.id}/read`);
   }
 
@@ -32,6 +36,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
       console.log("購入")
     }
   }
+
 
   return (
     <div className="BookCard" onClick={handleBuy}>
