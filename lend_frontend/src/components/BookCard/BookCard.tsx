@@ -27,7 +27,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
   };
 
   const handleLend = () => {
-    history.push(`/mybook/${props.book.id}/lend`);
+    history.push(`/mybook/${book.id}/lend`);
   };
 
   // 購入の場合のみ、カードをクリックしてアクションを起こせる
