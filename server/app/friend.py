@@ -18,3 +18,11 @@ def GetUserFriendData(user_id):
         return None
     for row in users:
         return row.friend_list
+
+def ChangeFriendlistToFriendData(friend_id): #フレンドidから名前と画像を取得
+    users = session.query(User).filter(User.id==friend_id).all()
+    session.commit()
+    if users ==[]:
+        return None
+    for row in users:
+        return [row.id,row.icon_image,row.name]
