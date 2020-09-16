@@ -20,7 +20,7 @@ const Login = () => {
       await axios.post(ENTRY_POINT + '/login', {
         name: userName,
         password: password,
-      });
+      }).then(console.log);
       console.log('login成功');
     }
   }
@@ -29,7 +29,7 @@ const Login = () => {
     <div className="login">
       <h1>レント Lento!</h1>
       <h2>{registerFlag ? "新規登録" : "ログイン"}</h2>
-      <form>
+      {/* <form> */}
         <div>
           <input
             className="login-form login-form-username"
@@ -54,7 +54,7 @@ const Login = () => {
         <button className="login-form-submit" onClick={handleSubmit}>
           {registerFlag ? "新規登録" : "ログイン"}
         </button>
-      </form>
+      {/* </form> */}
     </div>
   )
 

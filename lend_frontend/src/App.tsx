@@ -11,6 +11,7 @@ import { TabBar } from "./components/organizations/TabBar/TabBar";
 import AppBar from "./components/organizations/AppBar/AppBar";
 import BottomBar from "./components/organizations/BottomBar/BottomBar";
 import SelectFriendScreen from "./components/SelectFriendScreen/SelectFriendScreen";
+import BookPurchase from "./components/BookPurchase/BookPurchase";
 import "./App.scss";
 import Viewer from './components/Viewer/Viewer'
 import MyBookList from './components/MyBookList/MyBookList'
@@ -101,9 +102,7 @@ function App() {
           <Route
             exact
             path="/store/:id"
-            component={() => (
-              <div style={{ padding: "100px" }}>/store/:bookid 未実装</div>
-            )}
+            component={BookPurchase}
           />
           {/* 書籍決済ページ */}
           <Route
