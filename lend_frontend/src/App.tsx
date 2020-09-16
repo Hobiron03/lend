@@ -11,6 +11,7 @@ import { TabBar } from "./components/organizations/TabBar/TabBar";
 import AppBar from "./components/organizations/AppBar/AppBar";
 import BottomBar from "./components/organizations/BottomBar/BottomBar";
 import SelectFriendScreen from "./components/SelectFriendScreen/SelectFriendScreen";
+import BookPurchase from "./components/BookPurchase/BookPurchase";
 import "./App.scss";
 import Viewer from "./components/Viewer/Viewer";
 import MyBookList from "./components/MyBookList/MyBookList";
@@ -23,7 +24,6 @@ const initialState = {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <div className="App">
@@ -100,7 +100,6 @@ function App() {
                 <div style={{ padding: "100px" }}>/friend/mypass 未実装</div>
               )}
             />
-
             {/* 書籍詳細ページ */}
             <Route
               exact
@@ -119,7 +118,6 @@ function App() {
                 </div>
               )}
             />
-
             {/* 所持している限定コンテンツ一覧ページ */}
             <Route
               exact

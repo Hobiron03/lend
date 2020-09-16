@@ -3,9 +3,18 @@ from flask_restplus import Api, Resource, fields # Werkzeug==0.16.1が良い（W
 # https://qiita.com/sky_jokerxx/items/17481ffc34b52875528b よりSwaggerUIをFlaskで使う
 from flask_cors import CORS, cross_origin
 import json
+from app.friend import GetUserFriendData
 from app.get_db import GetUserLoginData
-from app.BookList import GetBookListByUser
+from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
+from app.BuyBooks import AddOwnBooks
+from app.StoreBook import AllBooks, BooksForUser
+from app.PointAdd import AddPoint,GetLenderId
+from app.friend import ChangeFriendlistToFriendData
+from app.StoreBook import AllBooksByRank, BooksForUserByRank
+from app.StoreBook import AllBooksByOwn, BooksForUserByOwn
+from app.StoreBook import AllBooksByLend, BooksForUserByLend
+
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -43,9 +52,9 @@ Login_doc = api.model('Login POST', { #ドキュメントの名前を定義（�
 })
 
 @api.route('/login')
-@api.doc(params={'name': 'kirin','password':'pass'})
+#@api.doc(params={'name': 'kirin','password':'pass'})
 class Login(Resource):
-    @api.marshal_with(Login_doc)
+    #@api.marshal_with(Login_doc)
     def post(self):
         if session.get('logged_in') == True: #ログインしていたら表示
             return {'message': 'すでにログインしています。'}
@@ -67,8 +76,19 @@ class Login(Resource):
                     print('ログイン成功')
                     session['logged_in'] = True
                     #フレンドIDからフレンド情報を取得するやつをかく
-                    json_text = "{'id':"+ "'"+str(LoginDatabase[0])+ "','icon_image':'"+str(LoginDatabase[1])+ ",'name':'"+str(LoginDatabase[2])+ "','password':'"+str(LoginDatabase[3])+ "','point':'"+str(LoginDatabase[4])+ "','friend_list':'"+str(LoginDatabase[5])+ "'}"
+                    print(type((LoginDatabase[5])))
+                    friend_list_data = LoginDatabase[5].strip("[")
+                    friend_list_data = friend_list_data.strip("]")
+                    friend_list_data = friend_list_data.split(",")
+                    print(friend_list_data)
+                    friend_info_data =[] # これを格納する
+                    for i in range(len(friend_list_data)):
+                        friend_info_data.append((ChangeFriendlistToFriendData(friend_list_data[i])))
+                    print(friend_info_data)
+
+                    json_text = {'id':(LoginDatabase[0]),'icon_image':(LoginDatabase[1]),'name':(LoginDatabase[2]),'password':(LoginDatabase[3]),'point':(LoginDatabase[4]),'friend_list':friend_info_data}
                     print(json_text)
+
                     return json_text
                 else:
                     return {'message':'Error.Wrong name or password!'}
@@ -87,10 +107,50 @@ class BookList(Resource):
         booklist = GetBookListByUser(user_id)
         return booklist
 
+@api.route('/store')
+class store(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooks()
+            return booklist
+        else :
+            booklist = BooksForUser(user_id)
+            return booklist
 
 
+@api.route('/store/rank') #(貸出+購入)順
+class BookStoreRank(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooksByRank()
+            return booklist
+        else :
+            booklist = BooksForUserByRank(user_id)
+            return booklist
 
+@api.route('/store/own') #購入順
+class BookStoreOwn(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooksByRank()
+            return booklist
+        else :
+            booklist = BooksForUserByRank(user_id)
+            return booklist
 
+@api.route('/store/lend') #貸出数順
+class BookStoreLend(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        if user_id is None:
+            booklist = AllBooksByRank()
+            return booklist
+        else :
+            booklist = BooksForUserByRank(user_id)
+            return booklist
 
 
 
@@ -106,7 +166,7 @@ Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明�
 @api.route('/lend')
 @api.doc(params={ "id": "1", "borrower_id": "2", "book_id": '1', "deadline": "2020-09-22 12:26:48.084076" })
 class BookLend(Resource):
-    @api.marshal_with(Lend)
+    #@api.marshal_with(Lend)
     def post(self):
         #try:
             lend_data = request.json #送られてきたデータの取得
@@ -115,7 +175,13 @@ class BookLend(Resource):
             book_id = lend_data['book_id']
             deadline = lend_data['deadline']
             # bookIDが持っている書籍化を判別
-
+            if IsOwnBookAndId(book_id,user_id) == False:
+                return {'message':"Error.You don't have a book!"}
+            # ここに友達じゃない時の処理をかく！！
+            friend_list = GetUserFriendData(user_id)
+            if borrower_id not in friend_list:
+                print("貸し出す相手が友達ではありません")
+                return {"message":"Error. You are not friends!!"}
             # Lend_infoデータベースにデータを送る
             try:
                 print((user_id,borrower_id,book_id,deadline))
@@ -141,7 +207,36 @@ class ReturnBook(Resource):
         except:
             return {'message':'Error. Please try again.'}
 
+# 書籍の購入
+BuyDoc = api.model('buy POST', { #ドキュメントの名前を定義（説明の追加）
+    'user_id': fields.String(description='user_id'),
+    'book_id': fields.String(description='book_id'),
+    'point': fields.String(description='point')
+})
 
+@api.route('/buy')
+class BuyBooks(Resource):
+    #@api.marshal_with(BuyDoc)
+    def post(self):
+        buy_book_data = request.json
+        user_id_data = buy_book_data['id']
+        book_id_data = buy_book_data['book_id']
+        point_data = buy_book_data['point'] # (拡張機能、デフォルトで０)
+        point_data = 0
+
+        # 書籍の購入を行う
+        try:
+            AddOwnBooks(user_id_data,book_id_data)
+            # 貸してくれたものを買ってくれた時にポイントを追加する
+            lend_user_id = GetLenderId(user_id_data,book_id_data)
+            if lend_user_id != None:
+                print("ポイント付与相手",lend_user_id)
+                add_point = 30
+                AddPoint(lend_user_id, add_point)
+                print("付与か完了しました")
+            return {"message":"Success."}
+        except:
+            return {"message":"Error.Please try again"}
 
 
 if __name__ == '__main__':

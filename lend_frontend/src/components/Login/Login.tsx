@@ -68,6 +68,7 @@ const Login = () => {
       <button className="login-form-submit" onClick={handleSubmit}>
         {registerFlag ? "新規登録" : "ログイン"}
       </button>
+
     </div>
   );
 };
