@@ -15,7 +15,7 @@ class Notification(Base_notification):
     created_at = Column(String)
 
     
-    def __init__(self, user_id, book_id,created_at):
+    def __init__(self, user_id, message,created_at):
         self.user_id = user_id
         self.message = message
         self.created_at = created_at

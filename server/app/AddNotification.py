@@ -5,6 +5,8 @@ from models.lend_info import Lend_info
 from models.notification import Notification
 from sqlalchemy import and_, or_
 
+from datetime import  date, timedelta
+import datetime
 
 def GetNotificationByUserId(user_id): #全ての通知を取得する
     session = Session()
@@ -17,15 +19,15 @@ def GetNotificationByUserId(user_id): #全ての通知を取得する
     print(notification_list)
     return notification_list
 
-def AllBooks(): #基本機能全てを出す
+
+def AddNotification(user_id_data,message_data):
     session = Session()
-    booklist = session.query(Book).all()
-
+    now_date = (datetime.datetime.now())
+    now_date_str = now_date.strftime('%Y/%m/%d %H:%M:%S')
+    session.add_all([
+        Notification( user_id = user_id_data , message = message_data ,created_at = now_date_str)
+    ])
     session.commit()
-    store = []
-    if booklist != []:
-        for book in booklist:
-            store.append( { "id" : book.id , "name" : book.name , "price" : book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') } )
+    print("通知の追加が完了しました")
 
-    return store
 
