@@ -7,6 +7,7 @@ import AppBar from "./components/organizations/AppBar/AppBar";
 import BottomBar from "./components/organizations/BottomBar/BottomBar";
 import "./App.scss";
 import Viewer from './components/Viewer/Viewer'
+import Store from './components/Store/Store'
 import MyBookList from './components/MyBookList/MyBookList'
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
           {/* 友達ページ */}
           <Route exact path="/friend" component={() => <Screen><div style={{ padding: '100px' }}>/friend 未実装</div></Screen>} />
           {/* ストアページ */}
-          <Route exact path="/store" component={() => <Screen><div style={{ padding: '100px' }}>/store 未実装</div></Screen>} />
+          <Route exact path="/store" component={Store} />
           {/* 限定コンテンツ一覧ページ */}
           <Route exact path="/contents-store" component={() => <Screen><div style={{ padding: '100px' }}>/contents-store 未実装</div></Screen>} />
           {/* 設定ページ */}
