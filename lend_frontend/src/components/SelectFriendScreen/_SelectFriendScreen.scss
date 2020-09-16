@@ -1,0 +1,22 @@
+$font-color: #222222;
+
+.select_friend_screen {
+  color: $font-color;
+
+  &__top {
+    text-align: center;
+    margin-bottom: 50px;
+    &__title {
+      font-weight: bold;
+    }
+
+    &__search {
+      &__input {
+        width: 70%;
+        height: 30px;
+        border-radius: 2%;
+        border-color: #686868;
+      }
+    }
+  }
+}

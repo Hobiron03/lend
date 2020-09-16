@@ -1,10 +1,11 @@
 import React from 'react'
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import { useHistory } from "react-router-dom";
 
 const AppBar = () => {
-	
-	const onClickNotification = (e: React.MouseEvent<HTMLInputElement>) => {
-		console.log('通知ページへ遷移');
+	const history = useHistory();
+	const onClickNotification = () => {
+		history.push('/notification');
 	}
 	
 	return (
