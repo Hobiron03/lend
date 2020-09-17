@@ -3,7 +3,8 @@ import AppBar from '../organizations/AppBar/AppBar';
 import BottomBar from '../organizations/BottomBar/BottomBar';
 
 interface Props{
-	children: ReactNode
+	children: ReactNode,
+	isNotificationPage?: boolean;
 }
 
 /**
@@ -13,7 +14,7 @@ interface Props{
 export default function Screen(props: Props) {
 	return (
 		<>
-			<AppBar/>
+			<AppBar isNotificationPage={props.isNotificationPage}/>
 				<article className="screen-body">
 					{props.children}
 				</article>

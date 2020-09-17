@@ -15,7 +15,7 @@ const user = (state = {}, action: userAction) => {
   switch (action.type) {
     case CREATE_USER:
       console.log(action.user);
-      return {
+      const newState = {
         ...state,
         id: action.user.id,
         name: action.user.name,
@@ -23,6 +23,8 @@ const user = (state = {}, action: userAction) => {
         point: action.user.point,
         friend_list: action.user.friend_list,
       };
+      localStorage.setItem("user", JSON.stringify(newState));
+      return newState;
     default:
       return state;
   }
