@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./_BookCard.scss";
 import "./Button/Button";
 import Button from "./Button/Button";
+import DiscountButton from "./DiscountButton/DiscountButton";
 import Book from "../../model/book";
 import BaseModal from "@material-ui/core/Modal";
 import ModalContentConfirm from "../Modal/ModalContentConfirm/ModalContentConfirm";
@@ -91,7 +92,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
       <div className="BookCard__top">
         <div className="BookCard__top__left">
           <div className="BookCard__top__left__image">
-            <BookImage src={book.image} isDiscount={book.status === "borrowing"}/>
+            <BookImage src={book.image} isDiscount={type === "buy" && book.status === "borrowing"}/>
           </div>
         </div>
         <div className="BookCard__top__right">
@@ -123,7 +124,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
           ) : book.status === "borrowing" ? (
             <>
               <Button content="読む" onClick={handleRead} />
-              <Button content="購入" onClick={handlePurchase} />
+              <DiscountButton content="購入" onClick={handlePurchase} />
               <Button content="返却" onClick={handleModalOpen} />
             </>
           ) : (
