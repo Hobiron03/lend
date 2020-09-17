@@ -7,11 +7,13 @@ import Book from "../../model/book";
 
 const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 type MyBookShellTabState = "available" | "lending";
+type MyBookFilterState = "all" | "borrowing";
 const initState = "available";
 
 const MyBookList = () => {
 	const [mybooks, setMyBooks] = useState<Book[]>([]);
 	const [showBooks, setShowBooks] = useState<Book[]>([])
+	const [filterType, setFilterType] = useState<MyBookFilterState>("all");
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -35,10 +37,28 @@ const MyBookList = () => {
 		}
 	}
 
+	const handleFilterChange = (type: MyBookFilterState) => {
+		setFilterType(type);
+	}
+
+	useEffect(() => {
+		if(filterType == "all"){
+			setShowBooks(mybooks);
+		}else{
+			setShowBooks(mybooks.filter(book => book.status === "borrowing"));
+		}
+	}, [filterType])
+
 	return (
 		<Screen>
 			<TabBar initState={initState} onTabChange={handleTabChange}/>
 			<div className="mybooklist-body">
+			<div className="mybooklist-select-outer">
+				<select value={filterType} onChange={e => handleFilterChange(e.target.value as MyBookFilterState)}>
+					<option value="all">今読める本全て</option>
+					<option value="borrowing">借りている本</option>
+				</select>
+			</div>
 			{
 				showBooks.length === 0 ? !isLoading && (
 					<div className="empty-message">

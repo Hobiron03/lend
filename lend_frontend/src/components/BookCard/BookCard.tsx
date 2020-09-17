@@ -23,7 +23,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
   const history = useHistory();
 
   const handleRead = () => {
-    history.push(`/mybook/${book.id}/read`);
+    history.push(`/mybook/${book.id}/read`, { book });
   }
 
   const handleLend = () => {

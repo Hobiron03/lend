@@ -2,6 +2,15 @@
 	padding-top: 50px;
 	padding-bottom: 1em;
 
+	.mybooklist-select-outer{
+		display: flex;
+		justify-content: center;
+		select{
+			padding: 1em;
+			margin: .5em;
+		}
+	}
+
 	.empty-message{
 		margin-top: 2em;
 		text-align: center;
