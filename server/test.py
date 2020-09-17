@@ -11,7 +11,7 @@ from app.AddNotification import GetNotificationByUserId,AddNotification,AddNotif
 user_id_data = 1
 borrower_id_data = 4
 
-book_id_data = 1
+book_id_data = 5
 
 now_date = datetime.now()
 deadline_data = (now_date + timedelta(minutes=60))
@@ -21,12 +21,12 @@ deadline_date_string = deadline_data.strftime('%Y/%m/%d %H:%M:%S')
 
 print(now_date_string,deadline_date_string)
 
-#AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_date_string)
+AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_date_string)
 
 #print(GetLendData(GetOwnBookIDByUseridAndBookid(2,6)))
 #UpdateLendInfoData(2,6) # 貸し出し処理の終了
 #print(GetOwnBookIDByUseridAndBookid(1,1))
-print(GetLendData(1))
+#print(GetLendData(1))
 
 
 
