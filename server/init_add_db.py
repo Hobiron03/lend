@@ -36,13 +36,15 @@ kirin_3manga =  ','.join(kirin_3list)
 
 
 session.add_all([
-    Book( name="よろしく", price=100000, image=mangalist[0], url = mangastr , info ="Brack", auther = "Who"),
+    Book( name="よろしく", price=600, image=kirinpass+"hello.png", url = mangastr , info ="Brack", auther = "Who"),
     Book( name="キリンの翼", price=100, image=kirin_tlist[0] , url = kirin_tmanga , info ="Tsubasa", auther = "Me"),
     Book( name="キリンの刃", price=1000, image=kirin_ylist[0], url = kirin_ymanga , info="....あれから3年....", auther = "You" ),
-    Book( name="3匹のキリン", price=10000, image=kirin_3list[0] , url = kirin_3manga , info="物語は~~~から始まった", auther ="He"),
-    Book( name="キリンビール", price=5000, image=ImageDir+"4.jpg", url = ImageDir+"4.jpg", info="nof" , auther = "She" ),
+    Book( name="3匹のキリン", price=800, image=kirin_3list[0] , url = kirin_3manga , info="物語は~~~から始まった", auther ="He"),
+    Book( name="キリンなレモン", price=550, image=kirinpass+"lemon.png", url = ImageDir+"4.jpg", info="nof" , auther = "She" ),
     Book( name="Kirin", price=777, image=ImageDir+"5.jpg", url = ImageDir+"5.jpg", info="beautiful" , auther="We"  ),
     Book( name="Defalt", price=0 , image = defaultpass+"1.png" , url = defaultmanga , info="No manga No life", auther="I" ),
+    Book( name="リスとキリン", price=500 , image = kirinpass+"RisutoKirin.png" , url = defaultmanga , info="ある日、リスはキリンと出会った", auther="They" ),
+    Book( name="きりんな人たち", price=810 , image = kirinpass+"kirinnokao.png" , url = defaultmanga , info="きりんの顔を見てみよう...", auther="It" )
     ])
 
 session.add_all([

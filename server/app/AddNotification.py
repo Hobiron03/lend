@@ -26,7 +26,7 @@ def GetNotificationByUserId(user_id): #全ての通知を取得する
 def AddNotification(user_id_data,message_data): # 通知を追加する
     session = Session()
     now_date = (datetime.datetime.now())
-    now_date_str = now_date.strftime('%Y/%m/%d %H:%M:%S')
+    now_date_str = now_date.strftime('%Y/%m/%d %H:%M:%S.%f')
     session.add_all([
         Notification( user_id = user_id_data , message = message_data ,created_at = now_date_str)
     ])
