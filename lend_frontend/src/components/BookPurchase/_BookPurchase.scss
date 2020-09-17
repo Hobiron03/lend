@@ -16,6 +16,11 @@ $hover-read-button-color: #adaf4a;
 
 		.book-img{
 			flex: 1;
+			padding: 10px;
+
+			img{
+				width: 100%;
+			}
 		}
 		.book-title{
 			flex: 1;
@@ -24,34 +29,51 @@ $hover-read-button-color: #adaf4a;
 			margin-top: 1em;
 			font-weight: bold;
 			font-size: 120%;
+			text-align: center;
 		}
 	}
 
-	.action-button{
-		cursor: pointer;
-		text-align: center;
-		color: white;
-		font-weight: bold;
-		border-radius: 2em;
-		padding: .5em 1em;
-		margin: 2em 1em;
-		box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.2);
-	}
+	.button-area{
+		display: flex;
+		flex-direction: row;
 
-	.purchase-button{
-		background: $purchase-button-color;
-		border: 3px solid $hover-purchase-button-color;
-		&:hover{
-			background: $hover-purchase-button-color;
+		.action-button{
+			flex: 1;
+			cursor: pointer;
+			text-align: center;
+			color: white;
+			font-weight: bold;
+			border-radius: 2em;
+			padding: .5em 1em;
+			margin: 1em 1em;
+			box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.2);
 		}
-	}
 
-	.read-button{
-		background: $read-button-color;
-		border: 3px solid $hover-read-button-color;
-		color: black;
-		&:hover{
-			background: $hover-read-button-color;
+		.purchase-button{
+			background: $purchase-button-color;
+			border: 3px solid $hover-purchase-button-color;
+			&:hover{
+				background: $hover-purchase-button-color;
+			}
+		}
+
+		.read-button{
+			background: $read-button-color;
+			border: 3px solid $hover-read-button-color;
+			color: black;
+			&:hover{
+				background: $hover-read-button-color;
+			}
+		}
+
+		.back-button{
+			border: 1px solid rgb(187, 187, 187);
+			box-shadow: none;
+			color: black;
+			font-weight: normal;
+			&:hover{
+				background: rgb(216, 216, 216);
+			}
 		}
 	}
 
