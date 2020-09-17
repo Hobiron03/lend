@@ -104,9 +104,7 @@ function App() {
             <Route
               exact
               path="/store/:id"
-              component={() => (
-                <div style={{ padding: "100px" }}>/store/:bookid 未実装</div>
-              )}
+              component={BookPurchase}
             />
             {/* 書籍決済ページ */}
             <Route
