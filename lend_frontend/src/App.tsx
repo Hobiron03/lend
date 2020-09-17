@@ -15,7 +15,6 @@ import BookPurchase from "./components/BookPurchase/BookPurchase";
 import reducer from "./reducers/";
 import AppContext from "./contexts/AppContexts";
 import Store from "./components/Store/Store";
-import BookPurchase from "./components/BookPurchase/BookPurchase";
 
 const initialState = {
   user: {},

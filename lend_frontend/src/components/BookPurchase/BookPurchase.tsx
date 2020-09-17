@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Screen from "../Screen/Screen";
 import Book from "../../model/book";
 import { useHistory, useLocation } from "react-router-dom";
 import BaseModal from "@material-ui/core/Modal";
-import ModalContentConfirm from "../Modal/ModalContentConfirm/ModalContentConfirm";
 import axios from "axios";
+import AppContext from "../../contexts/AppContexts";
 
 const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 
 const BookPurchase = () => {
+	const { state } = useContext(AppContext);
+
 	const history = useHistory();
-	const { state } = useLocation();
+	const { state: locationStatestate } = useLocation();
 	const [book, setBook] = useState<Book>();
 
 	useEffect(() => {
-		if(state == null){
+		if(locationStatestate == null){
 			history.push('/store');
 		}else{
-			setBook((state as { book: Book }).book as Book);
+			setBook((locationStatestate as { book: Book }).book as Book);
 		}
 	}, [])
 
@@ -33,7 +35,7 @@ const BookPurchase = () => {
 		if(book == null) return;
 		// TODO: ユーザIDを正しいものに
 		await axios.post(ENTRY_POINT + '/buy', {
-			id: 1,
+			id: state.user.id,
 			book_id: book.id,
 			point: 0,
 		});
