@@ -17,6 +17,7 @@ import Viewer from "./components/Viewer/Viewer";
 import MyBookList from "./components/MyBookList/MyBookList";
 import reducer from "./reducers/";
 import AppContext from "./contexts/AppContexts";
+import Store from "./components/Store/Store";
 
 const initialState = {
   user: {},
@@ -47,11 +48,7 @@ function App() {
             <Route
               exact
               path="/store"
-              component={() => (
-                <Screen>
-                  <div style={{ padding: "100px" }}>/store 未実装</div>
-                </Screen>
-              )}
+              component={Store}
             />
             {/* 限定コンテンツ一覧ページ */}
             <Route
@@ -104,9 +101,7 @@ function App() {
             <Route
               exact
               path="/store/:id"
-              component={() => (
-                <div style={{ padding: "100px" }}>/store/:bookid 未実装</div>
-              )}
+              component={BookPurchase}
             />
             {/* 書籍決済ページ */}
             <Route

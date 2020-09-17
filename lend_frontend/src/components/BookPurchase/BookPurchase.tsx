@@ -48,12 +48,17 @@ const BookPurchase = () => {
 					</section>
 				</div>
 				<div className="button-area">
-					<div className="back-button action-button" onClick={handleCancel}>キャンセル</div>
 					{
 						havingBook ? (
-							<div className="read-button action-button" onClick={handleRead}>読む</div>
+							<>
+								<div className="back-button action-button" onClick={handleCancel}>ストアに戻る</div>
+								<div className="read-button action-button" onClick={handleRead}>読む</div>
+							</>
 						):(
-							<div className="purchase-button action-button" onClick={handleBuy}>購入する</div>
+							<>
+								<div className="back-button action-button" onClick={handleCancel}>キャンセル</div>
+								<div className="purchase-button action-button" onClick={handleBuy}>購入する</div>
+							</>
 						)
 					}
 				</div>
