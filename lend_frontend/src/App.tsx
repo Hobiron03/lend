@@ -16,17 +16,25 @@ import reducer from "./reducers/";
 import AppContext from "./contexts/AppContexts";
 import Store from "./components/Store/Store";
 import Notification from "./components/Notification/Notification";
+import PointExchangeScreen from "./components/PointExchangeScreen/PointExchangeScreen";
 
-const localStorageDataStr = localStorage.getItem('user');
-const localStorageData = localStorageDataStr != null ? JSON.parse(localStorageDataStr) : null;
-const modifiedData = localStorageData != null ? {
-  user: (() => { const { friend_list, ...rest } = localStorageData; return rest; })(),
-  friends: localStorageData.friend_list.map((friendData: any) => ({
-    id: friendData[0],
-      icon_image: friendData[1],
-      name: friendData[2],
-  })), //TODO: ここデータのフォーマットがミスってるかも。
-} : null;
+const localStorageDataStr = localStorage.getItem("user");
+const localStorageData =
+  localStorageDataStr != null ? JSON.parse(localStorageDataStr) : null;
+const modifiedData =
+  localStorageData != null
+    ? {
+        user: (() => {
+          const { friend_list, ...rest } = localStorageData;
+          return rest;
+        })(),
+        friends: localStorageData.friend_list.map((friendData: any) => ({
+          id: friendData[0],
+          icon_image: friendData[1],
+          name: friendData[2],
+        })), //TODO: ここデータのフォーマットがミスってるかも。
+      }
+    : null;
 
 const initialState = modifiedData ?? {
   user: {},
@@ -60,11 +68,7 @@ function App() {
             <Route
               exact
               path="/contents-store"
-              component={() => (
-                <Screen>
-                  <div style={{ padding: "100px" }}>/contents-store 未実装</div>
-                </Screen>
-              )}
+              component={PointExchangeScreen}
             />
             {/* 設定ページ */}
             <Route
