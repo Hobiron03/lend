@@ -2,6 +2,10 @@
 	padding: 1em;
 	border-bottom: 1px solid #dfdfdf;
 
+	.notification-body{
+		white-space: pre-line;
+	}
+
 	.notification-date{
 		text-align: end;
 		font-size: 80%;
