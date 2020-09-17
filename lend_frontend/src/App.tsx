@@ -11,6 +11,7 @@ import SelectFriendScreen from "./components/SelectFriendScreen/SelectFriendScre
 import "./App.scss";
 import Viewer from "./components/Viewer/Viewer";
 import MyBookList from "./components/MyBookList/MyBookList";
+import BookPurchase from "./components/BookPurchase/BookPurchase";
 import reducer from "./reducers/";
 import AppContext from "./contexts/AppContexts";
 import Store from "./components/Store/Store";
@@ -43,11 +44,7 @@ function App() {
               )}
             />
             {/* ストアページ */}
-            <Route
-              exact
-              path="/store"
-              component={Store}
-            />
+            <Route exact path="/store" component={Store} />
             {/* 限定コンテンツ一覧ページ */}
             <Route
               exact
@@ -96,11 +93,7 @@ function App() {
               )}
             />
             {/* 書籍詳細ページ */}
-            <Route
-              exact
-              path="/store/:id"
-              component={BookPurchase}
-            />
+            <Route exact path="/store/:id" component={BookPurchase} />
             {/* 書籍決済ページ */}
             <Route
               exact
