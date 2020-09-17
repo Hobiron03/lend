@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import "./_BookCard.scss";
 import "./Button/Button";
 import Button from "./Button/Button";
 import Book from "../../model/book";
+import BaseModal from "@material-ui/core/Modal";
+import ModalContentConfirm from "../Modal/ModalContentConfirm/ModalContentConfirm";
+import AppContext from "../../contexts/AppContexts";
+import axios from "axios";
 
 /**
  * 本の状態によってボタンを出し分けるためのCardType
@@ -14,6 +18,7 @@ import Book from "../../model/book";
  */
 type CardType = "read_lend" | "buy" | "read_buy_return" | "lending_label";
 
+const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 interface BookCardProps {
   book: Book;
   type?: CardType;
@@ -21,6 +26,7 @@ interface BookCardProps {
 
 const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
   const history = useHistory();
+  const { state, dispatch } = useContext(AppContext);
 
   const handleRead = () => {
     history.push(`/mybook/${book.id}/read`, { book });
@@ -32,9 +38,21 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
 
   // 購入の場合のみ、カードをクリックしてアクションを起こせる
   const handleBuy = () => {
-    if(type === "buy"){
+    if (type === "buy") {
       history.push(`/store/${book.id}`, { book });
     }
+  };
+
+  const handleReturn = async () => {
+    await axios
+      .post(ENTRY_POINT + "/return_book", {
+        id: state.user.id,
+        book_id: book.id,
+      })
+      .then((res) => {
+        console.log("HandleRerutn res: ");
+        console.log(res);
+      });
   };
 
   return (
@@ -58,19 +76,19 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
 
       {type !== "buy" && (
         <div className="BookCard__under">
-          {type === "read_lend" ? (
+          {book.status === "having" ? (
             <>
               <Button content="読む" onClick={handleRead} />
               <Button content="貸す" onClick={handleLend} />
             </>
-          ) : type === "read_buy_return" ? (
+          ) : book.status === "borrowing" ? (
             <>
               <Button content="読む" onClick={handleRead} />
               <Button content="購入" onClick={() => console.log("購入")} />
-              <Button content="貸す" onClick={handleLend} />
+              <Button content="返却" onClick={handleReturn} />
             </>
           ) : (
-            type === "lending_label" && (
+            book.status === "lending" && (
               // TODO: デザイン未確認
               <div>貸し出し中です</div>
             )
