@@ -99,7 +99,7 @@ def BooksForUser(user_id): #応用機能
                 status = "still"
                 deadline = None
                 if book.id in borrowset:
-                    status = "lending"
+                    status = "borrowing"
                     deadline = GetDeadLine(user_id, book.id)
 
                 store.append( { "id" : book.id , "name" : book.name , "price" : book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(','), "status": status , "deadline": deadline } )
@@ -207,7 +207,7 @@ def BooksForUserByRank(user_id): #応用機能
                 status = "still"
                 deadline = None
                 if book.id in borrowset:
-                    status = "lending"
+                    status = "borrowing"
                     deadline = GetDeadLine(user_id, book.id)
 
                 store.append( { "id" : book.id , "name" : book.name , "price" : book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(','), "status": status , "deadline": deadline } )
@@ -244,7 +244,7 @@ def BooksForUserByOwn(user_id): #応用機能
                 status = "still"
                 deadline = None
                 if book.id in borrowset:
-                    status = "lending"
+                    status = "borrowing"
                     deadline = GetDeadLine(user_id, book.id)
 
                 store.append( { "id" : book.id , "name" : book.name , "price" : book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(','), "status": status , "deadline": deadline } )
@@ -281,7 +281,7 @@ def BooksForUserByLend(user_id): #応用機能
                 status = "still"
                 deadline = None
                 if book.id in borrowset:
-                    status = "lending"
+                    status = "borrowing"
                     deadline = GetDeadLine(user_id, book.id)
 
                 store.append( { "id" : book.id , "name" : book.name , "price" : book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(','), "status": status , "deadline": deadline } )
