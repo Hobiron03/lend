@@ -16,6 +16,8 @@ from app.StoreBook import AllBooksByOwn, BooksForUserByOwn
 from app.StoreBook import AllBooksByLend, BooksForUserByLend
 from app.AddNotification import AddNotificationInBuy,AddNotificationInLend,AddNotificationInBorrow,AddNotificationInLendBuy,GetNotificationByUserId,AddNotificationInReturn
 
+from app.IsHaveBook import IsHaveBook
+
 
 app = Flask(__name__)
 app.secret_key = 'シークレットキーです'
@@ -175,11 +177,9 @@ class BookLend(Resource):
             deadline = lend_data['deadline']
             #print("返却時間",deadline)
             # bookIDが持っている書籍化を判別
-            """
-            if IsOwnBookAndId(book_id,user_id) == False:
-                print("本を持っていないです")
-                return {'message':"Error.You don't have a book!"},404
-            """
+            if IsHaveBook(book_id,user_id) == False:
+                return {'message':"Error.You don't have a book!"}
+
             # ここに友達じゃない時の処理をかく！！
             friend_list = GetUserFriendData(user_id)
             if borrower_id not in friend_list:
