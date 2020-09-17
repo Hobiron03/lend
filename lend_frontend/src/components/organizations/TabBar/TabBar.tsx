@@ -5,12 +5,17 @@ import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 
 type MyBookShellTabState = "available" | "lending";
 
-export const TabBar = () => {
-	const [tabState, setTabState] = useState<MyBookShellTabState>("available");
+type Props = {
+	initState: MyBookShellTabState,
+	onTabChange: (tabState: MyBookShellTabState) => void,
+};
+
+const TabBar = ({ initState, onTabChange }: Props) => {
+	const [tabState, setTabState] = useState<MyBookShellTabState>(initState);
 	
 	const onItemClick = (tabState: MyBookShellTabState) => {
 		setTabState(tabState);
-		console.log(`タブ遷移: ${tabState}`);
+		onTabChange(tabState);
 	}
 
 	return (
@@ -32,3 +37,5 @@ export const TabBar = () => {
 		</div>
 	);
 }
+
+export default TabBar;
