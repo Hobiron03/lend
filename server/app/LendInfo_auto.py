@@ -5,6 +5,15 @@ import datetime
 from sqlalchemy import and_, or_
 from app.AddNotification import AddNotificationInAutoReturn
 
+def GetUserIdAndBookidFromOwnBook(own_book_id_data):
+    session = Session()
+    own_book = session.query(Own_Book).filter(
+        Own_Book.id == own_book_id_data
+    ).all()
+    session.commit()
+    for row in own_book:
+        return row.user_id,row.book_id
+
 def IsLendInfoUpdate(lend):
     now_date = datetime.datetime.now()
     now_date_str = str(now_date)
@@ -38,15 +47,5 @@ def AutoUpdateLendInfo():
                 AddNotificationInAutoReturn(user_id,borrower_id,book_id)
 
     session.commit()
-
-def GetUserIdAndBookidFromOwnBook(own_book_id_data):
-    session = Session()
-
-    own_book = session.query(Own_Book).filter(
-        Own_Book.id == own_book_id_data
-    ).all()
-    for row in own_book:
-        return row.user_id,row.book_id
-
 
 
