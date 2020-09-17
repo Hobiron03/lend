@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import "./_BookCard.scss";
 import "./Button/Button";
@@ -26,7 +26,10 @@ interface BookCardProps {
 
 const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
   const history = useHistory();
-  const { state, dispatch } = useContext(AppContext);
+  const { state } = useContext(AppContext);
+
+  const [message, setMessage] = useState<string>("");
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   const handleRead = () => {
     history.push(`/mybook/${book.id}/read`, { book });
@@ -48,11 +51,33 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
       .post(ENTRY_POINT + "/return_book", {
         id: state.user.id,
         book_id: book.id,
+        message,
       })
       .then((res) => {
-        console.log("HandleRerutn res: ");
+        console.log("HandleRerutn ");
         console.log(res);
       });
+  };
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
+  const onConfirm = () => {
+    handleReturn();
+    handleModalClose();
+  };
+
+  const onDeny = () => {
+    handleModalClose();
+  };
+
+  const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
   };
 
   return (
@@ -85,7 +110,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
             <>
               <Button content="読む" onClick={handleRead} />
               <Button content="購入" onClick={() => console.log("購入")} />
-              <Button content="返却" onClick={handleReturn} />
+              <Button content="返却" onClick={handleModalOpen} />
             </>
           ) : (
             book.status === "lending" && (
@@ -95,6 +120,29 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
           )}
         </div>
       )}
+      <BaseModal
+        open={isModalOpen}
+        onClose={handleModalClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div className="modal_background">
+          <textarea
+            className="message"
+            cols={35}
+            rows={4}
+            placeholder="貸してくれた人にメッセージを送りましょう"
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              handleMessageChange(e)
+            }
+          ></textarea>
+          <ModalContentConfirm
+            description={`このメッセージと共に ${book.name} を 返却します`}
+            onConfirm={onConfirm}
+            onDeny={onDeny}
+          />
+        </div>
+      </BaseModal>
     </div>
   );
 };
