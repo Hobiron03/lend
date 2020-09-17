@@ -120,7 +120,7 @@ const BookPurchase = () => {
 						<div className="modal-body">
 							<p className="book-title">{book?.name} ({book?.auther}) を購入します</p>
 							<div className="book-price">
-								<div>{book?.price}円</div>
+								<div>{book == null ? "   " : Math.floor(book.price * 0.9)}円</div>
 							</div>
 						</div>
 						<div className="button-area">
