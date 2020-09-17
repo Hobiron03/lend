@@ -67,7 +67,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
     setModalOpen(false);
   };
 
-  const onConfirm = async () => {
+  const onConfirm = () => {
     handleReturn();
     handleModalClose();
   };
