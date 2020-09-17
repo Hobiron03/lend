@@ -14,6 +14,7 @@ from app.friend import ChangeFriendlistToFriendData
 from app.StoreBook import AllBooksByRank, BooksForUserByRank
 from app.StoreBook import AllBooksByOwn, BooksForUserByOwn
 from app.StoreBook import AllBooksByLend, BooksForUserByLend
+from app.AddNotification import AddNotificationInBuy,AddNotificationInLend,AddNotificationInBorrow,AddNotificationInLendBuy,GetNotificationByUserId
 
 
 app = Flask(__name__)
@@ -186,6 +187,9 @@ class BookLend(Resource):
             try:
                 print((user_id,borrower_id,book_id,deadline))
                 AddLendInfoData(user_id,borrower_id,book_id,deadline)
+                # 本を貸しだしの通知
+                AddNotificationInLend(user_id,borrower_id,book_id) # 貸す側の通知
+                AddNotificationInBorrow(user_id,borrower_id,book_id) #貸してもらった側の通知
                 return {'message':'Success'}
             except:
                 return {'message':'Error.Please try again.'}
@@ -227,16 +231,26 @@ class BuyBooks(Resource):
         # 書籍の購入を行う
         try:
             AddOwnBooks(user_id_data,book_id_data)
+            AddNotificationInBuy(user_id_data,book_id_data) # 購入時の通知の追加
             # 貸してくれたものを買ってくれた時にポイントを追加する
             lend_user_id = GetLenderId(user_id_data,book_id_data)
             if lend_user_id != None:
                 print("ポイント付与相手",lend_user_id)
                 add_point = 30
                 AddPoint(lend_user_id, add_point)
+                AddNotificationInLendBuy(lend_user_id,user_id_data,book_id_data,add_point) # 貸してくれた人に通知
                 print("付与か完了しました")
             return {"message":"Success."}
         except:
             return {"message":"Error.Please try again"}
+
+# 通知の取得
+@api.route('/notification')
+class Notification(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        notification_list = GetNotificationByUserId(user_id)
+        return notification_list
 
 
 if __name__ == '__main__':
