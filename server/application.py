@@ -3,7 +3,7 @@ from flask_restplus import Api, Resource, fields # Werkzeug==0.16.1が良い（W
 # https://qiita.com/sky_jokerxx/items/17481ffc34b52875528b よりSwaggerUIをFlaskで使う
 from flask_cors import CORS, cross_origin
 import json
-from app.friend import GetUserFriendData
+from app.friend import GetUserFriendData,GetPointByUserId
 from app.get_db import GetUserLoginData
 from app.BookList import GetBookListByUser,IsOwnBookAndId
 from app.add_db_LendInfo import AddLendInfoData,UpdateLendInfoData
@@ -262,6 +262,16 @@ class Notification(Resource):
         user_id = request.args.get('user_id')
         notification_list = GetNotificationByUserId(user_id)
         return notification_list
+
+@api.route('/point')
+class Point(Resource):
+    def get(self):
+        user_id = request.args.get('user_id')
+        point_data = GetPointByUserId(user_id)
+        print(point_data)
+        return {'point':point_data}
+
+# ポイントの取得
 
 if __name__ == '__main__':
     app.run()
