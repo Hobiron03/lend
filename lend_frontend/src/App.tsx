@@ -21,6 +21,7 @@ import Store from "./components/Store/Store";
 
 const initialState = {
   user: {},
+  friends: [],
 };
 
 function App() {

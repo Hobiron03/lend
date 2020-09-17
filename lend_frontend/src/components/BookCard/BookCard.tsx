@@ -15,8 +15,8 @@ import Book from "../../model/book";
 type CardType = "read_lend" | "buy" | "read_buy_return" | "lending_label";
 
 interface BookCardProps {
-  book: Book,
-  type?: CardType,
+  book: Book;
+  type?: CardType;
 }
 
 const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
@@ -35,8 +35,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
     if(type === "buy"){
       history.push(`/store/${book.id}`, { book });
     }
-  }
-
+  };
 
   return (
     <div className="BookCard" onClick={handleBuy}>
@@ -56,29 +55,27 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
         </div>
       </div>
       {/* 購入以外は、フッターにボタンを表示する */}
-      {
-        type !== "buy" && (
-          <div className="BookCard__under">
-            {
-              type === "read_lend" ? (
-                <>
-                  <Button content="読む" onClick={handleRead} />
-                  <Button content="貸す" onClick={() => console.log("貸す")} />
-                </>
-              ) : type === "read_buy_return" ? (
-                <>
-                  <Button content="読む" onClick={handleRead} />
-                  <Button content="購入" onClick={() => console.log("購入")} />
-                  <Button content="貸す" onClick={() => console.log("貸す")} />
-                </>
-              ) : type === "lending_label" && (
-                // TODO: デザイン未確認
-                <div>貸し出し中です</div>
-              )
-            }
-          </div>
-        )
-      }
+      {type !== "buy" && (
+        <div className="BookCard__under">
+          {type === "read_lend" ? (
+            <>
+              <Button content="読む" onClick={handleRead} />
+              <Button content="貸す" onClick={handleLend} />
+            </>
+          ) : type === "read_buy_return" ? (
+            <>
+              <Button content="読む" onClick={handleRead} />
+              <Button content="購入" onClick={() => console.log("購入")} />
+              <Button content="貸す" onClick={handleLend} />
+            </>
+          ) : (
+            type === "lending_label" && (
+              // TODO: デザイン未確認
+              <div>貸し出し中です</div>
+            )
+          )}
+        </div>
+      )}
     </div>
   );
 };
