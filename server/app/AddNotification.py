@@ -4,7 +4,8 @@ from models.own_book import Own_Book
 from models.lend_info import Lend_info
 from models.notification import Notification
 from sqlalchemy import and_, or_
-from app.BookList import GetBookById
+#from app.BookList import GetBookById
+from app.GetBookById import GetBookById
 from app.friend import ChangeFriendlistToFriendData
 
 from datetime import  date, timedelta
