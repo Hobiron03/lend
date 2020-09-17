@@ -19,8 +19,8 @@ const MyBookList = () => {
   const [filterType, setFilterType] = useState<MyBookFilterState>("all");
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    axios.get(ENTRY_POINT + `/books?user_id=${state.user.id}`).then((res) => {
+  const fetch = async () => {
+    await axios.get(ENTRY_POINT + `/books?user_id=${state.user.id}`).then((res) => {
       const books: Book[] = res.data.map((data: any) => Book.fromJson(data));
       setMyBooks(books);
       if (initState === "available") {
@@ -30,11 +30,15 @@ const MyBookList = () => {
       }
       setIsLoading(false);
     });
+  }
+
+  useEffect(() => {
+    fetch();
   }, [state.user.id]);
 
   const handleTabChange = (tabState: MyBookShellTabState) => {
     if (tabState === "available") {
-      setShowBooks(mybooks);
+      setShowBooks(mybooks.filter(({status}) => status === "having" || status === "borrowing"));
     } else {
       setShowBooks(mybooks.filter(({ status }) => status === "lending"));
     }
@@ -72,7 +76,7 @@ const MyBookList = () => {
               <div className="empty-message">対象の本はありません</div>
             )
           : showBooks.map((mybook) => (
-              <BookCard key={mybook.id} book={mybook} />
+              <BookCard key={mybook.id} book={mybook}/>
             ))}
       </div>
     </Screen>
