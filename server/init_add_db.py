@@ -24,7 +24,7 @@ mangastr = ','.join(mangalist)
 
 defaultpass = ImageDir+"default/"
 defaultlist = [ defaultpass+"1.png", defaultpass+"2.png",defaultpass+"3.png", defaultpass+"4.png" ]
-defaultmanga = ','.join(defaultmanga)
+defaultmanga = ','.join(defaultlist)
 
 session.add_all([
     Book( name="キリンの翼", price=100, image=ImageDir+"1.jpg", url = mangastr , info ="Tsubasa", auther = "Me"),
