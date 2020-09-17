@@ -167,12 +167,13 @@ Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明�
 class BookLend(Resource):
     #@api.marshal_with(Lend)
     def post(self):
-        #try:
+        try:
             lend_data = request.json #送られてきたデータの取得
             user_id = lend_data['id']
             borrower_id = lend_data['borrower_id']
             book_id = lend_data['book_id']
             deadline = lend_data['deadline']
+            print("返却時間",deadline)
             # bookIDが持っている書籍化を判別
             if IsOwnBookAndId(book_id,user_id) == False:
                 return {'message':"Error.You don't have a book!"}
@@ -191,6 +192,9 @@ class BookLend(Resource):
                 return {'message':'Success'}
             except:
                 return {'message':'Error.Please try again.'}
+        except:
+            return {'message':'Error. Please try again.'}
+
 
 # 書籍の返却
 Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明の追加）
@@ -213,6 +217,7 @@ class ReturnBook(Resource):
             return {'message':'Success'}
         except:
             return {'message':'Error. Please try again.'}
+
 
 # 書籍の購入
 BuyDoc = api.model('buy POST', { #ドキュメントの名前を定義（説明の追加）
