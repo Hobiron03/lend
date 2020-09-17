@@ -22,18 +22,18 @@ interface BookCardProps {
 const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
   const history = useHistory();
 
+  const handleRead = () => {
+    history.push(`/mybook/${book.id}/read`, { book });
+  };
+
   const handleLend = () => {
     history.push(`/mybook/${book.id}/lend`);
   };
 
-  const handleRead = () => {
-    history.push(`/mybook/${book.id}/read`);
-  };
-
   // 購入の場合のみ、カードをクリックしてアクションを起こせる
   const handleBuy = () => {
-    if (type === "buy") {
-      console.log("購入");
+    if(type === "buy"){
+      history.push(`/store/${book.id}`, { book });
     }
   };
 
