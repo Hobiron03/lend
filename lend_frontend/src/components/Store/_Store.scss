@@ -8,6 +8,7 @@ $searchbox-total-height: $searchbox-inner-height + $searchbox-padding;
 		top: 60px;
 		width: 100vw;
 		padding: .5em 0;
+		z-index: 10;
 
 		display: flex;
 		flex-direction: row;
@@ -55,8 +56,12 @@ $searchbox-total-height: $searchbox-inner-height + $searchbox-padding;
 	padding: 1em;
 	width: 120px;
 
+	.image-box{
+		height: auto;
+	}
 	img{
-		width: 120px;
+		width: 120px !important;
+		height: 160px !important;
 	}
 
 	&>div{

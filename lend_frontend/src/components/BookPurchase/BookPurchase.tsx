@@ -5,6 +5,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import BaseModal from "@material-ui/core/Modal";
 import axios from "axios";
 import AppContext from "../../contexts/AppContexts";
+import BookImage from "../organizations/BookImage/BookImage";
 
 const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 
@@ -27,13 +28,14 @@ const BookPurchase = () => {
 	const [havingBook, setHavingBook] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 
+	const idDiscounted = book?.status == "borrowing";
+
 	const handleCancel = () => {
 		history.push('/store');
 	}
 
 	const handleBuy = async () => {
 		if(book == null) return;
-		// TODO: ユーザIDを正しいものに
 		await axios.post(ENTRY_POINT + '/buy', {
 			id: state.user.id,
 			book_id: book.id,
@@ -52,12 +54,24 @@ const BookPurchase = () => {
 			<div className="book-purchase-page">
 				<div className="upper-area">
 					<div className="book-img">
-						<img src={book?.image}/>
+						<BookImage src={book?.image ?? ""} isDiscount={idDiscounted} />
 					</div>
 					<section className="book-title">
 						<h1>{book?.name}</h1>
 						<div>{book?.auther}</div>
-						<div className="book-price"><u>{book?.price}円</u></div>
+						{
+							idDiscounted ? (
+								<div className="discount-area">
+									<div className="discount-message">現在割引価格！</div>
+									<div className="book-price">
+										<s className="regular-price">{book?.price}円</s>
+										<small className="price-arrow">→</small>
+										<u className="discount-price">{book == null ? "   " : Math.floor(book.price * 0.9)}円</u></div>
+								</div>
+							) : (
+								<div className="book-price"><u>{book?.price}円</u></div>
+							)
+						}
 					</section>
 				</div>
 				<div className="button-area">

@@ -1,0 +1,27 @@
+.image-box{
+	position: relative;
+	height: 100%;
+
+	.discount-badge{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+
+		margin: 0.2rem;
+		padding-left: .5em;
+
+		border: 2px solid red;
+		background: rgb(255, 255, 255);
+		color: red;
+		font-weight: bold;
+		font-size: 0.5rem;
+
+		transform: skew(-10deg);
+	}
+
+	img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+}

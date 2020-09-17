@@ -9,6 +9,7 @@ import ModalContentConfirm from "../Modal/ModalContentConfirm/ModalContentConfir
 import AppContext from "../../contexts/AppContexts";
 import axios from "axios";
 import dateFormat from "../../utils/dateFormatter";
+import BookImage from "../organizations/BookImage/BookImage";
 
 /**
  * 本の状態によってボタンを出し分けるためのCardType
@@ -86,7 +87,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
       <div className="BookCard__top">
         <div className="BookCard__top__left">
           <div className="BookCard__top__left__image">
-            <img src={book.image} alt="cover" />
+            <BookImage src={book.image} isDiscount={book.status === "borrowing"}/>
           </div>
         </div>
         <div className="BookCard__top__right">
@@ -101,7 +102,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
       {
         book.status === "borrowing" && (
           <div className="BookCard__middle">
-            <small>返却期限: {dateFormat(book.deadline).replace(' ', '')}まで</small>
+            <small>{type === "buy" ? '割引期間' : '返却期限'}: {dateFormat(book.deadline).replace(' ', '')}まで</small>
           </div>
         )
       }

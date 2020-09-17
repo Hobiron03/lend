@@ -104,10 +104,35 @@ $hover-read-button-color: #adaf4a;
 		.book-title{
 			flex: 1;
 		}
+
+		.discount-area{
+			margin: .8rem;
+			padding: .5rem;
+			background: #f8d9d9;
+			border: 1px solid #ee463a;
+
+			.discount-message{
+				font-weight: bold;
+				color: #ee463a;
+				text-align: center;
+			}
+		}
+		
+
 		.book-price{
 			margin-top: 1em;
 			font-weight: bold;
 			font-size: 120%;
+
+			.regular-price{
+				font-size: 80%;
+			}
+			.price-arrow{
+				padding: 0 .5em;
+			}
+			.discount-price{
+				color: #e4554a;
+			}
 		}
 	}
 
