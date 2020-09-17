@@ -16,7 +16,14 @@ import reducer from "./reducers/";
 import AppContext from "./contexts/AppContexts";
 import Store from "./components/Store/Store";
 
-const initialState = {
+const localStorageDataStr = localStorage.getItem('user');
+const localStorageData = localStorageDataStr != null ? JSON.parse(localStorageDataStr) : null;
+const modifiedData = localStorageData != null ? {
+  user: (() => { const { friend_list, ...rest } = localStorageData; return rest; })(),
+  friends: localStorageData.friend_list, //TODO: ここデータのフォーマットがミスってるかも。
+} : null;
+
+const initialState = modifiedData ?? {
   user: {},
   friends: [],
 };
