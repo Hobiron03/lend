@@ -206,7 +206,11 @@ class ReturnBook(Resource):
             lend_data = request.json #送られてきたデータの取得
             user_id = lend_data['id']
             book_id = lend_data['book_id']
+            messege = lend_data['message']
             UpdateLendInfoData(user_id,book_id)
+            # 返却されたことを相手に通知する
+            lend_user_id = GetLenderId(user_id,book_id) # 貸してくれた人の情報の取得
+            AddNotificationInReturn(lend_user_id,user_id,book_id,message) #メッセージの追加（返却がされたという情報＋メッセージ）
             return {'message':'Success'}
         except:
             return {'message':'Error. Please try again.'}

@@ -60,6 +60,7 @@ def AddNotificationInLendBuy(user_id,borrower_id,book_id,addpoint):
     message = str(name) + "さんが" + str(book_info[0]) + "を購入しました。" + str(addpoint) +"ポイントが追加されました。"
     AddNotification(user_id,message) # 貸してくれた人に通知がいく
 
+# 返却した時のメッセージ機能
 def AddNotificationInReturn(user_id,borrower_id,book_id,return_message):
     book_info = GetBookById(book_id)
     name = ChangeFriendlistToFriendData(borrower_id)[2]
