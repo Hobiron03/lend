@@ -154,9 +154,6 @@ class BookStoreLend(Resource):
             return booklist
 
 
-
-
-
 # 書籍の貸し出し
 Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明の追加）
     'id': fields.String(description='id'),
@@ -202,7 +199,7 @@ Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明�
 @api.route('/return_book')
 class ReturnBook(Resource):
     def post(self):
-        #try:
+        try:
             lend_data = request.json #送られてきたデータの取得
             user_id = lend_data['id']
             book_id = lend_data['book_id']
@@ -213,8 +210,8 @@ class ReturnBook(Resource):
             # 返却されたことを相手に通知する
             AddNotificationInReturn(lend_user_id,user_id,book_id,message) #メッセージの追加（返却がされたという情報＋メッセージ）
             return {'message':'Success'}
-        #except:
-            #return {'message':'Error. Please try again.'}
+        except:
+            return {'message':'Error. Please try again.'}
 
 # 書籍の購入
 BuyDoc = api.model('buy POST', { #ドキュメントの名前を定義（説明の追加）
