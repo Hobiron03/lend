@@ -55,6 +55,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
         </div>
       </div>
       {/* 購入以外は、フッターにボタンを表示する */}
+
       {type !== "buy" && (
         <div className="BookCard__under">
           {type === "read_lend" ? (

@@ -18,7 +18,7 @@ const Viewer = () => {
 		}else{
 			setBook((state as { book: Book }).book as Book);
 		}
-	}, [])
+	}, [state, history])
 
 	if(book != null){
 		return <InnerViewr book={book}/>;
@@ -36,7 +36,7 @@ const InnerViewr = ({book}: {book: Book}) => {
 	const [page, setPage] = useState(0);
 
 	const handlePageNext = () => {
-		if(page != images.length){
+		if(page !== images.length){
 			setPage(page => page + 1);
 		}
 	}
@@ -56,7 +56,7 @@ const InnerViewr = ({book}: {book: Book}) => {
 		<div className="viewer">
 			{
 				page < images.length ? (
-					<img className="viewer-image" src={images[page]}/>
+					<img className="viewer-image" src={images[page]} alt="manga-page"/>
 				) : (
 					// TODO: yuta-ike 最後に挿入するページ。何表示するか。
 					<div className="additional-page">
