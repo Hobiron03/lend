@@ -48,6 +48,7 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
     #print(type(own_book_id_data))
     #print(own_book_id_data)
     if own_book_id_data == "Non":
+        print("You don't have this books．")
         raise Exception('Error!You don\'t have your books')
 
     if IsSameBookLending( borrower_id_data , book_id_data ) :
