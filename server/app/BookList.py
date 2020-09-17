@@ -6,6 +6,7 @@ from models.lend_info import Lend_info
 from sqlalchemy import and_, or_
 from app.LendInfo_auto import AutoUpdateLendInfo
 
+from app.GetBookById import GetBookById
 
 def IsOwnBookAndId(own_book_id, user_id):
     session = Session()
@@ -36,11 +37,11 @@ def GetOwnBookById(own_book_id):
     return own_book #リスト
 
 #own_book => book
-def GetBookById(book_id):
-    session = Session()
-    book = session.query(Book).filter(Book.id == book_id).all()
-    session.commit()
-    return book #リスト
+#def GetBookById(book_id):
+#    session = Session()
+#    book = session.query(Book).filter(Book.id == book_id).all()
+#    session.commit()
+#    return book #リスト
 
 # user_id,book_id -> own_book_id
 def GetOwnBookIDByUseridAndBookid(user_id,book_id):
