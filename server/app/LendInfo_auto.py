@@ -5,9 +5,14 @@ from sqlalchemy import and_, or_
 
 def IsLendInfoUpdate(lend):
     now_date = datetime.datetime.now()
-    deadline_str = lend.deadline
-    deadline = datetime.datetime.strptime(deadline_str,'%Y/%m/%d %H:%M:%S')
-    return now_date > deadline
+    now_date_str = str(now_date)
+    print(now_date_str,type(now_date_str))
+    #now_date = datetime.datetime.strptime(now_date_str,'%Y/%m/%d %H:%M:%S')
+    deadline = lend.deadline
+    print("返還前",deadline)
+    deadline_after = datetime.datetime.strptime(deadline,'%Y/%m/%d %H:%M:%S.%f')
+    print(now_date,deadline_after)
+    return now_date > deadline_after
 
 def AutoUpdateLendInfo():
     session = Session()

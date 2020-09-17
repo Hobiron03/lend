@@ -98,6 +98,7 @@ class Login(Resource):
 class Logout(Resource):
     def post(self):
         session['logged_in'] = False
+        return {"message":"Success."}
 
 @api.route('/books')
 class BookList(Resource):
