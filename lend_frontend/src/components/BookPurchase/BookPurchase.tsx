@@ -4,6 +4,9 @@ import Book from "../../model/book";
 import { useHistory } from "react-router-dom";
 import BaseModal from "@material-ui/core/Modal";
 import ModalContentConfirm from "../Modal/ModalContentConfirm/ModalContentConfirm";
+import axios from "axios";
+
+const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 
 interface Props {
 	book: Book;
@@ -17,10 +20,13 @@ const BookPurchase = ({ book = new Book(1, '桃太郎', '昔の人', '昔話で�
 	const [havingBook, setHavingBook] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 
-	const handleBuy = () => {
-		// TODO: 購入処理
-		console.log('購入');
-		//購入処理が完了したら
+	const handleBuy = async () => {
+		// TODO: ユーザIDを正しいものに
+		await axios.post(ENTRY_POINT + '/buy', {
+			id: 1,
+			book_id: book.id,
+			point: 0,
+		});
 		setModalOpen(false);
 		setHavingBook(true);
 	}
