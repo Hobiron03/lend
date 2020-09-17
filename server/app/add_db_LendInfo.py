@@ -33,7 +33,7 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
     now_date = (datetime.datetime.now())
     #print(type(now_date))
     #print(now_date)
-    now_date_str = now_date.strftime('%Y/%m/%d %H:%M:%S')
+    now_date_str = now_date.strftime('%Y/%m/%d %H:%M:%S.%f')
     #print(now_date_str)
     #Own_Bookの変換を行う
     own_book_id_data = (GetOwnBookIDByUseridAndBookid(user_id_data,book_id_data))

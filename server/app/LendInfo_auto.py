@@ -9,7 +9,7 @@ def IsLendInfoUpdate(lend):
     print(now_date_str,type(now_date_str))
     #now_date = datetime.datetime.strptime(now_date_str,'%Y/%m/%d %H:%M:%S')
     deadline = lend.deadline
-    print("返還前",deadline)
+    #print("返還前",deadline)
     deadline_after = datetime.datetime.strptime(deadline,'%Y/%m/%d %H:%M:%S.%f')
     print(now_date,deadline_after)
     return now_date > deadline_after
