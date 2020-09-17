@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useContext,
 } from "react";
+import { useHistory } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
 import FriendColumn from "./FriendColumn/FriendColumn";
 import BaseModal from "@material-ui/core/Modal";
@@ -26,6 +27,8 @@ interface FriendsState {
 const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 
 const SelectFriendScreen = (props: SelectFriendScreenProps) => {
+  const history = useHistory();
+
   const { state } = useContext(AppContext);
   const [searchText, setSearchText] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
@@ -70,6 +73,7 @@ const SelectFriendScreen = (props: SelectFriendScreenProps) => {
         console.log(res);
       });
     handleModalClose();
+    history.push(`/mybook/`);
   };
 
   const onDeny = () => {
@@ -133,7 +137,8 @@ const SelectFriendScreen = (props: SelectFriendScreenProps) => {
       >
         <div className="modal_background">
           <ModalContentConfirm
-            description={`${lendUsername} さんに貸し出しても良いですか?`}
+            description={`${lendUsername} さんに貸し出しても良いですか？ 
+            \n貸し出した本は返却されるまで読むことができません`}
             onConfirm={onConfirm}
             onDeny={onDeny}
           />
