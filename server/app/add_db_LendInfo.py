@@ -11,6 +11,8 @@ import os
 from datetime import  date, timedelta
 import datetime
 
+from app.IsSameBookLending import IsSameBookLending
+
 
 def GetUserLoginData(UserName):
     print(type(UserName))
@@ -42,6 +44,9 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
     #print(own_book_id_data)
     if own_book_id_data == "Non":
         raise Exception('Error!You don\'t have your books')
+
+    if IsSameBookLending( borrower_id_data , book_id_data ) :
+        raise Exception('既に同じ本を貸し出したことがあります.')
 
     session.add_all([
         Lend_info( borrower_id = borrower_id_data,own_book_id = own_book_id_data,created_at = (now_date_str),returned_at= "Non",deadline = deadline_data,is_valid = 1)
