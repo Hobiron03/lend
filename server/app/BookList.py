@@ -66,7 +66,10 @@ def ChangeBooksFromLendInfo( booklist ):
     for book in booklist:
         own_book = GetOwnBookById( book.own_book_id )
         if own_book != [] :
-            res.extend( GetBookById( own_book[0].book_id ) )
+            b = GetBookById(own_book[0].book_id)
+            if b != []:
+                res.append( { "book": b[0] , "deadline": book.deadline } )
+            #res.extend( GetBookById( own_book[0].book_id ) )
     return res
 
 
@@ -130,20 +133,22 @@ def GetBookListByUser(user_id):
         books = ChangeBooksFromOwnBook(booklist)
     
         for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "having"} )
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "having", "deadline" : None } )
 
        # print(str)
     
     if user_borrow_info != []:
         books = ChangeBooksFromLendInfo(user_borrow_info)
-        for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "borrowing"} )
-    #print(str)
+        for book_info in books:
+            book = book_info["book"]
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "borrowing", "deadline": book_info["deadline"] } )
+        #print(str)
 
     if user_lend_info != []:
         books = ChangeBooksFromLendInfo(user_lend_info)
-        for book in books:
-            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "lending"} )
+        for book_info in books:
+            book = book_info["book"]
+            str.append( { "id" : book.id , "name" : book.name , "price" :book.price, "image" : book.image , "info" : book.info , "auther" : book.auther , "url": book.url.split(',') , "status": "lending", "deadline": book_info["deadline"] } )
         #print(str)
 
 
