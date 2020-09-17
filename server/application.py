@@ -14,7 +14,7 @@ from app.friend import ChangeFriendlistToFriendData
 from app.StoreBook import AllBooksByRank, BooksForUserByRank
 from app.StoreBook import AllBooksByOwn, BooksForUserByOwn
 from app.StoreBook import AllBooksByLend, BooksForUserByLend
-from app.AddNotification import AddNotificationInBuy,AddNotificationInLend,AddNotificationInBorrow,AddNotificationInLendBuy,GetNotificationByUserId
+from app.AddNotification import AddNotificationInBuy,AddNotificationInLend,AddNotificationInBorrow,AddNotificationInLendBuy,GetNotificationByUserId,AddNotificationInReturn
 
 
 app = Flask(__name__)
@@ -202,18 +202,20 @@ Lend = api.model('lend POST', { #ドキュメントの名前を定義（説明�
 @api.route('/return_book')
 class ReturnBook(Resource):
     def post(self):
-        try:
+        #try:
             lend_data = request.json #送られてきたデータの取得
             user_id = lend_data['id']
             book_id = lend_data['book_id']
-            messege = lend_data['message']
+            message = lend_data['message']
             UpdateLendInfoData(user_id,book_id)
             # 返却されたことを相手に通知する
-            lend_user_id = GetLenderId(user_id,book_id) # 貸してくれた人の情報の取得
-            AddNotificationInReturn(lend_user_id,user_id,book_id,message) #メッセージの追加（返却がされたという情報＋メッセージ）
+            print(user_id,book_id)
+            #lend_user_id = GetLenderId(user_id,book_id) # 貸してくれた人の情報の取得
+            #print("lend_user_id",lend_user_id)
+            #AddNotificationInReturn(lend_user_id,user_id,book_id,message) #メッセージの追加（返却がされたという情報＋メッセージ）
             return {'message':'Success'}
-        except:
-            return {'message':'Error. Please try again.'}
+        #except:
+            #return {'message':'Error. Please try again.'}
 
 # 書籍の購入
 BuyDoc = api.model('buy POST', { #ドキュメントの名前を定義（説明の追加）
@@ -255,7 +257,6 @@ class Notification(Resource):
         user_id = request.args.get('user_id')
         notification_list = GetNotificationByUserId(user_id)
         return notification_list
-
 
 if __name__ == '__main__':
     app.run()

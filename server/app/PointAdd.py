@@ -24,7 +24,7 @@ def GetLenderId(user_id_data,book_id_data):
         list.append(ower_book_id)
         borrowed_data_list.append(list)
     session.commit()
-    print(borrowed_data_list) # [[lend_id,ower_user_id,ower_book_id][...]]
+    #print(borrowed_data_list) # [[lend_id,ower_user_id,ower_book_id][...]]
 
     # 過去に貸し出されたかどうかを探す
     for i in range(len(borrowed_data_list)):
