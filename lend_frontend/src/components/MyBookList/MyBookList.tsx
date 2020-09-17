@@ -42,12 +42,12 @@ const MyBookList = () => {
 	}
 
 	useEffect(() => {
-		if(filterType == "all"){
+		if(filterType === "all"){
 			setShowBooks(mybooks);
 		}else{
 			setShowBooks(mybooks.filter(book => book.status === "borrowing"));
 		}
-	}, [filterType])
+	}, [filterType, mybooks])
 
 	return (
 		<Screen>
