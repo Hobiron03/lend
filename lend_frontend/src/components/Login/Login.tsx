@@ -2,14 +2,14 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import AppContext from "../../contexts/AppContexts";
-import { CREATE_USER } from "../../actions/";
+import { CREATE_USER, ADD_FRIEND_TO_LIST } from "../../actions/";
 
 const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 
 const Login = () => {
   const history = useHistory();
 
-  const { dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
   const [registerFlag, setRegisterFlag] = useState(false);
 
   const [userName, setUserName] = useState("kirin");
@@ -32,6 +32,16 @@ const Login = () => {
           dispatch({
             type: CREATE_USER,
             user: res.data,
+          });
+          res.data.friend_list.forEach((friend: Array<any>) => {
+            dispatch({
+              type: ADD_FRIEND_TO_LIST,
+              friend: {
+                id: friend[0],
+                icon_image: friend[1],
+                name: friend[2],
+              },
+            });
           });
           history.push(`/mybook/`);
         });
@@ -68,7 +78,6 @@ const Login = () => {
       <button className="login-form-submit" onClick={handleSubmit}>
         {registerFlag ? "新規登録" : "ログイン"}
       </button>
-
     </div>
   );
 };
