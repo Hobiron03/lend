@@ -9,8 +9,9 @@ export default class Book{
 	image: string;
 	url: string[];
 	status: BookStatus;
+	deadline: Date;
 
-	constructor(id: number, name: string, auther: string, info: string, price: number, image: string, url: string[], status: BookStatus){
+	constructor(id: number, name: string, auther: string, info: string, price: number, image: string, url: string[], status: BookStatus, deadline: Date){
 		this.id = id;
 		this.name = name;
 		this.auther = auther;
@@ -19,9 +20,10 @@ export default class Book{
 		this.image = image;
 		this.url = url;
 		this.status = status;
+		this.deadline = deadline;
 	}
 
 	static fromJson(json: any){
-		return new Book(json.id, json.name, json.auther, json.info, json.price, json.image, json.url, json.status);
+		return new Book(json.id, json.name, json.auther, json.info, json.price, json.image, json.url, json.status, new Date(json.deadline));
 	}
 }
