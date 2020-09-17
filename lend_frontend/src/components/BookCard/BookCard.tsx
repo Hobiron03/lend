@@ -47,6 +47,10 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
     }
   };
 
+  const handlePurchase = () => {
+    history.push(`/store/${book.id}`, { book });
+  };
+
   const handleReturn = async () => {
     await axios
       .post(ENTRY_POINT + "/return_book", {
@@ -98,13 +102,13 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
           </div>
         </div>
       </div>
-      {
-        book.status === "borrowing" && (
-          <div className="BookCard__middle">
-            <small>返却期限: {dateFormat(book.deadline).replace(' ', '')}まで</small>
-          </div>
-        )
-      }
+      {book.status === "borrowing" && (
+        <div className="BookCard__middle">
+          <small>
+            返却期限: {dateFormat(book.deadline).replace(" ", "")}まで
+          </small>
+        </div>
+      )}
 
       {/* 購入以外は、フッターにボタンを表示する */}
 
@@ -118,12 +122,16 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
           ) : book.status === "borrowing" ? (
             <>
               <Button content="読む" onClick={handleRead} />
-              <Button content="購入" onClick={() => console.log("購入")} />
+              <Button content="購入" onClick={handlePurchase} />
               <Button content="返却" onClick={handleModalOpen} />
             </>
           ) : (
             book.status === "lending" && (
-              <div><small>貸し出し中: {dateFormat(book.deadline).replace(' ', '')}まで</small></div>
+              <div>
+                <small>
+                  貸し出し中: {dateFormat(book.deadline).replace(" ", "")}まで
+                </small>
+              </div>
             )
           )}
         </div>
