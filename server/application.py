@@ -215,7 +215,6 @@ class ReturnBook(Resource):
             lend_user_id = GetLenderId(user_id,book_id) # 貸してくれた人の情報の取得
             print("lend_user_id",lend_user_id)
             UpdateLendInfoData(lend_user_id,book_id)
-            # 返却されたことを相手に通知する
             AddNotificationInReturn(lend_user_id,user_id,book_id,message) #メッセージの追加（返却がされたという情報＋メッセージ）
             return {'message':'Success'}
         except:
