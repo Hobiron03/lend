@@ -20,6 +20,7 @@ import AppContext from "./contexts/AppContexts";
 
 const initialState = {
   user: {},
+  friends: [],
 };
 
 function App() {
