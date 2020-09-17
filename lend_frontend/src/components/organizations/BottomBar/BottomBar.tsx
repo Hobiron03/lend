@@ -27,35 +27,35 @@ const BottomBar = () => {
 	return (
 		<footer className="bottom-bar">
 			<div
-				className={classNames("bottom-bar-item", tabState == "mybook" && "bottom-bar-item-selected")}
+				className={classNames("bottom-bar-item", tabState === "mybook" && "bottom-bar-item-selected")}
 				onClick={() => onItemClick("mybook")}
 			>
 				<MenuBookIcon/>
 				<div>マイ本棚</div>
 			</div>
 			<div
-				className={classNames("bottom-bar-item", tabState == "friend" && "bottom-bar-item-selected")}
+				className={classNames("bottom-bar-item", tabState === "friend" && "bottom-bar-item-selected")}
 				onClick={() => onItemClick("friend")}
 			>
 				<PeopleAltIcon />
 				<div>ともだち</div>
 			</div>
 			<div
-				className={classNames("bottom-bar-item", tabState == "store" && "bottom-bar-item-selected")}
+				className={classNames("bottom-bar-item", tabState === "store" && "bottom-bar-item-selected")}
 				onClick={() => onItemClick("store")}
 			>
 				<StorefrontIcon />
 				<div>ストア</div>
 			</div>
 			<div
-				className={classNames("bottom-bar-item", tabState == "contents-store" && "bottom-bar-item-selected")}
+				className={classNames("bottom-bar-item", tabState === "contents-store" && "bottom-bar-item-selected")}
 				onClick={() => onItemClick("contents-store")}
 			>
 				<EmojiEventsIcon />
 				<div>ポイント交換</div>
 			</div>
 			<div
-				className={classNames("bottom-bar-item", tabState == "settings" && "bottom-bar-item-selected")}
+				className={classNames("bottom-bar-item", tabState === "settings" && "bottom-bar-item-selected")}
 				onClick={() => onItemClick("settings")}
 			>
 				<SettingsIcon />

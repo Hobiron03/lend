@@ -7,19 +7,18 @@ import {
 } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Screen from "./components/Screen/Screen";
-import { TabBar } from "./components/organizations/TabBar/TabBar";
-import AppBar from "./components/organizations/AppBar/AppBar";
-import BottomBar from "./components/organizations/BottomBar/BottomBar";
 import SelectFriendScreen from "./components/SelectFriendScreen/SelectFriendScreen";
-import BookPurchase from "./components/BookPurchase/BookPurchase";
 import "./App.scss";
 import Viewer from "./components/Viewer/Viewer";
 import MyBookList from "./components/MyBookList/MyBookList";
 import reducer from "./reducers/";
 import AppContext from "./contexts/AppContexts";
+import Store from "./components/Store/Store";
+import BookPurchase from "./components/BookPurchase/BookPurchase";
 
 const initialState = {
   user: {},
+  friends: [],
 };
 
 function App() {
@@ -47,11 +46,7 @@ function App() {
             <Route
               exact
               path="/store"
-              component={() => (
-                <Screen>
-                  <div style={{ padding: "100px" }}>/store 未実装</div>
-                </Screen>
-              )}
+              component={Store}
             />
             {/* 限定コンテンツ一覧ページ */}
             <Route

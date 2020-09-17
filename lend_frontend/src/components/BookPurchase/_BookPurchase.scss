@@ -6,13 +6,14 @@ $hover-read-button-color: #adaf4a;
 
 .book-purchase-page, .purchase-modal-content{
 	.action-button{
+		flex: 1;
 		cursor: pointer;
 		text-align: center;
 		color: white;
 		font-weight: bold;
 		border-radius: 2em;
 		padding: .5em 1em;
-		margin: 2em 1em;
+		margin: 1em 1em;
 		box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.2);
 	}
 
@@ -31,6 +32,50 @@ $hover-read-button-color: #adaf4a;
 		&:hover{
 			background: $hover-read-button-color;
 		}
+	}
+
+	.back-button{
+		border: 1px solid rgb(187, 187, 187);
+		box-shadow: none;
+		color: black;
+		font-weight: normal;
+		&:hover{
+			background: rgb(216, 216, 216);
+		}
+	}
+}
+.book-purchase-page{
+	display: flex;
+	flex-direction: column;
+
+	.upper-area{
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		height: 50%;
+
+		.book-img{
+			flex: 1;
+			padding: 10px;
+
+			img{
+				width: 100%;
+			}
+		}
+		.book-title{
+			flex: 1;
+		}
+		.book-price{
+			margin-top: 1em;
+			font-weight: bold;
+			font-size: 120%;
+			text-align: center;
+		}
+	}
+
+	.button-area{
+		display: flex;
+		flex-direction: row;
 	}
 	.back-button{
 		border: 1px solid rgb(187, 187, 187);
@@ -119,5 +164,8 @@ $hover-read-button-color: #adaf4a;
 	.button-area{
 		display: flex;
 		flex-direction: row;
+		div{
+			flex: auto;
+		}
 	}
 }

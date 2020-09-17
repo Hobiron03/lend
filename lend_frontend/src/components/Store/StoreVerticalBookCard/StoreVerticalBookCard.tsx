@@ -1,14 +1,14 @@
 import React from 'react';
 import Book from '../../../model/book';
+import { useHistory } from "react-router-dom";
 
 type Props = {
 	book: Book,
 };
 const StoreVerticalBookCard = ({ book }: Props) => {
-
+	const history = useHistory();
 	const handleBuy = () => {
-		// TODO: APIコール実装
-		console.log('購入');
+		history.push(`/store/${book.id}`, { book });
 	}
 
 	return (
