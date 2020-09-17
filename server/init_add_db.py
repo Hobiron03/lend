@@ -36,13 +36,13 @@ kirin_3manga =  ','.join(kirin_3list)
 
 
 session.add_all([
+    Book( name="よろしく", price=100000, image=mangalist[0], url = mangastr , info ="Brack", auther = "Who"),
     Book( name="キリンの翼", price=100, image=kirin_tlist[0] , url = kirin_tmanga , info ="Tsubasa", auther = "Me"),
     Book( name="キリンの刃", price=1000, image=kirin_ylist[0], url = kirin_ymanga , info="....あれから3年....", auther = "You" ),
     Book( name="3匹のキリン", price=10000, image=kirin_3list[0] , url = kirin_3manga , info="物語は~~~から始まった", auther ="He"),
     Book( name="キリンビール", price=5000, image=ImageDir+"4.jpg", url = ImageDir+"4.jpg", info="nof" , auther = "She" ),
     Book( name="Kirin", price=777, image=ImageDir+"5.jpg", url = ImageDir+"5.jpg", info="beautiful" , auther="We"  ),
     Book( name="Defalt", price=0 , image = defaultpass+"1.png" , url = defaultmanga , info="No manga No life", auther="I" ),
-    Book( name="よろしく", price=100000, image=ImageDir+"p1.jpg", url = mangastr , info ="Brack", auther = "Who"),
     ])
 
 session.add_all([
