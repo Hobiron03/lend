@@ -8,6 +8,7 @@ import BaseModal from "@material-ui/core/Modal";
 import ModalContentConfirm from "../Modal/ModalContentConfirm/ModalContentConfirm";
 import AppContext from "../../contexts/AppContexts";
 import axios from "axios";
+import dateFormat from "../../utils/dateFormatter";
 
 /**
  * 本の状態によってボタンを出し分けるためのCardType
@@ -97,6 +98,14 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
           </div>
         </div>
       </div>
+      {
+        book.status === "borrowing" && (
+          <div className="BookCard__middle">
+            <small>返却期限: {dateFormat(book.deadline).replace(' ', '')}まで</small>
+          </div>
+        )
+      }
+
       {/* 購入以外は、フッターにボタンを表示する */}
 
       {type !== "buy" && (
@@ -114,8 +123,7 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
             </>
           ) : (
             book.status === "lending" && (
-              // TODO: デザイン未確認
-              <div>貸し出し中です</div>
+              <div><small>貸し出し中: {dateFormat(book.deadline).replace(' ', '')}まで</small></div>
             )
           )}
         </div>
