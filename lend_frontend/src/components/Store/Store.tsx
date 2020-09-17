@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
 import Screen from '../Screen/Screen';
 import Book from '../../model/book';
@@ -6,12 +6,14 @@ import SearchIcon from '@material-ui/icons/Search';
 import BookCard from '../BookCard/BookCard';
 import StoreVerticalBookCard from './StoreVerticalBookCard/StoreVerticalBookCard';
 import CloseIcon from '@material-ui/icons/Close';
+import AppContext from '../../contexts/AppContexts';
 
 const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 
 type StoreMode = "top-page" | "search-page";
 
 const Store = () => {
+	const { state } = useContext(AppContext);
 	const [rankingBooks, setRankingBooks] = useState<Book[]>([]);
 	const [discountBooks, setDiscountBooks] = useState<Book[]>([]);
 	const [allBooks, setAllBooks] = useState<Book[]>([]);
@@ -20,7 +22,7 @@ const Store = () => {
 	const [storeMode, setStoreMode] = useState<StoreMode>("top-page");
 
 	useEffect(() => {
-		axios.get(ENTRY_POINT + '/store').then((res) => {
+		axios.get(ENTRY_POINT + `/store?user_id=${state.user.id}`).then((res) => {
 			const books = res.data.map((data: any) => Book.fromJson(data));
 			setRankingBooks(books);
 			setDiscountBooks(books);

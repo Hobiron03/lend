@@ -1,11 +1,21 @@
 import React from 'react'
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { useHistory } from "react-router-dom";
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import CloseIcon from '@material-ui/icons/Close';
 
-const AppBar = () => {
+type Props = {
+	isNotificationPage?: boolean,
+}
+
+const AppBar = ({ isNotificationPage = false }: Props) => {
 	const history = useHistory();
 	const onClickNotification = () => {
-		history.push('/notification');
+		if (isNotificationPage){
+			history.goBack();
+		}else{
+			history.push('/notification');
+			console.log("back");
+		}
 	}
 	
 	return (
@@ -13,7 +23,13 @@ const AppBar = () => {
 			<p>RENT</p>
 			<div className="action-buttons">
 				<div className="action-button" onClick={onClickNotification}>
-					<NotificationsIcon/>
+				{
+					isNotificationPage ? (
+						<CloseIcon />
+					) : (
+						<NotificationsIcon/>
+					)
+				}
 				</div>
 			</div>
 		</header>

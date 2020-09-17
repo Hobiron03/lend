@@ -15,12 +15,17 @@ import BookPurchase from "./components/BookPurchase/BookPurchase";
 import reducer from "./reducers/";
 import AppContext from "./contexts/AppContexts";
 import Store from "./components/Store/Store";
+import Notification from "./components/Notification/Notification";
 
 const localStorageDataStr = localStorage.getItem('user');
 const localStorageData = localStorageDataStr != null ? JSON.parse(localStorageDataStr) : null;
 const modifiedData = localStorageData != null ? {
   user: (() => { const { friend_list, ...rest } = localStorageData; return rest; })(),
-  friends: localStorageData.friend_list, //TODO: ここデータのフォーマットがミスってるかも。
+  friends: localStorageData.friend_list.map((friendData: any) => ({
+    id: friendData[0],
+      icon_image: friendData[1],
+      name: friendData[2],
+  })), //TODO: ここデータのフォーマットがミスってるかも。
 } : null;
 
 const initialState = modifiedData ?? {
@@ -140,7 +145,7 @@ function App() {
             />
 
             {/* 通知ページ */}
-            <Route exact path="/notification" component={Login} />
+            <Route exact path="/notification" component={Notification} />
             {/* 通知詳細ページ */}
             <Route exact path="/notification/:id" component={Login} />
 
