@@ -207,12 +207,11 @@ class ReturnBook(Resource):
             user_id = lend_data['id']
             book_id = lend_data['book_id']
             message = lend_data['message']
-            UpdateLendInfoData(user_id,book_id)
+            lend_user_id = GetLenderId(user_id,book_id) # 貸してくれた人の情報の取得
+            print("lend_user_id",lend_user_id)
+            UpdateLendInfoData(lend_user_id,book_id)
             # 返却されたことを相手に通知する
-            print(user_id,book_id)
-            #lend_user_id = GetLenderId(user_id,book_id) # 貸してくれた人の情報の取得
-            #print("lend_user_id",lend_user_id)
-            #AddNotificationInReturn(lend_user_id,user_id,book_id,message) #メッセージの追加（返却がされたという情報＋メッセージ）
+            AddNotificationInReturn(lend_user_id,user_id,book_id,message) #メッセージの追加（返却がされたという情報＋メッセージ）
             return {'message':'Success'}
         #except:
             #return {'message':'Error. Please try again.'}
