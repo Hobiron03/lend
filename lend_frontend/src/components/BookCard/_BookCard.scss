@@ -40,6 +40,10 @@ $book-card-height: 200px;
       }
     }
   }
+  
+  &__middle{
+    text-align: center;
+  }
 
   &__under {
     display: flex;

@@ -98,6 +98,14 @@ const BookCard = ({ book, type = "read_lend" }: BookCardProps): JSX.Element => {
           </div>
         </div>
       </div>
+      {
+        book.status === "borrowing" && (
+          <div className="BookCard__middle">
+            <small>返却期限: {dateFormat(book.deadline).replace(' ', '')}まで</small>
+          </div>
+        )
+      }
+
       {/* 購入以外は、フッターにボタンを表示する */}
 
       {type !== "buy" && (
