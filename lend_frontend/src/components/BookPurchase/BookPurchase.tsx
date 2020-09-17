@@ -28,7 +28,7 @@ const BookPurchase = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 
 	const handleCancel = () => {
-		history.push('/store');
+		history.goBack();
 	}
 
 	const handleBuy = async () => {
