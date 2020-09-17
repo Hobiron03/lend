@@ -27,3 +27,12 @@ def ChangeFriendlistToFriendData(friend_id): #フレンドidから名前と画�
         return None
     for row in users:
         return [row.id,row.icon_image,row.name]
+
+def GetPointByUserId(friend_id): #idからポイントを取得
+    users = session.query(User).filter(User.id==friend_id).all()
+    session.commit()
+    #print(users)
+    if users ==[]:
+        return None
+    for row in users:
+        return row.point
