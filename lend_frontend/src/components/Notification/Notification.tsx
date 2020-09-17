@@ -12,13 +12,7 @@ const NotificationPage = () => {
 
 	useEffect(() => {
 		axios.get(ENTRY_POINT + "/notification").then((res) => {
-			// setNorifications(res.data.map((item: any) => Notification.fromJson(item)));
-			setNorifications([
-				new Notification('キリンさんが本を買いましたとさ。', new Date('2020/9/17 14:01:00')),
-				new Notification('キリンさんが本を買いましたとさ。', new Date('2020/9/17 14:01:00')),
-				new Notification('キリンさんが本を買いましたとさ。', new Date('2020/9/17 14:01:00')),
-				new Notification('キリンさんが本を買いましたとさ。', new Date('2020/9/17 14:01:00')),
-			]);
+			setNorifications(res.data.map((item: any) => Notification.fromJson(item)));
 			setIsLoading(false);
 		})
 	}, []);
