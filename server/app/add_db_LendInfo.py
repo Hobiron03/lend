@@ -46,6 +46,7 @@ def AddLendInfoData(user_id_data,borrower_id_data,book_id_data,deadline_data):
         raise Exception('Error!You don\'t have your books')
 
     if IsSameBookLending( borrower_id_data , book_id_data ) :
+        print("既に同じ本を貸し出したことがあります．")
         raise Exception('既に同じ本を貸し出したことがあります.')
 
     session.add_all([
