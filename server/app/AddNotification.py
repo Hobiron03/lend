@@ -68,7 +68,7 @@ def AddNotificationInReturn(user_id,borrower_id,book_id,return_message):
     name = ChangeFriendlistToFriendData(borrower_id)[2]
     message = str(name) + "さんが「" + str(book_info[0]) + "」を返却しました。"
     if return_message != None:
-        message = message + "\n" + return_message # 返却時にメッセージを追加する
+        message = message + "\n（コメント）" + return_message # 返却時にメッセージを追加する
     print(user_id,message)
     AddNotification(user_id,message) # 貸してくれた人に通知がいく
     # 返却しましたの通知の追加
