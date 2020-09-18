@@ -1,8 +1,8 @@
-$header-color: rgb(118, 165, 118);
-$purchase-button-color: #5ab9e3;
-$hover-purchase-button-color: #4a91af;
-$read-button-color: #dae35a;
-$hover-read-button-color: #adaf4a;
+$header-color: $primary-color;
+$purchase-button-color: $button-color;
+$hover-purchase-button-color: $button-hover-color;
+$read-button-color: $secondary-button-color;
+$hover-read-button-color: $secondary-button-hover-color;
 
 .book-purchase-page, .purchase-modal-content{
 	.action-button{

@@ -20,7 +20,7 @@ const AppBar = ({ isNotificationPage = false }: Props) => {
 	
 	return (
 		<header className="appBar">
-			<p>RENT</p>
+			<p className="title">RENT</p>
 			<div className="action-buttons">
 				<div className="action-button" onClick={onClickNotification}>
 				{

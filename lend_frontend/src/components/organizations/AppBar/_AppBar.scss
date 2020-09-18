@@ -11,7 +11,13 @@
 
 	padding: 0.2em 1em;
 	height: 60px;
-	background: cyan;
+	background: $primary-color;
+	color: $white;
+
+	.title{
+		font-weight: bold;
+		font-size: 120%;
+	}
 	
 	.action-buttons {
 		margin-left: auto;

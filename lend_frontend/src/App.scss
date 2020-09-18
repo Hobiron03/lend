@@ -1,9 +1,18 @@
+$primary-color: #f66f6f;
+$white: #fffbf0;
+$button-color: #5ab9e3;
+$button-hover-color: #4a91af;
+$secondary-button-color: #dae35a;
+$secondary-button-hover-color: #adaf4a;
+
 @import "./components/Login/_Login.scss";
 @import "./components/Screen/Screen";
 @import "./components/Viewer/Viewer";
 @import "./components/Store/Store";
 @import "./components/Notification/Notification";
 @import "./components/MyBookList/MyBookList";
+@import "./components/BookCard/BookCard";
+@import "./components/BookCard/Button/Button";
 @import "./components/BookPurchase/BookPurchase";
 @import "./components/organizations/TabBar/TabBar";
 @import "./components/organizations/AppBar/AppBar";

@@ -10,7 +10,7 @@
 	flex-direction: row;
 	
 	.tabBar-item{
-		background: khaki;
+		background: $primary-color;
 		padding-top: 1em;
 		padding-bottom: .5em;
 
@@ -23,16 +23,16 @@
 			margin-right: 0.5em;
 		}
 
-		border-top: 6px solid rgba(0,0,0,0);
-		border-bottom: 6px solid rgba(0,0,0,0);
-		color: rgb(92, 92, 92);
+		border-top: 6px solid transparent;
+		border-bottom: 6px solid transparent;
+		color: $white;
 		
 		transition: border-color 0.4s, font-size 0.1s;
 
 		&.tabBar-item-selected{
 			font-size: 100%;
-			color: black;
-			border-bottom: 6px solid rgb(182, 152, 107);
+			
+			border-bottom: 6px solid #ffc9c9;
 		}
 	}
 

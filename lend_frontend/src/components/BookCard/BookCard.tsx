@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import "./_BookCard.scss";
-import "./Button/Button";
 import Button from "./Button/Button";
 import DiscountButton from "./DiscountButton/DiscountButton";
 import Book from "../../model/book";

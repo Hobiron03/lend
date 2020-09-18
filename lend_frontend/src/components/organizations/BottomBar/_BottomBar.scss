@@ -1,7 +1,7 @@
-$bottombar-bg-color: rgb(118, 165, 118);
-$bottombar-bg-selected-color: white;
-$bottombar-color: white;
-$bottombar-selected-color: rgb(118, 165, 118);
+$bottombar-bg-color: $primary-color;
+$bottombar-bg-selected-color: $white;
+$bottombar-color: $white;
+$bottombar-selected-color: $primary-color;
 
 .bottom-bar{
 	position: fixed;

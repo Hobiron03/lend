@@ -1,6 +1,3 @@
-$button-color: #5ab9e3;
-$hover-button-color: #4a91af;
-
 .button {
   width: 90px;
   height: 30px;
@@ -17,6 +14,6 @@ $hover-button-color: #4a91af;
 
   transition: all 0.2s;
   &:hover {
-    background-color: $hover-button-color;
+    background-color: $button-hover-color;
   }
 }
