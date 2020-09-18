@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import "./_BookCard.scss";
-import "./Button/Button";
 import Button from "./Button/Button";
 import Book from "../../model/book";
 import BaseModal from "@material-ui/core/Modal";
