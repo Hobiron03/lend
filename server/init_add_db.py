@@ -36,7 +36,7 @@ kirin_3manga =  ','.join(kirin_3list)
 
 
 session.add_all([
-    Book( name="ブラックジャックによろしく", price=600, image=kirinpass+"hello.png", url = mangastr , info ="研修医が目にする日本の大学病院や医療現場の現状を描く。", auther = "佐藤秀峰"),
+    Book( name="ブラックジャックによろしく", price=600, image=mangalist[0], url = mangastr , info ="研修医が目にする日本の大学病院や医療現場の現状を描く。", auther = "佐藤秀峰"),
     Book( name="キリンの翼", price=100, image=kirin_tlist[0] , url = kirin_tmanga , info ="ドラマ化もされた人気マンガ。東京を舞台にした殺人事件を描く。", auther = "山田次郎"),
     Book( name="キリンの刃", price=1000, image=kirin_ylist[0], url = kirin_ymanga , info="キリンとキリンが刃を持って戦う！新感覚アドベンチャー！", auther = "杉山健一" ),
     Book( name="3匹のキリン", price=800, image=kirin_3list[0] , url = kirin_3manga , info="物語はxxxから始まった。全米が泣いた人気マンガが遂に日本上陸。", auther ="林四郎"),
