@@ -36,15 +36,15 @@ kirin_3manga =  ','.join(kirin_3list)
 
 
 session.add_all([
-    Book( name="よろしく", price=600, image=kirinpass+"hello.png", url = mangastr , info ="Brack", auther = "Who"),
-    Book( name="キリンの翼", price=100, image=kirin_tlist[0] , url = kirin_tmanga , info ="Tsubasa", auther = "Me"),
-    Book( name="キリンの刃", price=1000, image=kirin_ylist[0], url = kirin_ymanga , info="....あれから3年....", auther = "You" ),
-    Book( name="3匹のキリン", price=800, image=kirin_3list[0] , url = kirin_3manga , info="物語は~~~から始まった", auther ="He"),
-    Book( name="キリンなレモン", price=550, image=kirinpass+"lemon.png", url = ImageDir+"4.jpg", info="nof" , auther = "She" ),
-    Book( name="Kirin", price=777, image=ImageDir+"5.jpg", url = ImageDir+"5.jpg", info="beautiful" , auther="We"  ),
-    Book( name="Defalt", price=0 , image = defaultpass+"1.png" , url = defaultmanga , info="No manga No life", auther="I" ),
-    Book( name="リスとキリン", price=500 , image = kirinpass+"RisutoKirin.png" , url = defaultmanga , info="ある日、リスはキリンと出会った", auther="They" ),
-    Book( name="きりんな人たち", price=810 , image = kirinpass+"kirinnokao.png" , url = defaultmanga , info="きりんの顔を見てみよう...", auther="It" )
+    Book( name="ブラックジャックによろしく", price=600, image=kirinpass+"hello.png", url = mangastr , info ="研修医が目にする日本の大学病院や医療現場の現状を描く。", auther = "佐藤秀峰"),
+    Book( name="キリンの翼", price=100, image=kirin_tlist[0] , url = kirin_tmanga , info ="ドラマ化もされた人気マンガ。東京を舞台にした殺人事件を描く。", auther = "山田次郎"),
+    Book( name="キリンの刃", price=1000, image=kirin_ylist[0], url = kirin_ymanga , info="キリンとキリンが刃を持って戦う！新感覚アドベンチャー！", auther = "杉山健一" ),
+    Book( name="3匹のキリン", price=800, image=kirin_3list[0] , url = kirin_3manga , info="物語はxxxから始まった。全米が泣いた人気マンガが遂に日本上陸。", auther ="林四郎"),
+    Book( name="キリンなレモン", price=550, image=kirinpass+"lemon.png", url = ImageDir+"4.jpg", info="美味しい飲み物ではありません。楽しいマンガです。" , auther = "松江宏樹" ),
+    Book( name="Kirin", price=777, image=ImageDir+"5.jpg", url = ImageDir+"5.jpg", info="累計発行部数1億部突破の大人気コミック。" , auther="落合由香" ),
+    Book( name="Defalt", price=0 , image = defaultpass+"1.png" , url = defaultmanga , info="No manga No life.", auther="広井淳二" ),
+    Book( name="リスとキリン", price=500 , image = kirinpass+"RisutoKirin.png" , url = defaultmanga , info="ある日、リスはキリンと出会った", auther="前川紀子" ),
+    Book( name="きりんな人たち", price=810 , image = kirinpass+"kirinnokao.png" , url = defaultmanga , info="きりんの顔を見てみよう...様々なキリンの顔を集めた大人気写真集。", auther="魚田和子" )
     ])
 
 session.add_all([
