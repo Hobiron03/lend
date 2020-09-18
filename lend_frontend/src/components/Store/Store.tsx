@@ -23,11 +23,20 @@ const Store = () => {
 
 	useEffect(() => {
 		axios.get(ENTRY_POINT + `/store?user_id=${state.user.id}`).then((res) => {
+			console.log(res);
 			const books = res.data.map((data: any) => Book.fromJson(data));
-			setRankingBooks(books);
-			setDiscountBooks(books);
 			setAllBooks(books);
 			setSortedBooks(books);
+		});
+		axios.get(ENTRY_POINT + `/store/lend?user_id=${state.user.id}`).then((res) => {
+			console.log(res);
+			const books = res.data.map((data: any) => Book.fromJson(data)).slice(0, 5);
+			setRankingBooks(books);
+		});
+		axios.get(ENTRY_POINT + `/books?user_id=${state.user.id}`).then((res) => {
+			console.log(res);
+			const books = res.data.map((data: any) => Book.fromJson(data)).filter((book: any) => (book as Book).status === "borrowing");
+			setDiscountBooks(books);
 		});
 	}, [])
 
@@ -70,26 +79,32 @@ const Store = () => {
 							<div className="divider"/>
 							<article className="store-page">
 								<section>
-									<h1 className="upper-title">最近人気の本</h1>
+									<h1 className="upper-title">貸し出し数ランキング TOP5</h1>
 									<div className="gallery">
 										{
 											rankingBooks.map(book =>
-												<StoreVerticalBookCard key={book.id} book={book}/>
+												<StoreVerticalBookCard key={book.id} book={book} isDiscounted={book.status === "borrowing"} />
 											)
 										}
 									</div>
 								</section>
-								<div className="divider" />
-								<section>
-									<h1 className="upper-title">割引中の本</h1>
-									<div className="gallery">
-										{
-											discountBooks.map(book =>
-												<StoreVerticalBookCard key={book.id} book={book} />
-											)
-										}
-									</div>
-								</section>
+								{
+									discountBooks.length !== 0 && (
+										<>
+											<div className="divider" />
+											<section>
+												<h1 className="upper-title">割引中の本</h1>
+												<div className="gallery">
+													{
+														discountBooks.map(book =>
+															<StoreVerticalBookCard key={book.id} book={book} isDiscounted={book.status === "borrowing"}/>
+														)
+													}
+												</div>
+											</section>
+										</>
+									)
+								}
 								<div className="divider" />
 								<section>
 									<h1 className="upper-title">書籍一覧</h1>

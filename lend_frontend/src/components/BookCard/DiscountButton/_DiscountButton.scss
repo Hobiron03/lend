@@ -1,0 +1,42 @@
+$button-color: #e35a5a;
+$hover-button-color: #af4a4a;
+
+.discount-button {
+  width: 90px;
+  height: 30px;
+  margin: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $button-color;
+  border-radius: 2%;
+  color: white;
+  cursor: pointer;
+
+  transition: all 0.2s;
+  &:hover {
+    background-color: $hover-button-color;
+  }
+
+  position: relative;
+
+  .discount-badge{
+		position: absolute;
+		top: -2.5em;
+		left: -1em;
+
+		margin: 0.2rem;
+		padding: 0 .5em;
+
+		border: 2px solid $button-color;
+		background: rgb(255, 255, 255);
+		color: $button-color;
+		font-weight: bold;
+		font-size: 0.5rem;
+
+		transform: skew(-10deg);
+	}
+}
+
