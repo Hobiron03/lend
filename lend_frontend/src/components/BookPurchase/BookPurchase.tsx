@@ -8,7 +8,40 @@ import AppContext from "../../contexts/AppContexts";
 
 const ENTRY_POINT = process.env.REACT_APP_API_ENTRYPOINT;
 
-const BookPurchase = () => {
+// AppBarとBottomBarつきで表示する。ストアから利用する用。
+const BookPurchaseScreen = () => {
+	const history = useHistory();
+	const { state: locationStatestate } = useLocation();
+	const [book, setBook] = useState<Book>();
+
+	useEffect(() => {
+		if (locationStatestate != null) {
+			setBook((locationStatestate as { book: Book }).book as Book);
+		} else {
+			history.push('/store');
+		}
+	}, [])
+
+	const handleClose = () => {
+		history.goBack();
+	}
+
+	return (
+		<Screen>
+			{
+				book == null ? <div>Loading</div> : <BookPurchase book={book} onClose={handleClose}/>
+			}
+		</Screen>
+	)
+}
+
+// AopBarとBottomBarを省いて表示する。ビュワーで表示する用。
+interface Props {
+	book: Book;
+	onClose: () => void; //ビュワーでは「閉じるボタン」を押すと本棚へ、それ以外では直前のページに戻るため
+}
+
+const BookPurchase = ({ book: _book, onClose }: Props) => {
 	const { state } = useContext(AppContext);
 
 	const history = useHistory();
@@ -16,10 +49,12 @@ const BookPurchase = () => {
 	const [book, setBook] = useState<Book>();
 
 	useEffect(() => {
-		if(locationStatestate == null){
-			history.push('/store');
-		}else{
+		if (locationStatestate != null) {
 			setBook((locationStatestate as { book: Book }).book as Book);
+		} else if (_book != null){
+			setBook(_book);
+		} else {
+			history.push('/store');
 		}
 	}, [])
 
@@ -28,7 +63,7 @@ const BookPurchase = () => {
 	const [modalOpen, setModalOpen] = useState(false);
 
 	const handleCancel = () => {
-		history.goBack();
+		onClose();
 	}
 
 	const handleBuy = async () => {
@@ -48,7 +83,7 @@ const BookPurchase = () => {
 	}
 
 	return (
-		<Screen>
+		<>
 			<div className="book-purchase-page">
 				<div className="upper-area">
 					<div className="book-img">
@@ -116,8 +151,9 @@ const BookPurchase = () => {
 					</div>
 				</div>
 			</BaseModal>
-		</Screen>
+		</>
 	);
 }
 
-export default BookPurchase;
+export default BookPurchaseScreen;
+export { BookPurchase };

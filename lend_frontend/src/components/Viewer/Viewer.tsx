@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Book from '../../model/book';
 import CloseIcon from '@material-ui/icons/Close';
+import { BookPurchase } from '../BookPurchase/BookPurchase';
+import Button from '../BookCard/Button/Button';
 
 /**
  * bookデータが与えられればビュワー（InnerViewer）を表示
@@ -64,20 +66,23 @@ const InnerViewr = ({book}: {book: Book}) => {
 			<div className="viewer">
 				{
 					page < images.length ? (
+						// マンガページの表示
 						<img className="viewer-image" src={images[page]} alt="manga-page"/>
 					) : (
-						// TODO: yuta-ike 最後に挿入するページ。何表示するか。
-						<div className="additional-page">
-							<div>購入を促進するページ</div>
-							{/* TODO: yuta-ike ボタンのデザイン */}
-							<div>
-								<button onClick={handleCloseViewer}>ビュワーを閉じる</button>
+						// 最終ページの表示
+						book.status === "having" ? (
+							// 所持している本
+							<div className="additional-page">
+								<Button content="閉じる" onClick={handleCloseViewer}/>
 							</div>
-						</div>
+						) : (
+							// 借りている本
+							<BookPurchase book={book} onClose={handleCloseViewer}/>
+						)
 					)
 				}
-				<div className="navigation-next" onClick={handlePageNext}/>
-				<div className="navigation-back" onClick={handlePageBack}/>
+				{ page !== 0 && <div className="navigation-back" onClick={handlePageBack}/> }
+				{ page !== images.length && <div className="navigation-next" onClick={handlePageNext}/>}
 			</div>
 		</>
 	)
