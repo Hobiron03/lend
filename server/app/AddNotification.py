@@ -71,3 +71,17 @@ def AddNotificationInReturn(user_id,borrower_id,book_id,return_message):
         message = message + "\n" + return_message # 返却時にメッセージを追加する
     print(user_id,message)
     AddNotification(user_id,message) # 貸してくれた人に通知がいく
+    # 返却しましたの通知の追加
+    lender_name = ChangeFriendlistToFriendData(user_id)[2]
+    message_lend = "「" + str(book_info[0]) + "」を"+ str(lender_name) +"さんに返却しました。"
+    AddNotification(borrower_id,message_lend)
+
+def AddNotificationInAutoReturn(user_id,borrower_id,book_id):
+    book_info = GetBookById(book_id)
+    name = ChangeFriendlistToFriendData(borrower_id)[2]
+    message = str(name) + "さんが「" + str(book_info[0]) + "」を自動返却しました。"
+    AddNotification(user_id,message) # 貸してくれた人に通知がいく
+    # 返却しましたの通知の追加
+    lender_name = ChangeFriendlistToFriendData(user_id)[2]
+    message_lend = "「" + str(book_info[0]) + "」を"+ str(lender_name) +"さんに自動返却しました。"
+    AddNotification(borrower_id,message_lend)

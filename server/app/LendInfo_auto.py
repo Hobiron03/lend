@@ -3,7 +3,7 @@ from models.lend_info import Lend_info
 import datetime
 from sqlalchemy import and_, or_
 from models.own_book import Own_Book
-from app.AddNotification import AddNotificationInReturn
+from app.AddNotification import AddNotificationInAutoReturn
 
 def IsLendInfoUpdate(lend):
     now_date = datetime.datetime.now()
@@ -44,7 +44,7 @@ def AutoUpdateLendInfo():
                 user_id = own_info[0].user_id
                 book_id = own_info[0].book_id
                 borrower_id = lend.borrower_id
-                AddNotificationInReturn( user_id , borrower_id, book_id, "自動返却による返却" )
+                AddNotificationInAutoReturn( user_id , borrower_id, book_id )
 
     session.commit()
 
